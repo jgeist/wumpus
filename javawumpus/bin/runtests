@@ -1,0 +1,35 @@
+#!/bin/sh
+BASEDIR=$(dirname $0)/..
+#
+# compile
+#
+pushd $BASEDIR/src > /dev/null
+javac Wumpus.java
+if [ $? -ne 0 ] ; then 
+  echo "Compile of game failed"
+  popd > /dev/null
+  exit 1
+fi
+popd > /dev/null
+
+#
+# compile tests
+#
+pushd $BASEDIR/test > /dev/null
+javac -cp ../src:../external/hamcrest-core-1.3.jar:../external/junit-4.11.jar WumpusTest.java
+if [ $? -ne 0 ] ; then 
+  echo "Compile of tests failed"
+  popd > /dev/null
+  exit 1
+fi
+popd > /dev/null
+
+#
+# run tests
+#
+pushd $BASEDIR > /dev/null
+java -cp src:test:external/hamcrest-core-1.3.jar:external/junit-4.11.jar org.junit.runner.JUnitCore WumpusTest
+popd > /dev/null
+
+
+
