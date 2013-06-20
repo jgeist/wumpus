@@ -41,12 +41,7 @@ public class Wumpus {
 				switch (currentLine) {
 				case 5: break;								 													// 5 rem *** HUNT THE WUMPUS ***
 				case 10: break;				 																	// 10 dim p(5)
-				case 15: System.out.print("INSTRUCTIONS (Y-N) "); break;										// 15 print "INSTRUCTIONS (Y-N)";
-				case 20: i$ = (char) System.in.read(); System.in.read(); break; 								// 20 input i$
-				case 25: if (i$ == 'N' || i$ =='n') nextLine = 35; break;										// 25 if (i$ = "N") or (i$ = "n") then 35
-				case 30: printInstructions(); break;															// 30 gosub 375
-				case 35: nextLine = 80; break;																	// 35 goto 80
-				case 80: break;																					// 80 rem *** SET UP CAVE (DODECAHEDRAL NODE LIST) ***
+				case 15: promptAndShowInstructions(); break;	    									        // 15 print "INSTRUCTIONS (Y-N)";
 																												// 85 dim s(20,3)
 																												// 90 for j = 1 to 20
 																												// 95 for k = 1 to 3
@@ -316,6 +311,19 @@ public class Wumpus {
         System.out.println(" BAT   :  'BATS NEARBY'");
         System.out.println(" PIT   :  'I FEEL A DRAFT'");
         System.out.println("");
+    }
+
+    private static void promptAndShowInstructions() throws IOException {
+        char i$ = '\0';
+
+        System.out.print("INSTRUCTIONS (Y-N) ");
+        i$ = (char) System.in.read(); 
+        System.in.read(); 
+        if (i$ == 'N' || i$ =='n') {    
+            return;
+        }
+
+        printInstructions();
     }
 }
       
