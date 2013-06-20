@@ -1,0 +1,20 @@
+#!/bin/sh
+BASEDIR=$(dirname $0)/..
+#
+# compile
+#
+pushd $BASEDIR/src > /dev/null
+javac Wumpus.java
+if [ $? -ne 0 ] ; then 
+  echo "Compile of game failed"
+  popd > /dev/null
+  exit 1
+fi
+popd > /dev/null
+
+#
+# run
+#
+pushd $BASEDIR
+java -cp src Wumpus
+popd
