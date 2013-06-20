@@ -265,6 +265,10 @@ public class Wumpus {
 		return Integer.parseInt(line);
 	}
 
+    private static void waitForUserToHitReturn() throws IOException {
+        System.in.read();
+    }
+
     private static void printInstructions() throws IOException {
         System.out.println("WELCOME TO 'HUNT THE WUMPUS'");
         System.out.println("  THE WUMPUS LIVES IN A CAVE OF 20 ROOMS. EACH ROOM");	
@@ -279,7 +283,8 @@ public class Wumpus {
         System.out.println("     GO THERE, A BAT GRABS YOU AND TAKES YOU TO SOME OTHER");
         System.out.println("     ROOM AT RANDOM. (WHICH MAY BE TROUBLESOME)");
         System.out.println("HIT RETURN TO CONTINUE"); 
-        System.in.read();
+        
+        waitForUserToHitReturn();
 
         System.out.println("     WUMPUS:");
         System.out.println(" THE WUMPUS IS NOT BOTHERED BY HAZARDS (HE HAS SUCKER");
@@ -301,7 +306,8 @@ public class Wumpus {
         System.out.println("     IF THE ARROW HITS THE WUMPUS, YOU WIN.");
         System.out.println("     IF THE ARROW HITS YOU, YOU LOSE.");
         System.out.println("HIT RETURN TO CONTINUE"); 
-        System.in.read();
+
+        waitForUserToHitReturn();
 
         System.out.println("    WARNINGS:");
         System.out.println("     WHEN YOU ARE ONE ROOM AWAY FROM A WUMPUS OR HAZARD,");
