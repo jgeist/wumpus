@@ -12,6 +12,9 @@ public class Wumpus {
 	private static Deque<Integer> returnLine = new ArrayDeque<Integer>();
 	private static int nextLine;
 	public static Random random = new Random();
+    
+    private static final int MAP_OBJECT_COUNT = 6;
+
 	/**
 	 * @param args
 	 */
@@ -24,8 +27,8 @@ public class Wumpus {
 			{0,5,7,15},		{0,6,8,17},		{0,1,7,9},		{0,8,10,18},	{0,2,9,11},
 			{0,10,12,19},	{0,3,11,13},	{0,12,14,20},	{0,4,13,15},	{0,6,14,16},
 			{0,15,17,20},	{0,7,16,18},	{0,9,17,19},	{0,11,18,20},	{0,13,16,19}};
-			int[] l = new int[7];
-			int[] m = new int[7];
+			int[] l = new int[MAP_OBJECT_COUNT + 1];
+			int[] m = new int[MAP_OBJECT_COUNT + 1];
 			int[] p = new int[6];
 			int aa = 5;
 			int ll = aa;
@@ -62,14 +65,14 @@ public class Wumpus {
 				case 170: j = 1; break;																			// 170 for j = 1 to 6
 				case 175: l[j] = fnA(); break;																	// 175 l(j) = fna(0)
 				case 180: m[j] = l[j]; break;																	// 180 m(j) = l(j)
-				case 185: ++j; if (j <= 6) nextLine = 175; break;												// 185 next j
+				case 185: ++j; if (j <= MAP_OBJECT_COUNT) nextLine = 175; break;								// 185 next j
 				case 190: break;																				// 190 rem *** CHECK FOR CROSSOVERS (IE l(1)=l(2), ETC) ***
 				case 195: j = 1; break;																			// 195 for j = 1 to 6
 				case 200: k = 1; break;																			// 200 for k = 1 to 6
 				case 205: if (j == k ) nextLine = 215; break;													// 205 if j = k then 215
 				case 210: if (l[j] == l[k]) nextLine = 170; break;												// 210 if l(j) = l(k) then 170
-				case 215: ++k; if (k <= 6) nextLine = 205; break;												// 215 next k
-				case 220: ++j; if (j <= 6) nextLine = 200; break;												// 220 next j
+				case 215: ++k; if (k <= MAP_OBJECT_COUNT) nextLine = 205; break;	    						// 215 next k
+				case 220: ++j; if (j <= MAP_OBJECT_COUNT) nextLine = 200; break;								// 220 next j
 				case 225: break;																				// 225 rem *** SET NO. OF ARROWS ***
 				case 230: aa = 5; break;																		// 230 a = 5
 				case 235: ll = l[1]; break;																		// 235 l = l(1)
@@ -95,7 +98,7 @@ public class Wumpus {
 				case 335: System.out.println("HEE HEE HEE - THE WUMPUS'LL GET YOU NEXT TIME!!"); break;			// 335 print "HEE HEE HEE - THE WUMPUS'LL GET YOU NEXT TIME!!"
 				case 340: j = 1; break;																			// 340 for j = 1 to 6
 				case 345: l[j] = m[j]; break;																	// 345 l(j) = m(j)
-				case 350: ++j; if (j <= 6) nextLine = 345; break;												// 350 next j
+				case 350: ++j; if (j <= MAP_OBJECT_COUNT) nextLine = 345; break;								// 350 next j
 				case 355: System.out.print("SAME SETUP (Y-N)"); break;											// 355 print "SAME SETUP (Y-N)";
 				case 360: i$ = (char) System.in.read(); System.in.read(); break;								// 360 input i$
 				case 365: if (i$ != 'Y' && i$ != 'y') nextLine = 170; break;									// 365 if (i$ <> "Y") and (i$ <> "y") then 170
@@ -118,7 +121,7 @@ public class Wumpus {
 				case 630: nextLine = 640; break;																// 630 goto 640
 				case 635: System.out.println("BATS NEARBY!"); break;											// 635 print "BATS NEARBY!"
 				case 640: ++k; if (k <= 3) nextLine = 605; break;												// 640 next k
-				case 645: ++j; if (j <= 6) nextLine = 600; break;												// 645 next j
+				case 645: ++j; if (j <= MAP_OBJECT_COUNT) nextLine = 600; break;								// 645 next j
 				case 650: System.out.print("YOUR ARE IN ROOM "); System.out.println(l[1]); break;				// 650 print "YOU ARE IN ROOM ";l(1)
 				case 655: System.out.print("TUNNELS LEAD TO "); System.out.print(s[ll][1]);						// 655 print "TUNNELS LEAD TO ";s(l,1);" ";s(l,2);" ";s(l,3)
 							System.out.print(" "); System.out.print(s[ll][2]); 
