@@ -44,7 +44,7 @@ public class Wumpus {
 				case 15: System.out.print("INSTRUCTIONS (Y-N) "); break;										// 15 print "INSTRUCTIONS (Y-N)";
 				case 20: i$ = (char) System.in.read(); System.in.read(); break; 								// 20 input i$
 				case 25: if (i$ == 'N' || i$ =='n') nextLine = 35; break;										// 25 if (i$ = "N") or (i$ = "n") then 35
-				case 30: gosub(375, 35); break;																	// 30 gosub 375
+				case 30: printInstructions(); break;															// 30 gosub 375
 				case 35: nextLine = 80; break;																	// 35 goto 80
 				case 80: break;																					// 80 rem *** SET UP CAVE (DODECAHEDRAL NODE LIST) ***
 																												// 85 dim s(20,3)
@@ -105,64 +105,6 @@ public class Wumpus {
 				case 360: i$ = (char) System.in.read(); System.in.read(); break;								// 360 input i$
 				case 365: if (i$ != 'Y' && i$ != 'y') nextLine = 170; break;									// 365 if (i$ <> "Y") and (i$ <> "y") then 170
 				case 370: nextLine = 230; break;																// 370 goto 230
-				case 375: break;																				// 375 rem *** INSTRUCTIONS ***
-				case 380: System.out.println("WELCOME TO 'HUNT THE WUMPUS'"); break;					 		// 380 print "WELCOME TO 'HUNT THE WUMPUS'"
-				case 385: System.out.println(																	// 385 print
-						"  THE WUMPUS LIVES IN A CAVE OF 20 ROOMS. EACH ROOM");	break;							// "  THE WUMPUS LIVES IN A CAVE OF 20 ROOMS. EACH ROOM"
-				case 390: System.out.println("HAS 3 TUNNELS LEADING TO OTHER ROOMS. (LOOK AT A"); break;		// 390 print "HAS 3 TUNNELS LEADING TO OTHER ROOMS. (LOOK AT A"
-				case 395: System.out.println(																	// 395 print
-						"DODECAHEDRON TO SEE HOW THIS WORKS-IF YOU DON'T KNOW"); break;							// "DODECAHEDRON TO SEE HOW THIS WORKS-IF YOU DON'T KNOW"
-				case 400: System.out.println("WHAT A DODECAHEDRON IS, ASK SOMEONE)"); break;					// 400 print "WHAT A DODECAHEDRON IS, ASK SOMEONE)"
-				case 405: System.out.println(""); break;														// 405 print
-				case 410: System.out.println("     HAZARDS:"); break;											// 410 print "     HAZARDS:"
-				case 415: System.out.println(																	// 415 print
-						" BOTTOMLESS PITS - TWO ROOMS HAVE BOTTOMLESS PITS IN THEM"); break;					// " BOTTOMLESS PITS - TWO ROOMS HAVE BOTTOMLESS PITS IN THEM"
-				case 420: System.out.println(																	// 420 print
-						"     IF YOU GO THERE, YOU FALL INTO THE PIT (& LOSE!)"); break;						// "     IF YOU GO THERE, YOU FALL INTO THE PIT (& LOSE!)"
-				case 425: System.out.println(																	// 425 print
-						" SUPER BATS - TWO OTHER ROOMS HAVE SUPER BATS. IF YOU"); break;						// " SUPER BATS - TWO OTHER ROOMS HAVE SUPER BATS. IF YOU"
-				case 430: System.out.println(																	// 430 print
-						"     GO THERE, A BAT GRABS YOU AND TAKES YOU TO SOME OTHER"); break;					// "     GO THERE, A BAT GRABS YOU AND TAKES YOU TO SOME OTHER"
-				case 435: System.out.println("     ROOM AT RANDOM. (WHICH MAY BE TROUBLESOME)"); break;			// 435 print "     ROOM AT RANDOM. (WHICH MAY BE TROUBLESOME)"
-				case 440: System.out.println("HIT RETURN TO CONTINUE"); System.in.read(); break;				// 440 input "HIT RETURN TO CONTINUE";a$
-				case 445: System.out.println("     WUMPUS:"); break;											// 445 print "     WUMPUS:"
-				case 450: System.out.println(																	// 450 print
-						" THE WUMPUS IS NOT BOTHERED BY HAZARDS (HE HAS SUCKER"); break;						// " THE WUMPUS IS NOT BOTHERED BY HAZARDS (HE HAS SUCKER"
-				case 455: System.out.println(" FEET AND IS TOO BIG FOR A BAT TO LIFT).  USUALLY"); break; 		// 455 print " FEET AND IS TOO BIG FOR A BAT TO LIFT).  USUALLY"
-				case 460: System.out.println(																	// 460 print
-						" HE IS ASLEEP.  TWO THINGS WAKE HIM UP: YOU SHOOTING AN"); break;						// " HE IS ASLEEP.  TWO THINGS WAKE HIM UP: YOU SHOOTING AN"
-				case 465: System.out.println("ARROW OR YOU ENTERING HIS ROOM."); break;							// 465 print "ARROW OR YOU ENTERING HIS ROOM."
-				case 470: System.out.println(																	// 470 print
-						"     IF THE WUMPUS WAKES HE MOVES (P=.75) ONE ROOM"); break;							// "     IF THE WUMPUS WAKES HE MOVES (P=.75) ONE ROOM"
-				case 475: System.out.println(																	// 475 print
-						" OR STAYS STILL (P=.25).  AFTER THAT, IF HE IS WHERE YOU"); break;						// " OR STAYS STILL (P=.25).  AFTER THAT, IF HE IS WHERE YOU"
-				case 480: System.out.println(" ARE, HE EATS YOU UP AND YOU LOSE!"); break;						// 480 print " ARE, HE EATS YOU UP AND YOU LOSE!"
-				case 485: System.out.println(""); break;														// 485 print
-				case 490: System.out.println("     YOU:"); break;												// 490 print "     YOU:"
-				case 495: System.out.println(" EACH TURN YOU MAY MOVE OR SHOOT A CROOKED ARROW"); break; 		// 495 print " EACH TURN YOU MAY MOVE OR SHOOT A CROOKED ARROW"
-				case 500: System.out.println(																	// 500 print
-						"   MOVING:  YOU CAN MOVE ONE ROOM (THRU ONE TUNNEL)"); break;							// "   MOVING:  YOU CAN MOVE ONE ROOM (THRU ONE TUNNEL)"
-				case 505: System.out.println(																	// 505 print
-						"   ARROWS:  YOU HAVE 5 ARROWS.  YOU LOSE WHEN YOU RUN OUT"); break;					// "   ARROWS:  YOU HAVE 5 ARROWS.  YOU LOSE WHEN YOU RUN OUT"
-				case 510: System.out.println(																	// 510 print
-						"   EACH ARROW CAN GO FROM 1 TO 5 ROOMS. YOU AIM BY TELLING"); break;					// "   EACH ARROW CAN GO FROM 1 TO 5 ROOMS. YOU AIM BY TELLING"
-				case 515: System.out.println(																	// 515 print
-						"   THE COMPUTER THE ROOM#S YOU WANT THE ARROW TO GO TO."); break;						// "   THE COMPUTER THE ROOM#S YOU WANT THE ARROW TO GO TO."
-				case 520: System.out.println(																	// 520 print
-						"   IF THE ARROW CAN'T GO THAT WAY (IF NO TUNNEL) IT MOVES"); break; 					// "   IF THE ARROW CAN'T GO THAT WAY (IF NO TUNNEL) IT MOVES"
-				case 525: System.out.println("   AT RANDOM TO THE NEXT ROOM."); break;							// 525 print "   AT RANDOM TO THE NEXT ROOM."
-				case 530: System.out.println("     IF THE ARROW HITS THE WUMPUS, YOU WIN."); break;				// 530 print "     IF THE ARROW HITS THE WUMPUS, YOU WIN."
-				case 535: System.out.println("     IF THE ARROW HITS YOU, YOU LOSE."); break;					// 535 print "     IF THE ARROW HITS YOU, YOU LOSE."
-				case 540: System.out.println("HIT RETURN TO CONTINUE"); System.in.read(); break;				// 540 input "HIT RETURN TO CONTINUE";a$
-				case 545: System.out.println("    WARNINGS:"); break;											// 545 print "    WARNINGS:"
-				case 550: System.out.println(																	// 550 print
-						"     WHEN YOU ARE ONE ROOM AWAY FROM A WUMPUS OR HAZARD,"); break;						// "     WHEN YOU ARE ONE ROOM AWAY FROM A WUMPUS OR HAZARD,"
-				case 555: System.out.println("     THE COMPUTER SAYS:"); break;									// 555 print "     THE COMPUTER SAYS:"
-				case 560: System.out.println(" WUMPUS:  'I SMELL A WUMPUS'"); break;							// 560 print " WUMPUS:  'I SMELL A WUMPUS'"
-				case 565: System.out.println(" BAT   :  'BATS NEARBY'"); break;									// 565 print " BAT   :  'BATS NEARBY'"
-				case 570: System.out.println(" PIT   :  'I FEEL A DRAFT'"); break;								// 570 print " PIT   :  'I FEEL A DRAFT'"
-				case 575: System.out.println(""); break;														// 575 print
-				case 580: returnFromGosub(); break;																// 580 return
 				case 585: break;																				// 585 rem *** PRINT LOCATION & HAZARD WARNINGS ***
 				case 590: System.out.println(""); break;														// 590 print
 				case 595: j = 2; break;																			// 595 for j = 2 to 6
@@ -322,4 +264,52 @@ public class Wumpus {
 		}
 		return Integer.parseInt(line);
 	}
+
+    private static void printInstructions() throws IOException {
+        System.out.println("WELCOME TO 'HUNT THE WUMPUS'");
+        System.out.println("  THE WUMPUS LIVES IN A CAVE OF 20 ROOMS. EACH ROOM");	
+        System.out.println("HAS 3 TUNNELS LEADING TO OTHER ROOMS. (LOOK AT A");
+        System.out.println("DODECAHEDRON TO SEE HOW THIS WORKS-IF YOU DON'T KNOW");
+        System.out.println("WHAT A DODECAHEDRON IS, ASK SOMEONE)");
+        System.out.println("");
+        System.out.println("     HAZARDS:");
+        System.out.println(" BOTTOMLESS PITS - TWO ROOMS HAVE BOTTOMLESS PITS IN THEM");
+        System.out.println("     IF YOU GO THERE, YOU FALL INTO THE PIT (& LOSE!)");
+        System.out.println(" SUPER BATS - TWO OTHER ROOMS HAVE SUPER BATS. IF YOU");
+        System.out.println("     GO THERE, A BAT GRABS YOU AND TAKES YOU TO SOME OTHER");
+        System.out.println("     ROOM AT RANDOM. (WHICH MAY BE TROUBLESOME)");
+        System.out.println("HIT RETURN TO CONTINUE"); 
+        System.in.read();
+
+        System.out.println("     WUMPUS:");
+        System.out.println(" THE WUMPUS IS NOT BOTHERED BY HAZARDS (HE HAS SUCKER");
+        System.out.println(" FEET AND IS TOO BIG FOR A BAT TO LIFT).  USUALLY");
+        System.out.println(" HE IS ASLEEP.  TWO THINGS WAKE HIM UP: YOU SHOOTING AN");
+        System.out.println("ARROW OR YOU ENTERING HIS ROOM.");
+        System.out.println("     IF THE WUMPUS WAKES HE MOVES (P=.75) ONE ROOM");
+        System.out.println(" OR STAYS STILL (P=.25).  AFTER THAT, IF HE IS WHERE YOU");
+        System.out.println(" ARE, HE EATS YOU UP AND YOU LOSE!");
+        System.out.println("");
+        System.out.println("     YOU:");
+        System.out.println(" EACH TURN YOU MAY MOVE OR SHOOT A CROOKED ARROW");
+        System.out.println("   MOVING:  YOU CAN MOVE ONE ROOM (THRU ONE TUNNEL)");
+        System.out.println("   ARROWS:  YOU HAVE 5 ARROWS.  YOU LOSE WHEN YOU RUN OUT");
+        System.out.println("   EACH ARROW CAN GO FROM 1 TO 5 ROOMS. YOU AIM BY TELLING");
+        System.out.println("   THE COMPUTER THE ROOM#S YOU WANT THE ARROW TO GO TO.");
+        System.out.println("   IF THE ARROW CAN'T GO THAT WAY (IF NO TUNNEL) IT MOVES");
+        System.out.println("   AT RANDOM TO THE NEXT ROOM.");
+        System.out.println("     IF THE ARROW HITS THE WUMPUS, YOU WIN.");
+        System.out.println("     IF THE ARROW HITS YOU, YOU LOSE.");
+        System.out.println("HIT RETURN TO CONTINUE"); 
+        System.in.read();
+
+        System.out.println("    WARNINGS:");
+        System.out.println("     WHEN YOU ARE ONE ROOM AWAY FROM A WUMPUS OR HAZARD,");
+        System.out.println("     THE COMPUTER SAYS:");
+        System.out.println(" WUMPUS:  'I SMELL A WUMPUS'");
+        System.out.println(" BAT   :  'BATS NEARBY'");
+        System.out.println(" PIT   :  'I FEEL A DRAFT'");
+        System.out.println("");
+    }
 }
+      
