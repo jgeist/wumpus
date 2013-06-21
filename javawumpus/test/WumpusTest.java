@@ -20,6 +20,7 @@ public class WumpusTest {
 	public void setUp() {
 		Wumpus.random = new Random(0); //seed random for expected results
         Wumpus.currentLine = 5;
+        Wumpus.throwOnIOErrorForTests = true;
         System.setOut(new PrintStream(textOutput));
 	}
 
@@ -353,8 +354,7 @@ public class WumpusTest {
             "ROOM # " + 
             "ROOM # " + 
             "ARROWS AREN'T THAT CROOKED - TRY ANOTHER ROOM\n" +
-            "ROOM # " +
-            "MISSED\n";
+            "ROOM # ";
         
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
@@ -425,6 +425,8 @@ public class WumpusTest {
         
         Wumpus.main(null);
 
+        System.out.flush();
+
         String expectedOutput = "TSK TSK TSK - WUMPUS GOT YOU!\n";
         
         assertEquals(expectedOutput, textOutput.toString());
@@ -434,7 +436,156 @@ public class WumpusTest {
 
     @Test
     public void testMovePlayerNotPossible() {
+        Wumpus.l[1] = 1;
+        Wumpus.l[2] = 19;
+        Wumpus.l[3] = 19;
+        Wumpus.l[4] = 19; 
+        Wumpus.l[5] = 19;
+        Wumpus.l[6] = 19;
+        Wumpus.ll = Wumpus.l[1];
+        Wumpus.aa = 5;  
+        Wumpus.f = -999;
         
+        String input = "10" + CR;
+        System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
+        
+        Wumpus.pushGosubReturnAddressForTests(9999);
+        Wumpus.currentLine = 975;
+        
+        Wumpus.main(null);
+
+        System.out.flush();
+        
+        String expectedOutput = 
+            "WHERE TO " +
+            "NOT POSSIBLE - WHERE TO ";
+        
+        assertEquals(expectedOutput, textOutput.toString());
+        assertEquals(0, Wumpus.f);
+        assertEquals(1, Wumpus.l[1]);
+    }
+
+    @Test
+    public void testMovePlayerNothingHappens() {
+        Wumpus.l[1] = 1;
+        Wumpus.l[2] = 19;
+        Wumpus.l[3] = 19;
+        Wumpus.l[4] = 19; 
+        Wumpus.l[5] = 19;
+        Wumpus.l[6] = 19;
+        Wumpus.ll = Wumpus.l[1];
+        Wumpus.aa = 5;  
+        Wumpus.f = -999;
+        
+        String input = "2" + CR;
+        System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
+        
+        Wumpus.pushGosubReturnAddressForTests(9999);
+        Wumpus.currentLine = 975;
+        
+        Wumpus.main(null);
+
+        System.out.flush();
+        
+        String expectedOutput = 
+            "WHERE TO ";
+        
+        assertEquals(expectedOutput, textOutput.toString());
+        assertEquals(0, Wumpus.f);
+        assertEquals(2, Wumpus.l[1]);
+    }
+
+    @Test
+    public void testMovePlayerRunIntoWumpus() {
+        Wumpus.l[1] = 1;
+        Wumpus.l[2] = 2;
+        Wumpus.l[3] = 19;
+        Wumpus.l[4] = 19; 
+        Wumpus.l[5] = 19;
+        Wumpus.l[6] = 19;
+        Wumpus.ll = Wumpus.l[1];
+        Wumpus.aa = 5;  
+        Wumpus.f = -999;
+        
+        String input = "2" + CR;
+        System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
+        
+        Wumpus.pushGosubReturnAddressForTests(9999);
+        Wumpus.currentLine = 975;
+        
+        Wumpus.main(null);
+
+        System.out.flush();
+        
+        String expectedOutput = 
+            "WHERE TO " +
+            "... OOPS! BUMPED A WUMPUS!\n";
+        
+        assertEquals(expectedOutput, textOutput.toString());
+        assertEquals(0, Wumpus.f);
+        assertEquals(2, Wumpus.l[1]);
+    }
+
+    @Test
+    public void testMovePlayerRunIntoPit() {
+        Wumpus.l[1] = 1;
+        Wumpus.l[2] = 19;
+        Wumpus.l[3] = 2;
+        Wumpus.l[4] = 19; 
+        Wumpus.l[5] = 19;
+        Wumpus.l[6] = 19;
+        Wumpus.ll = Wumpus.l[1];
+        Wumpus.aa = 5;  
+        Wumpus.f = -999;
+        
+        String input = "2" + CR;
+        System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
+        
+        Wumpus.pushGosubReturnAddressForTests(9999);
+        Wumpus.currentLine = 975;
+        
+        Wumpus.main(null);
+
+        System.out.flush();
+        
+        String expectedOutput = 
+            "WHERE TO " +
+            "YYYYIIIIEEEE . . . FELL IN PIT\n";
+        
+        assertEquals(expectedOutput, textOutput.toString());
+        assertEquals(-1, Wumpus.f);
+        assertEquals(2, Wumpus.l[1]);
+    }
+
+    @Test
+    public void testMovePlayerRunIntoBat() {
+        Wumpus.l[1] = 1;
+        Wumpus.l[2] = 19;
+        Wumpus.l[3] = 19;
+        Wumpus.l[4] = 19; 
+        Wumpus.l[5] = 2;
+        Wumpus.l[6] = 19;
+        Wumpus.ll = Wumpus.l[1];
+        Wumpus.aa = 5;  
+        Wumpus.f = -999;
+        
+        String input = "2" + CR;
+        System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
+        
+        Wumpus.pushGosubReturnAddressForTests(9999);
+        Wumpus.currentLine = 975;
+        
+        Wumpus.main(null);
+
+        System.out.flush();
+        
+        String expectedOutput = 
+            "WHERE TO " +
+            "ZAP--SUPER BAT SNATCH! ELSEWHEREVILLE FOR YOU!\n";
+        
+        assertEquals(expectedOutput, textOutput.toString());
+        assertEquals(0, Wumpus.f);
+        assertEquals(1, Wumpus.l[1]);
     }
 
     @Test

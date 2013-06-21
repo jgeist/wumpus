@@ -34,6 +34,8 @@ public class Wumpus {
     public static int k1 = 0;
     public static int j9 = 0;
 
+    public static boolean throwOnIOErrorForTests = false;
+
 	/**
 	 * @param args
 	 */
@@ -131,7 +133,7 @@ public class Wumpus {
 				case 1055: if (ll != l[2]) nextLine = 1090; break;												// 1055 if l <> l(2) then 1090
 				case 1060: System.out.println("... OOPS! BUMPED A WUMPUS!"); break;								// 1060 print "... OOPS! BUMPED A WUMPUS!"
 				case 1065: break;																				// 1065 rem *** MOVE WUMPUS ***
-				case 1070: gosub(940, 1075); break;																// 1070 gosub 940
+				case 1070: gosub(935, 1075); break;																// 1070 gosub 935
 				case 1075: if (f == 0) nextLine = 1090; break;													// 1075 if f = 0 then 1090
 				case 1080: returnFromGosub(); break;															// 1080 return
 				case 1085: break;																				// 1085 rem *** PIT ***
@@ -179,12 +181,15 @@ public class Wumpus {
 		return random.nextInt(4) + 1;
 	}
 
-	public static int readInt() {
+	public static int readInt() throws IOException {
 		String line = "";
 		BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
 		try {
 			line = is.readLine();
 		} catch (IOException e) {
+            if (throwOnIOErrorForTests) {
+                throw e;
+            }
 			return 0;
 		}
 		return Integer.parseInt(line);
