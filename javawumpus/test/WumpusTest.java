@@ -266,6 +266,7 @@ public class WumpusTest {
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
         assertEquals(0, Wumpus.f);
+        assertEquals(20, Wumpus.l[2]);      // on missed, Wumpus moves
     }
 
     @Test
@@ -331,6 +332,7 @@ public class WumpusTest {
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
         assertEquals(-1, Wumpus.f);
+        assertEquals(19, Wumpus.l[2]);
     }
 
     @Test
@@ -367,6 +369,7 @@ public class WumpusTest {
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
         assertEquals(0, Wumpus.f);
+        assertEquals(19, Wumpus.l[2]);
     }
 
     @Test
@@ -399,6 +402,7 @@ public class WumpusTest {
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
         assertEquals(0, Wumpus.f);
+        assertEquals(19, Wumpus.l[2]);
     }
 
     @Test
