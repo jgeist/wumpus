@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class Wumpus {
 
-	private static int currentLine;
+	public static int currentLine = 5;
 	private static Deque<Integer> returnLine = new ArrayDeque<Integer>();
 	private static int nextLine;
 	public static Random random = new Random();
@@ -39,7 +39,6 @@ public class Wumpus {
 	 */
 	public static void main(String[] args) {
 		try {
-			currentLine = 5;
 			while (currentLine <= 1150) {
 				nextLine = currentLine + 1;
 				switch (currentLine) {
