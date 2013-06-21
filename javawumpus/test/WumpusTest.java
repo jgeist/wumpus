@@ -202,6 +202,42 @@ public class WumpusTest {
     }
 
     @Test
+    public void testShootOrMovePromptShoot() {   
+        String input = "S\r";
+        String expectedOutput = "SHOOT OR MOVE (S-M) ";
+        System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
+        
+        Wumpus.o = 0;
+
+        Wumpus.pushGosubReturnAddressForTests(9999);
+        Wumpus.currentLine = 670;
+        
+        Wumpus.main(null);
+
+        System.out.flush();
+        assertEquals(expectedOutput, textOutput.toString());    
+        assertEquals(1, Wumpus.o);
+    }
+
+    @Test
+    public void testShootOrMovePromptMove() {   
+        String input = "M\r";
+        String expectedOutput = "SHOOT OR MOVE (S-M) ";
+        System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
+        
+        Wumpus.o = 0;
+
+        Wumpus.pushGosubReturnAddressForTests(9999);
+        Wumpus.currentLine = 670;
+        
+        Wumpus.main(null);
+
+        System.out.flush();
+        assertEquals(expectedOutput, textOutput.toString());    
+        assertEquals(2, Wumpus.o);
+    }
+
+    @Test
     public void gameSessionLosing() throws Exception {
         final String CR = "\r";
         String input = 
