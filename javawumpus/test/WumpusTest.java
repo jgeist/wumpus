@@ -174,7 +174,6 @@ public class WumpusTest {
 
     @Test
     public void testRoomDescriptionEverything() {
-        // player is in room 1, everything else is off the map
         Wumpus.l[1] = 1;
         Wumpus.l[2] = 2;
         Wumpus.l[3] = 5;
@@ -235,6 +234,171 @@ public class WumpusTest {
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
         assertEquals(2, Wumpus.o);
+    }
+
+    @Test
+    public void testShootArrowMissing() {   
+        Wumpus.l[1] = 1;
+        Wumpus.l[2] = 19;
+        Wumpus.l[3] = 19;
+        Wumpus.l[4] = 19; 
+        Wumpus.l[5] = 19;
+        Wumpus.l[6] = 19;
+        Wumpus.ll = Wumpus.l[1];
+        Wumpus.aa = 5;
+
+        final String CR = "\r";
+        String input = "1" + CR + "2" + CR;     // shoot arrow into room 2
+        
+        String expectedOutput = 
+            "NO. OF ROOMS (1-5) " +
+            "ROOM # " + 
+            "MISSED\n";
+        
+        System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
+        
+        Wumpus.f = -999;  
+        Wumpus.pushGosubReturnAddressForTests(9999);
+        Wumpus.currentLine = 715;   
+        
+        Wumpus.main(null);
+
+        System.out.flush();
+        assertEquals(expectedOutput, textOutput.toString());    
+        assertEquals(0, Wumpus.f);
+    }
+
+    @Test
+    public void testShootArrowHitting() {   
+        Wumpus.l[1] = 1;
+        Wumpus.l[2] = 2;
+        Wumpus.l[3] = 19;
+        Wumpus.l[4] = 19; 
+        Wumpus.l[5] = 19;
+        Wumpus.l[6] = 19;
+        Wumpus.ll = Wumpus.l[1];
+        Wumpus.aa = 5;
+
+        final String CR = "\r";
+        String input = "1" + CR + "2" + CR;     // shoot arrow into room 2
+        
+        String expectedOutput = 
+            "NO. OF ROOMS (1-5) " +
+            "ROOM # " + 
+            "AHA! YOU GOT THE WUMPUS!\n";
+        
+        System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
+        
+        Wumpus.f = -999;  
+        Wumpus.pushGosubReturnAddressForTests(9999);
+        Wumpus.currentLine = 715;   
+        
+        Wumpus.main(null);
+
+        System.out.flush();
+        assertEquals(expectedOutput, textOutput.toString());    
+        assertEquals(1, Wumpus.f);
+    }
+
+    @Test
+    public void testShootArrowAtSelf() {   
+        Wumpus.l[1] = 1;
+        Wumpus.l[2] = 19;
+        Wumpus.l[3] = 19;
+        Wumpus.l[4] = 19; 
+        Wumpus.l[5] = 19;
+        Wumpus.l[6] = 19;
+        Wumpus.ll = Wumpus.l[1];
+        Wumpus.aa = 5;
+
+        final String CR = "\r";
+        String input = "2" + CR + "2" + CR + "1" + CR;     // shoot arrow into next room and back
+        
+        String expectedOutput = 
+            "NO. OF ROOMS (1-5) " +
+            "ROOM # " +
+            "ROOM # " + 
+            "OUCH! ARROW GOT YOU!\n";
+        
+        System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
+        
+        Wumpus.f = -999;  
+        Wumpus.pushGosubReturnAddressForTests(9999);
+        Wumpus.currentLine = 715;   
+        
+        Wumpus.main(null);
+
+        System.out.flush();
+        assertEquals(expectedOutput, textOutput.toString());    
+        assertEquals(-1, Wumpus.f);
+    }
+
+    @Test
+    public void testShootArrowBackwards() {   
+        Wumpus.l[1] = 1;
+        Wumpus.l[2] = 19;
+        Wumpus.l[3] = 19;
+        Wumpus.l[4] = 19; 
+        Wumpus.l[5] = 19;
+        Wumpus.l[6] = 19;
+        Wumpus.ll = Wumpus.l[1];
+        Wumpus.aa = 5;
+
+        final String CR = "\r";
+        String input = "3" + CR + "2" + CR + "3" + CR + "2" + CR;     // shoot arrow into next room and back
+        
+        String expectedOutput = 
+            "NO. OF ROOMS (1-5) " +
+            "ROOM # " +
+            "ROOM # " + 
+            "ROOM # " + 
+            "ARROWS AREN'T THAT CROOKED - TRY ANOTHER ROOM\n" +
+            "ROOM # " +
+            "MISSED\n";
+        
+        System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
+        
+        Wumpus.f = -999;  
+        Wumpus.pushGosubReturnAddressForTests(9999);
+        Wumpus.currentLine = 715;   
+        
+        Wumpus.main(null);
+
+        System.out.flush();
+        assertEquals(expectedOutput, textOutput.toString());    
+        assertEquals(0, Wumpus.f);
+    }
+
+    @Test
+    public void testShootArrowWall() {   
+        Wumpus.l[1] = 1;
+        Wumpus.l[2] = 19;
+        Wumpus.l[3] = 19;
+        Wumpus.l[4] = 19; 
+        Wumpus.l[5] = 19;
+        Wumpus.l[6] = 19;
+        Wumpus.ll = Wumpus.l[1];
+        Wumpus.aa = 5;
+
+        final String CR = "\r";
+        String input = "1" + CR + "12" + CR;
+        
+        String expectedOutput = 
+            "NO. OF ROOMS (1-5) " +
+            "ROOM # " +
+            "MISSED\n";
+        
+        System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
+        
+        Wumpus.f = -999;  
+        Wumpus.pushGosubReturnAddressForTests(9999);
+        Wumpus.currentLine = 715;   
+        
+        Wumpus.main(null);
+
+        System.out.flush();
+        assertEquals(expectedOutput, textOutput.toString());    
+        assertEquals(0, Wumpus.f);
     }
 
     @Test
