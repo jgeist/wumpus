@@ -107,49 +107,7 @@ public class Wumpus {
 				case 665: returnFromGosub(); break;																// 665 return
 				case 670: promptForShootOrMove(); break;														// 670 rem *** CHOOSE OPTION ***
 				case 710: returnFromGosub(); break;																// 710 return
-				case 715: break;																				// 715 rem *** ARROW ROUTINE ***
-				case 720: f = 0; break;																			// 720 f = 0
-				case 725: break;																				// 725 rem *** PATH OF ARROW ***
-				case 735: System.out.print("NO. OF ROOMS (1-5) "); break;										// 735 print "NO. OF ROOMS (1-5)";
-				case 740: j9 = readInt(); break;																// 740 input j9
-				case 745: if (j9 < 1) nextLine = 735; break;													// 745 if j9 < 1 then 735
-				case 750: if (j9 > 5) nextLine = 735; break;													// 750 if j9 > 5 then 735
-				case 755: k = 1; break;																			// 755 for k = 1 to j9
-				case 760: System.out.print("ROOM # "); break;													// 760 print "ROOM #";
-				case 765: p[k] = readInt(); break;																// 765 input p(k)
-				case 770: if (k <= 2) nextLine = 790; break;													// 770 if k <= 2 then 790
-				case 775: if (p[k] != p[k-2]) nextLine = 790; break;											// 775 if p(k) <> p(k-2) then 790
-				case 780: System.out.println("ARROWS AREN'T THAT CROOKED - TRY ANOTHER ROOM"); break;			// 780 print "ARROWS AREN'T THAT CROOKED - TRY ANOTHER ROOM"
-				case 785: nextLine = 760; break;																// 785 goto 760
-				case 790: ++k; if (k <= j9) nextLine = 760; break;												// 790 next k
-				case 795: break;																				// 795 rem *** SHOOT ARROW ***
-				case 800: ll = l[1]; break;																		// 800 l = l(1)
-				case 805: k = 1; break;																			// 805 for k = 1 to j9
-				case 810: k1 = 1; break;																		// 810 for k1 = 1 to 3
-				case 815: if (s[ll][k1] == p[k]) nextLine = 895; break;											// 815 if s(l,k1) = p(k) then 895
-				case 820: ++k1; if (k1 <= 3) nextLine = 815; break;												// 820 next k1
-				case 825: break;																				// 825 rem *** NO TUNNEL FOR ARROW ***
-				case 830: ll = s[ll][fnB()]; break;																// 830 l = s(l,fnb(1))
-				case 835: nextLine = 900; break;																// 835 goto 900
-				case 840: ++k; if (k <= j9) nextLine = 810; break;												// 840 next k
-				case 845: System.out.println("MISSED"); break;													// 845 print "MISSED"
-				case 850: ll = l[1]; break;																		// 850 l = l(1)
-				case 855: break;																				// 855 rem *** MOVE WUMPUS ***
-				case 860: gosub(935, 865); break;																// 860 gosub 935
-				case 865: break;																				// 865 rem *** AMMO CHECK ***
-				case 870: aa = aa - 1; break;																	// 870 a = a-1
-				case 875: if (aa > 0) nextLine = 885; break;													// 875 if a > 0 then 885
-				case 880: f = -1; break;																		// 880 f = -1
-				case 885: returnFromGosub(); break;																// 885 return
-				case 890: break;																				// 890 rem *** SEE IF ARROW IS AT l(1) OR AT l(2)
-				case 895: ll = p[k]; break;																		// 895 l = p(k)
-				case 900: if (ll != l[2]) nextLine = 920; break;												// 900 if l <> l(2) then 920
-				case 905: System.out.println("AHA! YOU GOT THE WUMPUS!"); break;								// 905 print "AHA! YOU GOT THE WUMPUS!"
-				case 910: f = 1; break;																			// 910 f = 1
-				case 915: returnFromGosub(); break;																// 915 return
-				case 920: if (ll != l[1]) nextLine = 840; break;												// 920 if l <> l(1) then 840
-				case 925: System.out.println ("OUCH! ARROW GOT YOU!"); break;									// 925 print "OUCH! ARROW GOT YOU!"
-				case 930: nextLine = 880; break;																// 930 goto 880
+				case 715: promptAndShootArrow(); returnFromGosub(); break;										// 715 rem *** ARROW ROUTINE ***
 
 				case 935: moveWumpus(); break;																	// 935 rem *** MOVE WUMPUS ROUTINE ***
 				case 970: returnFromGosub(); break;																// 970 return
@@ -356,6 +314,61 @@ public class Wumpus {
         }
         if (l[2] == ll) {
             System.out.println("TSK TSK TSK - WUMPUS GOT YOU!");
+            f = -1;
+        }
+    }
+
+    public static void promptAndShootArrow() throws IOException {
+        f = 0;
+        
+        // path of arrow
+        System.out.print("NO. OF ROOMS (1-5) ");
+        while (true) {
+            j9 = readInt();
+            if (j9 >= 1 && j9 <= 5) {
+                break;
+            }
+        }
+        
+        for (k = 1; k <= j9; k++) {
+            System.out.print("ROOM # ");    
+            p[k] = readInt();
+            if (k > 2 && p[k] == p[k-2]) {
+                System.out.println("ARROWS AREN'T THAT CROOKED - TRY ANOTHER ROOM");
+                k--;
+                continue;
+            }
+        }
+
+        ll = l[1];
+        for (k = 1; k <= j9; k++) {
+            for (k1 = 1; k1 <= 3; k1++) {
+                if (s[ll][k1] == p[k]) {
+                    ll = p[k];  
+                    break;
+                }
+            }
+            if (k1 == 4) {
+                ll = s[ll][fnB()];
+            }
+             
+            if (ll == l[2]) {
+                System.out.println("AHA! YOU GOT THE WUMPUS!");
+                f = 1;
+                return;
+            }   
+            if (ll == l[1]) {
+                System.out.println("OUCH! ARROW GOT YOU!");
+                f = -1;
+                return;
+            }
+        }
+
+        System.out.println("MISSED");
+        ll = l[1];
+        moveWumpus();
+        aa--;
+        if (aa <= 0) {
             f = -1;
         }
     }
