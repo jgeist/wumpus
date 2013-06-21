@@ -15,30 +15,31 @@ public class Wumpus {
     
     private static final int MAP_OBJECT_COUNT = 6;
 
+    public static char i$ = '\0';
+	public static int[][] s = {{0,0,0,0},
+                        {0,2,5,8},		{0,1,3,10},		{0,2,4,12},		{0,3,5,14},		{0,1,4,6},
+                        {0,5,7,15},		{0,6,8,17},		{0,1,7,9},		{0,8,10,18},	{0,2,9,11},
+                        {0,10,12,19},	{0,3,11,13},	{0,12,14,20},	{0,4,13,15},	{0,6,14,16},
+                        {0,15,17,20},	{0,7,16,18},	{0,9,17,19},	{0,11,18,20},	{0,13,16,19}};
+    public static int[] l = new int[MAP_OBJECT_COUNT + 1];
+    public static int[] m = new int[MAP_OBJECT_COUNT + 1];
+    public static int[] p = new int[6];
+    public static int aa = 5;
+    public static int ll = aa;
+    public static int o = 1;
+    public static int f = 0;
+			
+    public static int j = 0;
+    public static int k = 0;
+    public static int k1 = 0;
+    public static int j9 = 0;
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		try {
 			currentLine = 5;
-			char i$ = '\0';
-			int[][] s = {{0,0,0,0},
-			{0,2,5,8},		{0,1,3,10},		{0,2,4,12},		{0,3,5,14},		{0,1,4,6},
-			{0,5,7,15},		{0,6,8,17},		{0,1,7,9},		{0,8,10,18},	{0,2,9,11},
-			{0,10,12,19},	{0,3,11,13},	{0,12,14,20},	{0,4,13,15},	{0,6,14,16},
-			{0,15,17,20},	{0,7,16,18},	{0,9,17,19},	{0,11,18,20},	{0,13,16,19}};
-			int[] l = new int[MAP_OBJECT_COUNT + 1];
-			int[] m = new int[MAP_OBJECT_COUNT + 1];
-			int[] p = new int[6];
-			int aa = 5;
-			int ll = aa;
-			int o = 1;
-			int f = 0;
-			
-			int j = 0;
-			int k = 0;
-			int k1 = 0;
-			int j9 = 0;
 			while (currentLine <= 1150) {
 				nextLine = currentLine + 1;
 				switch (currentLine) {
