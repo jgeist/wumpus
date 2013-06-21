@@ -402,6 +402,35 @@ public class WumpusTest {
     }
 
     @Test
+    public void testMoveWumpus() {
+        Wumpus.l[2] = 1;
+        
+        Wumpus.pushGosubReturnAddressForTests(9999);
+        Wumpus.currentLine = 935;
+        
+        Wumpus.main(null);
+        
+        assertEquals(8, Wumpus.l[2]);
+
+        Wumpus.pushGosubReturnAddressForTests(9999);
+        Wumpus.currentLine = 935;
+        
+        Wumpus.main(null);
+        
+        assertEquals(8, Wumpus.l[2]);
+
+        Wumpus.pushGosubReturnAddressForTests(9999);
+        Wumpus.currentLine = 935;
+        
+        Wumpus.main(null);
+
+        String expectedOutput = "TSK TSK TSK - WUMPUS GOT YOU!\n";
+        
+        assertEquals(expectedOutput, textOutput.toString());
+        assertEquals(1, Wumpus.l[2]);
+    }
+
+    @Test
     public void gameSessionLosing() throws Exception {
         final String CR = "\r";
         String input = 
