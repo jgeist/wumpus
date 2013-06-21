@@ -69,6 +69,139 @@ public class WumpusTest {
 	}
 
     @Test
+    public void testRoomDescriptionNormal() {
+        // player is in room 1, everything else is off the map
+        Wumpus.l[1] = 1;
+        Wumpus.l[2] = 999;
+        Wumpus.l[3] = 999;
+        Wumpus.l[4] = 999; 
+        Wumpus.l[5] = 999;
+        Wumpus.l[6] = 999;
+        Wumpus.ll = Wumpus.l[1];
+        
+        String expectedOutput =     
+            "\n" +
+            "YOUR ARE IN ROOM 1\n" +
+            "TUNNELS LEAD TO 2 5 8\n" +
+            "\n";
+        
+        Wumpus.pushGosubReturnAddressForTests(9999);
+        Wumpus.currentLine = 585;
+        
+        Wumpus.main(null);
+        
+        System.out.flush();        
+        assertEquals(expectedOutput, textOutput.toString());
+    }
+
+    @Test
+    public void testRoomDescriptionWumpus() {
+        Wumpus.l[1] = 1;
+        Wumpus.l[2] = 2;
+        Wumpus.l[3] = 999;
+        Wumpus.l[4] = 999; 
+        Wumpus.l[5] = 999;
+        Wumpus.l[6] = 999;
+        Wumpus.ll = Wumpus.l[1];
+        
+        String expectedOutput =     
+            "\n" +
+            "I SMELL A WUMPUS!\n" + 
+            "YOUR ARE IN ROOM 1\n" +
+            "TUNNELS LEAD TO 2 5 8\n" +
+            "\n";
+        
+        Wumpus.pushGosubReturnAddressForTests(9999);
+        Wumpus.currentLine = 585;
+        
+        Wumpus.main(null);
+        
+        System.out.flush();        
+        assertEquals(expectedOutput, textOutput.toString());
+    }
+
+    @Test
+    public void testRoomDescriptionPits() {
+        Wumpus.l[1] = 1;
+        Wumpus.l[2] = 999;
+        Wumpus.l[3] = 2;
+        Wumpus.l[4] = 999; 
+        Wumpus.l[5] = 999;
+        Wumpus.l[6] = 999;
+        Wumpus.ll = Wumpus.l[1];
+        
+        String expectedOutput =     
+            "\n" +
+            "I FEEL A DRAFT\n" + 
+            "YOUR ARE IN ROOM 1\n" +
+            "TUNNELS LEAD TO 2 5 8\n" +
+            "\n";
+        
+        Wumpus.pushGosubReturnAddressForTests(9999);
+        Wumpus.currentLine = 585;
+        
+        Wumpus.main(null);
+        
+        System.out.flush();        
+        assertEquals(expectedOutput, textOutput.toString());
+    }
+
+    @Test
+    public void testRoomDescriptionBats() {
+        Wumpus.l[1] = 1;
+        Wumpus.l[2] = 999;
+        Wumpus.l[3] = 999;
+        Wumpus.l[4] = 999; 
+        Wumpus.l[5] = 2;
+        Wumpus.l[6] = 999;
+        Wumpus.ll = Wumpus.l[1];
+        
+        String expectedOutput =     
+            "\n" +
+            "BATS NEARBY!\n" + 
+            "YOUR ARE IN ROOM 1\n" +
+            "TUNNELS LEAD TO 2 5 8\n" +
+            "\n";
+        
+        Wumpus.pushGosubReturnAddressForTests(9999);
+        Wumpus.currentLine = 585;
+        
+        Wumpus.main(null);
+        
+        System.out.flush();        
+        assertEquals(expectedOutput, textOutput.toString());
+    }
+
+    @Test
+    public void testRoomDescriptionEverything() {
+        // player is in room 1, everything else is off the map
+        Wumpus.l[1] = 1;
+        Wumpus.l[2] = 2;
+        Wumpus.l[3] = 5;
+        Wumpus.l[4] = 999; 
+        Wumpus.l[5] = 8;
+        Wumpus.l[6] = 999;
+        Wumpus.ll = Wumpus.l[1];
+
+        String expectedOutput =     
+            "\n" +
+            "I SMELL A WUMPUS!\n" + 
+            "I FEEL A DRAFT\n" +
+            "BATS NEARBY!\n" + 
+            "YOUR ARE IN ROOM 1\n" +
+            "TUNNELS LEAD TO 2 5 8\n" +
+            "\n";
+        
+        Wumpus.pushGosubReturnAddressForTests(9999);
+        Wumpus.currentLine = 585;
+        
+        Wumpus.main(null);
+        
+        System.out.flush();        
+        assertEquals(expectedOutput, textOutput.toString());
+    }
+
+    @Test
     public void gameSessionLosing() throws Exception {
         final String CR = "\r";
         String input = 

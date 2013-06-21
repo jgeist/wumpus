@@ -242,6 +242,9 @@ public class Wumpus {
 		else
 			nextLine = returnLine.pollLast();
 	}
+    public static void pushGosubReturnAddressForTests(int lineToReturnTo) {
+        returnLine.addLast(lineToReturnTo);
+    }
 	public static int fnA() {
 		return random.nextInt(20) + 1;
 	}
