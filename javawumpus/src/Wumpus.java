@@ -150,14 +150,10 @@ public class Wumpus {
 				case 920: if (ll != l[1]) nextLine = 840; break;												// 920 if l <> l(1) then 840
 				case 925: System.out.println ("OUCH! ARROW GOT YOU!"); break;									// 925 print "OUCH! ARROW GOT YOU!"
 				case 930: nextLine = 880; break;																// 930 goto 880
-				case 935: break;																				// 935 rem *** MOVE WUMPUS ROUTINE ***
-				case 940: k = fnC(); break;																		// 940 k = fnc(0)
-				case 945: if (k == 4) nextLine = 955; break;													// 945 if k = 4 then 955
-				case 950: l[2] = s[l[2]][k]; break;																// 950 l(2) = s(l(2),k)
-				case 955: if (l[2] != ll) nextLine = 970; break;												// 955 if l(2) <> l then 970
-				case 960: System.out.println("TSK TSK TSK - WUMPUS GOT YOU!"); break;							// 960 print "TSK TSK TSK - WUMPUS GOT YOU!"
-				case 965: f = -1; break;																		// 965 f = -1
+
+				case 935: moveWumpus(); break;																	// 935 rem *** MOVE WUMPUS ROUTINE ***
 				case 970: returnFromGosub(); break;																// 970 return
+
 				case 975: break;																				// 975 rem *** MOVE ROUTINE ***
 				case 980: f = 0; break;																			// 980 f = 0
 				case 985: System.out.print("WHERE TO "); break;													// 985 print "WHERE TO";
@@ -350,6 +346,17 @@ public class Wumpus {
                 o = 2;
                 break;
             }
+        }
+    }
+
+    public static void moveWumpus() {
+        k = fnC();
+        if (k != 4) {
+            l[2] = s[l[2]][k]; 
+        }
+        if (l[2] == ll) {
+            System.out.println("TSK TSK TSK - WUMPUS GOT YOU!");
+            f = -1;
         }
     }
 }

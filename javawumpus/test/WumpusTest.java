@@ -428,6 +428,7 @@ public class WumpusTest {
         
         assertEquals(expectedOutput, textOutput.toString());
         assertEquals(1, Wumpus.l[2]);
+        assertEquals(-1, Wumpus.f);
     }
 
     @Test
