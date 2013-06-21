@@ -13,6 +13,8 @@ import java.io.PrintStream;
 
 public class WumpusTest {
     private final ByteArrayOutputStream textOutput = new ByteArrayOutputStream();
+    private final String CR = "\r";
+
 
 	@Before
 	public void setUp() {
@@ -247,7 +249,6 @@ public class WumpusTest {
         Wumpus.ll = Wumpus.l[1];
         Wumpus.aa = 5;
 
-        final String CR = "\r";
         String input = "1" + CR + "2" + CR;     // shoot arrow into room 2
         
         String expectedOutput = 
@@ -280,7 +281,6 @@ public class WumpusTest {
         Wumpus.ll = Wumpus.l[1];
         Wumpus.aa = 5;
 
-        final String CR = "\r";
         String input = "1" + CR + "2" + CR;     // shoot arrow into room 2
         
         String expectedOutput = 
@@ -312,7 +312,6 @@ public class WumpusTest {
         Wumpus.ll = Wumpus.l[1];
         Wumpus.aa = 5;
 
-        final String CR = "\r";
         String input = "2" + CR + "2" + CR + "1" + CR;     // shoot arrow into next room and back
         
         String expectedOutput = 
@@ -346,7 +345,6 @@ public class WumpusTest {
         Wumpus.ll = Wumpus.l[1];
         Wumpus.aa = 5;
 
-        final String CR = "\r";
         String input = "3" + CR + "2" + CR + "3" + CR + "2" + CR;     // shoot arrow into next room and back
         
         String expectedOutput = 
@@ -383,7 +381,6 @@ public class WumpusTest {
         Wumpus.ll = Wumpus.l[1];
         Wumpus.aa = 5;
 
-        final String CR = "\r";
         String input = "1" + CR + "12" + CR;
         
         String expectedOutput = 
@@ -436,8 +433,12 @@ public class WumpusTest {
     }
 
     @Test
+    public void testMovePlayerNotPossible() {
+        
+    }
+
+    @Test
     public void gameSessionLosing() throws Exception {
-        final String CR = "\r";
         String input = 
             "Y" + CR + CR + CR + 
             "M" + CR + "2" + CR + 
@@ -543,7 +544,6 @@ public class WumpusTest {
 
     @Test
     public void gameSessionWinning() throws Exception {
-        final String CR = "\r";
         String input = 
             "N" + CR +
             "M" + CR + "5" + CR + 
