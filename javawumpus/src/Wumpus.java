@@ -103,30 +103,7 @@ public class Wumpus {
 				case 360: i$ = (char) System.in.read(); System.in.read(); break;								// 360 input i$
 				case 365: if (i$ != 'Y' && i$ != 'y') nextLine = 170; break;									// 365 if (i$ <> "Y") and (i$ <> "y") then 170
 				case 370: nextLine = 230; break;																// 370 goto 230
-				case 585: break;																				// 585 rem *** PRINT LOCATION & HAZARD WARNINGS ***
-				case 590: System.out.println(""); break;														// 590 print
-				case 595: j = 2; break;																			// 595 for j = 2 to 6
-				case 600: k = 1; break;																			// 600 for k = 1 to 3
-				case 605: if (s[l[1]][k] != l[j]) nextLine = 640; break;										// 605 if s(l(1),k) <> l(j) then 640
-				case 610: switch(j-1) {																			// 610 on j-1 goto 615,625,625,635,635
-							case 1: nextLine = 615; break;
-							case 2:
-							case 3: nextLine = 625; break;
-							case 4:
-							case 5: nextLine = 635; break;
-							}; break;
-				case 615: System.out.println("I SMELL A WUMPUS!"); break;										// 615 print "I SMELL A WUMPUS!"
-				case 620: nextLine = 640; break;																// 620 goto 640
-				case 625: System.out.println("I FEEL A DRAFT"); break;											// 625 print "I FEEL A DRAFT"
-				case 630: nextLine = 640; break;																// 630 goto 640
-				case 635: System.out.println("BATS NEARBY!"); break;											// 635 print "BATS NEARBY!"
-				case 640: ++k; if (k <= 3) nextLine = 605; break;												// 640 next k
-				case 645: ++j; if (j <= MAP_OBJECT_COUNT) nextLine = 600; break;								// 645 next j
-				case 650: System.out.print("YOUR ARE IN ROOM "); System.out.println(l[1]); break;				// 650 print "YOU ARE IN ROOM ";l(1)
-				case 655: System.out.print("TUNNELS LEAD TO "); System.out.print(s[ll][1]);						// 655 print "TUNNELS LEAD TO ";s(l,1);" ";s(l,2);" ";s(l,3)
-							System.out.print(" "); System.out.print(s[ll][2]); 
-							System.out.print(" "); System.out.println(s[ll][3]); break;
-				case 660: System.out.println(""); break;														// 660 print
+				case 585: printRoomDescription(); break;														// 585 rem *** PRINT LOCATION & HAZARD WARNINGS ***
 				case 665: returnFromGosub(); break;																// 665 return
 				case 670: break;																				// 670 rem *** CHOOSE OPTION ***
 				case 675: System.out.print("SHOOT OR MOVE (S-M) "); break;										// 675 print "SHOOT OR MOVE (S-M)";
@@ -331,5 +308,41 @@ public class Wumpus {
 
         printInstructions();
     }
+
+    public static void printRoomDescription() throws IOException {
+        System.out.println("");
+        for (j = 2; j <= MAP_OBJECT_COUNT; j++) {   
+            for (k = 1; k <= 3; k++) {
+                if (s[l[1]][k] == l[j]) {
+                    switch (j-1) {
+                    case 1:
+                        System.out.println("I SMELL A WUMPUS!");
+                        break;
+
+                    case 2:                        
+                    case 3:
+                        System.out.println("I FEEL A DRAFT");
+                        break;
+
+                    case 4:
+                    case 5:
+                        System.out.println("BATS NEARBY!");
+                        break;
+                    }
+                }
+            }
+        }
+        
+        System.out.print("YOUR ARE IN ROOM ");
+        System.out.println(l[1]);
+        System.out.print("TUNNELS LEAD TO ");
+        System.out.print(s[ll][1]);
+        System.out.print(" ");
+        System.out.print(s[ll][2]);
+        System.out.print(" ");
+        System.out.print(s[ll][3]);
+        System.out.println("");
+        System.out.println("");
+    }                         
 }
       
