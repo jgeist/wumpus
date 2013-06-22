@@ -30,7 +30,6 @@ public class Wumpus {
 
     public static WinLoseState winLoseState = WinLoseState.PLAYING;
 
-    public static int k1 = 0;
     public static int j9 = 0;
 
     public static boolean throwOnIOErrorForTests = false;
@@ -222,6 +221,7 @@ public class Wumpus {
 
         int arrowPosition = objectPositions[1];
         for (int k = 1; k <= j9; k++) {
+            int k1;
             for (k1 = 1; k1 <= 3; k1++) {
                 if (caveStructure[arrowPosition][k1] == p[k]) {
                     arrowPosition = p[k];  
