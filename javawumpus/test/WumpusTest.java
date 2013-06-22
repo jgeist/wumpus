@@ -30,17 +30,17 @@ public class WumpusTest {
     }
 	
 	@Test
-	public void fnA() throws Exception {
-		assertEquals(1, Wumpus.fnA());
-		assertEquals(9, Wumpus.fnA());
-		assertEquals(10, Wumpus.fnA());
-		assertEquals(8, Wumpus.fnA());
-		assertEquals(16, Wumpus.fnA());
-		assertEquals(14, Wumpus.fnA());
-		assertEquals(12, Wumpus.fnA());
-		assertEquals(2, Wumpus.fnA());
-		assertEquals(20, Wumpus.fnA());
-		assertEquals(15, Wumpus.fnA());
+	public void randomRoom() throws Exception {
+		assertEquals(1, Wumpus.randomRoom());
+		assertEquals(9, Wumpus.randomRoom());
+		assertEquals(10, Wumpus.randomRoom());
+		assertEquals(8, Wumpus.randomRoom());
+		assertEquals(16, Wumpus.randomRoom());
+		assertEquals(14, Wumpus.randomRoom());
+		assertEquals(12, Wumpus.randomRoom());
+		assertEquals(2, Wumpus.randomRoom());
+		assertEquals(20, Wumpus.randomRoom());
+		assertEquals(15, Wumpus.randomRoom());
 	}
 
 	@Test

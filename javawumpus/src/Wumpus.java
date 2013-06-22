@@ -46,7 +46,7 @@ public class Wumpus {
 			e.printStackTrace();
 		}
 	}
-	public static int fnA() {
+	public static int randomRoom() {
 		return random.nextInt(NUMBER_OF_ROOMS) + 1;
 	}
 	public static int fnB() {
@@ -298,7 +298,7 @@ public class Wumpus {
         
             if (roomToMoveTo == objectPositions[5] || roomToMoveTo == objectPositions[6]) {
                 System.out.println("ZAP--SUPER BAT SNATCH! ELSEWHEREVILLE FOR YOU!");
-                roomToMoveTo = fnA();
+                roomToMoveTo = randomRoom();
                 continue;
             }
             
@@ -316,7 +316,7 @@ public class Wumpus {
             if (randomize) {
                 while (true) {
                     for (int j = 1; j <= MAP_OBJECT_COUNT; j++) {
-                        objectPositions[j] = fnA();
+                        objectPositions[j] = randomRoom();
                         originalObjectPositions[j] = objectPositions[j];
                     }
 
