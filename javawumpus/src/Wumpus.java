@@ -11,6 +11,7 @@ public class Wumpus {
     
     private static final int MAP_OBJECT_COUNT = 6;
     private static final int INITIAL_ARROWS = 5;
+    private static final int NUMBER_OF_ROOMS = 20;
 
 	public static int[][] caveStructure = {{0,0,0,0},
                         {0,2,5,8},		{0,1,3,10},		{0,2,4,12},		{0,3,5,14},		{0,1,4,6},
@@ -45,7 +46,7 @@ public class Wumpus {
 		}
 	}
 	public static int fnA() {
-		return random.nextInt(20) + 1;
+		return random.nextInt(NUMBER_OF_ROOMS) + 1;
 	}
 	public static int fnB() {
 		return random.nextInt(3) + 1;
@@ -74,7 +75,7 @@ public class Wumpus {
 
     private static void printInstructions() throws IOException {
         System.out.println("WELCOME TO 'HUNT THE WUMPUS'");
-        System.out.println("  THE WUMPUS LIVES IN A CAVE OF 20 ROOMS. EACH ROOM");	
+        System.out.println(String.format("  THE WUMPUS LIVES IN A CAVE OF %d ROOMS. EACH ROOM", NUMBER_OF_ROOMS));	
         System.out.println("HAS 3 TUNNELS LEADING TO OTHER ROOMS. (LOOK AT A");
         System.out.println("DODECAHEDRON TO SEE HOW THIS WORKS-IF YOU DON'T KNOW");
         System.out.println("WHAT A DODECAHEDRON IS, ASK SOMEONE)");
@@ -261,7 +262,7 @@ public class Wumpus {
         while (true) {
             System.out.print("WHERE TO "); 
             roomToMoveTo = readInt(); 
-            if (roomToMoveTo < 1 || roomToMoveTo > 20) {
+            if (roomToMoveTo < 1 || roomToMoveTo > NUMBER_OF_ROOMS) {
                 continue;
             }
 
