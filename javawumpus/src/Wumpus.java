@@ -187,7 +187,7 @@ public class Wumpus {
 
     public static void moveWumpus() {
         int k = randomWumpusMove();
-        if (k != 4) {
+        if (k != NUMBER_OF_CONNECTIONS_PER_ROOM + 1) {
             objectPositions[2] = caveStructure[objectPositions[2]][k]; 
         }
         if (objectPositions[2] == objectPositions[1]) {
@@ -230,7 +230,7 @@ public class Wumpus {
                     break;
                 }
             }
-            if (k1 == 4) {
+            if (k1 > NUMBER_OF_CONNECTIONS_PER_ROOM) {
                 arrowPosition = caveStructure[arrowPosition][randomConnection()];
             }
              
