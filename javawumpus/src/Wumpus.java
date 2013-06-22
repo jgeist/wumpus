@@ -254,7 +254,8 @@ public class Wumpus {
 
     public static void promptAndMovePlayer() throws IOException {
         f = 0;
-        
+
+        int ll;
         while (true) {
             System.out.print("WHERE TO "); 
             ll = readInt(); 
