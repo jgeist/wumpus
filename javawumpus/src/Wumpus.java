@@ -219,24 +219,24 @@ public class Wumpus {
             }
         }
 
-        ll = objectPositions[1];
+        int arrowPosition = objectPositions[1];
         for (k = 1; k <= j9; k++) {
             for (k1 = 1; k1 <= 3; k1++) {
-                if (caveStructure[ll][k1] == p[k]) {
-                    ll = p[k];  
+                if (caveStructure[arrowPosition][k1] == p[k]) {
+                    arrowPosition = p[k];  
                     break;
                 }
             }
             if (k1 == 4) {
-                ll = caveStructure[ll][fnB()];
+                arrowPosition = caveStructure[arrowPosition][fnB()];
             }
              
-            if (ll == objectPositions[2]) {
+            if (arrowPosition == objectPositions[2]) {
                 System.out.println("AHA! YOU GOT THE WUMPUS!");
                 f = 1;
                 return;
             }   
-            if (ll == objectPositions[1]) {
+            if (arrowPosition == objectPositions[1]) {
                 System.out.println("OUCH! ARROW GOT YOU!");
                 f = -1;
                 return;
@@ -244,7 +244,7 @@ public class Wumpus {
         }
 
         System.out.println("MISSED");
-        ll = objectPositions[1];
+
         moveWumpus();
         arrowInventory--;
         if (arrowInventory <= 0) {
