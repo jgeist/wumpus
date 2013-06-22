@@ -46,8 +46,6 @@ public class Wumpus {
 				switch (currentLine) {
 				case 5: runMainLoop(); break;				 													// 5 rem *** HUNT THE WUMPUS ***
 
-
-				case 975: promptAndMovePlayer(); returnFromGosub(); break;    									// 975 rem *** MOVE ROUTINE ***
 				}
 				currentLine = nextLine;
 			}

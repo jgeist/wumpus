@@ -395,7 +395,7 @@ public class WumpusTest {
     }
 
     @Test
-    public void testMovePlayerNotPossible() {
+    public void testMovePlayerNotPossible() throws IOException {
         Wumpus.l[1] = 1;
         Wumpus.l[2] = 19;
         Wumpus.l[3] = 19;
@@ -409,10 +409,10 @@ public class WumpusTest {
         String input = "10" + CR;
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
-        Wumpus.pushGosubReturnAddressForTests(9999);
-        Wumpus.currentLine = 975;
-        
-        Wumpus.main(null);
+        try {
+            Wumpus.promptAndMovePlayer();
+        } catch (IOException e) {
+        }
 
         System.out.flush();
         
@@ -426,7 +426,7 @@ public class WumpusTest {
     }
 
     @Test
-    public void testMovePlayerNothingHappens() {
+    public void testMovePlayerNothingHappens() throws IOException{
         Wumpus.l[1] = 1;
         Wumpus.l[2] = 19;
         Wumpus.l[3] = 19;
@@ -440,10 +440,7 @@ public class WumpusTest {
         String input = "2" + CR;
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
-        Wumpus.pushGosubReturnAddressForTests(9999);
-        Wumpus.currentLine = 975;
-        
-        Wumpus.main(null);
+        Wumpus.promptAndMovePlayer();
 
         System.out.flush();
         
@@ -456,7 +453,7 @@ public class WumpusTest {
     }
 
     @Test
-    public void testMovePlayerRunIntoWumpus() {
+    public void testMovePlayerRunIntoWumpus() throws IOException {
         Wumpus.l[1] = 1;
         Wumpus.l[2] = 2;
         Wumpus.l[3] = 19;
@@ -470,10 +467,7 @@ public class WumpusTest {
         String input = "2" + CR;
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
-        Wumpus.pushGosubReturnAddressForTests(9999);
-        Wumpus.currentLine = 975;
-        
-        Wumpus.main(null);
+        Wumpus.promptAndMovePlayer();
 
         System.out.flush();
         
@@ -487,7 +481,7 @@ public class WumpusTest {
     }
 
     @Test
-    public void testMovePlayerRunIntoPit() {
+    public void testMovePlayerRunIntoPit() throws IOException {
         Wumpus.l[1] = 1;
         Wumpus.l[2] = 19;
         Wumpus.l[3] = 2;
@@ -501,10 +495,7 @@ public class WumpusTest {
         String input = "2" + CR;
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
-        Wumpus.pushGosubReturnAddressForTests(9999);
-        Wumpus.currentLine = 975;
-        
-        Wumpus.main(null);
+        Wumpus.promptAndMovePlayer();
 
         System.out.flush();
         
@@ -518,7 +509,7 @@ public class WumpusTest {
     }
 
     @Test
-    public void testMovePlayerRunIntoBat() {
+    public void testMovePlayerRunIntoBat() throws IOException {
         Wumpus.l[1] = 1;
         Wumpus.l[2] = 19;
         Wumpus.l[3] = 19;
@@ -532,10 +523,7 @@ public class WumpusTest {
         String input = "2" + CR;
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
-        Wumpus.pushGosubReturnAddressForTests(9999);
-        Wumpus.currentLine = 975;
-        
-        Wumpus.main(null);
+        Wumpus.promptAndMovePlayer();
 
         System.out.flush();
         
