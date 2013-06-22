@@ -196,20 +196,20 @@ public class Wumpus {
 
     public static void promptAndShootArrow() throws IOException {
         int[] p = new int[6];
-        int j9;
+        int roomCount;
 
         winLoseState = WinLoseState.PLAYING;
         
         // path of arrow
         System.out.print("NO. OF ROOMS (1-5) ");
         while (true) {
-            j9 = readInt();
-            if (j9 >= 1 && j9 <= 5) {
+            roomCount = readInt();
+            if (roomCount >= 1 && roomCount <= 5) {
                 break;
             }
         }
         
-        for (int k = 1; k <= j9; k++) {
+        for (int k = 1; k <= roomCount; k++) {
             System.out.print("ROOM # ");    
             p[k] = readInt();
             if (k > 2 && p[k] == p[k-2]) {
@@ -220,7 +220,7 @@ public class Wumpus {
         }
 
         int arrowPosition = objectPositions[1];
-        for (int k = 1; k <= j9; k++) {
+        for (int k = 1; k <= roomCount; k++) {
             int k1;
             for (k1 = 1; k1 <= 3; k1++) {
                 if (caveStructure[arrowPosition][k1] == p[k]) {
