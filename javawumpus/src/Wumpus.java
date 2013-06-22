@@ -12,11 +12,12 @@ public class Wumpus {
     
     private static final int MAP_OBJECT_COUNT = 6;
 
-	public static int[][] s = {{0,0,0,0},
+	public static int[][] caveStructure = {{0,0,0,0},
                         {0,2,5,8},		{0,1,3,10},		{0,2,4,12},		{0,3,5,14},		{0,1,4,6},
                         {0,5,7,15},		{0,6,8,17},		{0,1,7,9},		{0,8,10,18},	{0,2,9,11},
                         {0,10,12,19},	{0,3,11,13},	{0,12,14,20},	{0,4,13,15},	{0,6,14,16},
                         {0,15,17,20},	{0,7,16,18},	{0,9,17,19},	{0,11,18,20},	{0,13,16,19}};
+
     public static int[] l = new int[MAP_OBJECT_COUNT + 1];
     public static int[] m = new int[MAP_OBJECT_COUNT + 1];
     public static int[] p = new int[6];
@@ -137,7 +138,7 @@ public class Wumpus {
         System.out.println("");
         for (j = 2; j <= MAP_OBJECT_COUNT; j++) {   
             for (k = 1; k <= 3; k++) {
-                if (s[l[1]][k] == l[j]) {
+                if (caveStructure[l[1]][k] == l[j]) {
                     switch (j-1) {
                     case 1:
                         System.out.println("I SMELL A WUMPUS!");
@@ -160,11 +161,11 @@ public class Wumpus {
         System.out.print("YOUR ARE IN ROOM ");
         System.out.println(l[1]);
         System.out.print("TUNNELS LEAD TO ");
-        System.out.print(s[ll][1]);
+        System.out.print(caveStructure[ll][1]);
         System.out.print(" ");
-        System.out.print(s[ll][2]);
+        System.out.print(caveStructure[ll][2]);
         System.out.print(" ");
-        System.out.print(s[ll][3]);
+        System.out.print(caveStructure[ll][3]);
         System.out.println("");
         System.out.println("");
     } 
@@ -187,7 +188,7 @@ public class Wumpus {
     public static void moveWumpus() {
         k = fnC();
         if (k != 4) {
-            l[2] = s[l[2]][k]; 
+            l[2] = caveStructure[l[2]][k]; 
         }
         if (l[2] == ll) {
             System.out.println("TSK TSK TSK - WUMPUS GOT YOU!");
@@ -220,13 +221,13 @@ public class Wumpus {
         ll = l[1];
         for (k = 1; k <= j9; k++) {
             for (k1 = 1; k1 <= 3; k1++) {
-                if (s[ll][k1] == p[k]) {
+                if (caveStructure[ll][k1] == p[k]) {
                     ll = p[k];  
                     break;
                 }
             }
             if (k1 == 4) {
-                ll = s[ll][fnB()];
+                ll = caveStructure[ll][fnB()];
             }
              
             if (ll == l[2]) {
@@ -260,7 +261,7 @@ public class Wumpus {
                 continue;
             }
             for (k = 1; k <= 3; k++) {
-                if (s[l[1]][k] == ll) {
+                if (caveStructure[l[1]][k] == ll) {
                     break;
                 }
             }
