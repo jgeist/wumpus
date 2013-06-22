@@ -190,17 +190,14 @@ public class WumpusTest {
     }
 
     @Test
-    public void testShootOrMovePromptShoot() {   
+    public void testShootOrMovePromptShoot() throws IOException {   
         String input = "S\r";
         String expectedOutput = "SHOOT OR MOVE (S-M) ";
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
         Wumpus.o = 0;
 
-        Wumpus.pushGosubReturnAddressForTests(9999);
-        Wumpus.currentLine = 670;
-        
-        Wumpus.main(null);
+        Wumpus.promptForShootOrMove();
 
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
@@ -208,17 +205,14 @@ public class WumpusTest {
     }
 
     @Test
-    public void testShootOrMovePromptMove() {   
+    public void testShootOrMovePromptMove() throws IOException {   
         String input = "M\r";
         String expectedOutput = "SHOOT OR MOVE (S-M) ";
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
         Wumpus.o = 0;
 
-        Wumpus.pushGosubReturnAddressForTests(9999);
-        Wumpus.currentLine = 670;
-        
-        Wumpus.main(null);
+        Wumpus.promptForShootOrMove();
 
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
