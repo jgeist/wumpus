@@ -30,7 +30,6 @@ public class Wumpus {
 
     public static WinLoseState winLoseState = WinLoseState.PLAYING;
 
-    public static int j = 0;
     public static int k = 0;
     public static int k1 = 0;
     public static int j9 = 0;
@@ -140,7 +139,7 @@ public class Wumpus {
 
     public static void printRoomDescription() throws IOException {
         System.out.println("");
-        for (j = 2; j <= MAP_OBJECT_COUNT; j++) {   
+        for (int j = 2; j <= MAP_OBJECT_COUNT; j++) {   
             for (k = 1; k <= 3; k++) {
                 if (caveStructure[objectPositions[1]][k] == objectPositions[j]) {
                     switch (j-1) {
@@ -313,12 +312,12 @@ public class Wumpus {
         while (true) {
             if (randomize) {
                 while (true) {
-                    for (j = 1; j <= MAP_OBJECT_COUNT; j++) {
+                    for (int j = 1; j <= MAP_OBJECT_COUNT; j++) {
                         objectPositions[j] = fnA();
                         originalObjectPositions[j] = objectPositions[j];
                     }
 
-                    for (j = 1; j <= MAP_OBJECT_COUNT; j++) {
+                    for (int j = 1; j <= MAP_OBJECT_COUNT; j++) {
                         for (k = 1; k <= MAP_OBJECT_COUNT; k++) {
                             if (j == k) {
                                 continue;
@@ -366,7 +365,7 @@ public class Wumpus {
                 System.out.println ("HA HA HA - YOU LOSE!");
             }
         
-            for (j = 1; j < MAP_OBJECT_COUNT; j++) {
+            for (int j = 1; j < MAP_OBJECT_COUNT; j++) {
                 objectPositions[j] = originalObjectPositions[j];
             }
             
