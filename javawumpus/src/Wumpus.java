@@ -20,8 +20,8 @@ public class Wumpus {
 
     public static int[] objectPositions = new int[MAP_OBJECT_COUNT + 1];
     public static int[] originalObjectPositions = new int[MAP_OBJECT_COUNT + 1];
-    public static int aa = 5;
-    public static int ll = aa;
+    public static int arrowInventory = 5;
+    public static int ll = arrowInventory;
     public static int o = 1;
     public static int f = 0;
 			
@@ -246,8 +246,8 @@ public class Wumpus {
         System.out.println("MISSED");
         ll = objectPositions[1];
         moveWumpus();
-        aa--;
-        if (aa <= 0) {
+        arrowInventory--;
+        if (arrowInventory <= 0) {
             f = -1;
         }
     }
@@ -333,7 +333,7 @@ public class Wumpus {
                 }
             }
 
-            aa = 5; 
+            arrowInventory = 5; 
             ll = objectPositions[1];
 
             System.out.println("HUNT THE WUMPUS");

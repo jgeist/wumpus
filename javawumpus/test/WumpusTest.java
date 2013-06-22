@@ -227,7 +227,7 @@ public class WumpusTest {
         Wumpus.objectPositions[5] = 19;
         Wumpus.objectPositions[6] = 19;
         Wumpus.ll = Wumpus.objectPositions[1];
-        Wumpus.aa = 5;
+        Wumpus.arrowInventory = 5;
 
         String input = "1" + CR + "2" + CR;     // shoot arrow into room 2
         
@@ -257,7 +257,7 @@ public class WumpusTest {
         Wumpus.objectPositions[5] = 19;
         Wumpus.objectPositions[6] = 19;
         Wumpus.ll = Wumpus.objectPositions[1];
-        Wumpus.aa = 5;
+        Wumpus.arrowInventory = 5;
 
         String input = "1" + CR + "2" + CR;     // shoot arrow into room 2
         
@@ -286,7 +286,7 @@ public class WumpusTest {
         Wumpus.objectPositions[5] = 19;
         Wumpus.objectPositions[6] = 19;
         Wumpus.ll = Wumpus.objectPositions[1];
-        Wumpus.aa = 5;
+        Wumpus.arrowInventory = 5;
 
         String input = "2" + CR + "2" + CR + "1" + CR;     // shoot arrow into next room and back
         
@@ -317,7 +317,7 @@ public class WumpusTest {
         Wumpus.objectPositions[5] = 19;
         Wumpus.objectPositions[6] = 19;
         Wumpus.ll = Wumpus.objectPositions[1];
-        Wumpus.aa = 5;
+        Wumpus.arrowInventory = 5;
 
         String input = "3" + CR + "2" + CR + "3" + CR + "2" + CR;     // shoot arrow into next room and back
         
@@ -353,7 +353,7 @@ public class WumpusTest {
         Wumpus.objectPositions[5] = 19;
         Wumpus.objectPositions[6] = 19;
         Wumpus.ll = Wumpus.objectPositions[1];
-        Wumpus.aa = 5;
+        Wumpus.arrowInventory = 5;
 
         String input = "1" + CR + "12" + CR;
         
@@ -402,7 +402,7 @@ public class WumpusTest {
         Wumpus.objectPositions[5] = 19;
         Wumpus.objectPositions[6] = 19;
         Wumpus.ll = Wumpus.objectPositions[1];
-        Wumpus.aa = 5;  
+        Wumpus.arrowInventory = 5;  
         Wumpus.f = -999;
         
         String input = "10" + CR;
@@ -433,7 +433,7 @@ public class WumpusTest {
         Wumpus.objectPositions[5] = 19;
         Wumpus.objectPositions[6] = 19;
         Wumpus.ll = Wumpus.objectPositions[1];
-        Wumpus.aa = 5;  
+        Wumpus.arrowInventory = 5;  
         Wumpus.f = -999;
         
         String input = "2" + CR;
@@ -460,7 +460,7 @@ public class WumpusTest {
         Wumpus.objectPositions[5] = 19;
         Wumpus.objectPositions[6] = 19;
         Wumpus.ll = Wumpus.objectPositions[1];
-        Wumpus.aa = 5;  
+        Wumpus.arrowInventory = 5;  
         Wumpus.f = -999;
         
         String input = "2" + CR;
@@ -488,7 +488,7 @@ public class WumpusTest {
         Wumpus.objectPositions[5] = 19;
         Wumpus.objectPositions[6] = 19;
         Wumpus.ll = Wumpus.objectPositions[1];
-        Wumpus.aa = 5;  
+        Wumpus.arrowInventory = 5;  
         Wumpus.f = -999;
         
         String input = "2" + CR;
@@ -516,7 +516,7 @@ public class WumpusTest {
         Wumpus.objectPositions[5] = 2;
         Wumpus.objectPositions[6] = 19;
         Wumpus.ll = Wumpus.objectPositions[1];
-        Wumpus.aa = 5;  
+        Wumpus.arrowInventory = 5;  
         Wumpus.f = -999;
         
         String input = "2" + CR;
