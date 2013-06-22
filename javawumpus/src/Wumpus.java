@@ -52,7 +52,7 @@ public class Wumpus {
 	public static int randomConnection() {
 		return random.nextInt(NUMBER_OF_CONNECTIONS_PER_ROOM) + 1;
 	}
-	public static int fnC() {
+	public static int randomWumpusMove() {
 		return random.nextInt(NUMBER_OF_CONNECTIONS_PER_ROOM + 1) + 1;
 	}
 
@@ -186,7 +186,7 @@ public class Wumpus {
     }
 
     public static void moveWumpus() {
-        int k = fnC();
+        int k = randomWumpusMove();
         if (k != 4) {
             objectPositions[2] = caveStructure[objectPositions[2]][k]; 
         }

@@ -58,17 +58,17 @@ public class WumpusTest {
 	}
 	
 	@Test
-	public void fnC() throws Exception {
-		assertEquals(3, Wumpus.fnC());
-		assertEquals(4, Wumpus.fnC());
-		assertEquals(1, Wumpus.fnC());
-		assertEquals(3, Wumpus.fnC());
-		assertEquals(3, Wumpus.fnC());
-		assertEquals(2, Wumpus.fnC());
-		assertEquals(3, Wumpus.fnC());
-		assertEquals(1, Wumpus.fnC());
-		assertEquals(3, Wumpus.fnC());
-		assertEquals(4, Wumpus.fnC());
+	public void randomWumpusMove() throws Exception {
+		assertEquals(3, Wumpus.randomWumpusMove());
+		assertEquals(4, Wumpus.randomWumpusMove());
+		assertEquals(1, Wumpus.randomWumpusMove());
+		assertEquals(3, Wumpus.randomWumpusMove());
+		assertEquals(3, Wumpus.randomWumpusMove());
+		assertEquals(2, Wumpus.randomWumpusMove());
+		assertEquals(3, Wumpus.randomWumpusMove());
+		assertEquals(1, Wumpus.randomWumpusMove());
+		assertEquals(3, Wumpus.randomWumpusMove());
+		assertEquals(4, Wumpus.randomWumpusMove());
 	}
 
     @Test
