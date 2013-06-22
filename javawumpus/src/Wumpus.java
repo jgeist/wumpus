@@ -189,7 +189,7 @@ public class Wumpus {
         if (k != 4) {
             objectPositions[2] = caveStructure[objectPositions[2]][k]; 
         }
-        if (objectPositions[2] == ll) {
+        if (objectPositions[2] == objectPositions[1]) {
             System.out.println("TSK TSK TSK - WUMPUS GOT YOU!");
             f = -1;
         }
