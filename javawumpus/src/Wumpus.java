@@ -255,19 +255,20 @@ public class Wumpus {
     public static void promptAndMovePlayer() throws IOException {
         f = 0;
 
-        int ll;
+        int roomToMoveTo;
+
         while (true) {
             System.out.print("WHERE TO "); 
-            ll = readInt(); 
-            if (ll < 1 || ll > 20) {
+            roomToMoveTo = readInt(); 
+            if (roomToMoveTo < 1 || roomToMoveTo > 20) {
                 continue;
             }
             for (k = 1; k <= 3; k++) {
-                if (caveStructure[objectPositions[1]][k] == ll) {
+                if (caveStructure[objectPositions[1]][k] == roomToMoveTo) {
                     break;
                 }
             }
-            if (k > 3 && ll != objectPositions[1]) {
+            if (k > 3 && roomToMoveTo != objectPositions[1]) {
                 System.out.print("NOT POSSIBLE - ");
                 continue;
             }
@@ -275,8 +276,8 @@ public class Wumpus {
         }
         
         while (true) {
-            objectPositions[1] = ll;
-            if (ll == objectPositions[2]) {
+            objectPositions[1] = roomToMoveTo;
+            if (roomToMoveTo == objectPositions[2]) {
                 System.out.println("... OOPS! BUMPED A WUMPUS!");
                 moveWumpus();
                 if (f != 0) {
@@ -284,15 +285,15 @@ public class Wumpus {
                 }
             }
         
-            if (ll == objectPositions[3] || ll == objectPositions[4]) {
+            if (roomToMoveTo == objectPositions[3] || roomToMoveTo == objectPositions[4]) {
                 System.out.println("YYYYIIIIEEEE . . . FELL IN PIT");
                 f = -1;
                 return;
             }
         
-            if (ll == objectPositions[5] || ll == objectPositions[6]) {
+            if (roomToMoveTo == objectPositions[5] || roomToMoveTo == objectPositions[6]) {
                 System.out.println("ZAP--SUPER BAT SNATCH! ELSEWHEREVILLE FOR YOU!");
-                ll = fnA();
+                roomToMoveTo = fnA();
                 continue;
             }
             
