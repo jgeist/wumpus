@@ -20,7 +20,6 @@ public class WumpusTest {
 	@Before
 	public void setUp() {
 		Wumpus.random = new Random(0); //seed random for expected results
-        Wumpus.currentLine = 5;
         Wumpus.throwOnIOErrorForTests = true;
         System.setOut(new PrintStream(textOutput));
 	}

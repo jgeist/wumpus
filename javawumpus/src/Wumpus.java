@@ -8,9 +8,6 @@ import java.util.Random;
 
 public class Wumpus {
 
-	public static int currentLine = 5;
-	private static Deque<Integer> returnLine = new ArrayDeque<Integer>();
-	private static int nextLine;
 	public static Random random = new Random();
     
     private static final int MAP_OBJECT_COUNT = 6;
@@ -47,19 +44,6 @@ public class Wumpus {
 			e.printStackTrace();
 		}
 	}
-	private static void gosub(int gosubLine, int lineToReturnTo) {
-		nextLine = gosubLine;
-		returnLine.addLast(lineToReturnTo);
-	}
-	private static void returnFromGosub() {
-		if (returnLine.isEmpty())
-			nextLine = 1151;
-		else
-			nextLine = returnLine.pollLast();
-	}
-    public static void pushGosubReturnAddressForTests(int lineToReturnTo) {
-        returnLine.addLast(lineToReturnTo);
-    }
 	public static int fnA() {
 		return random.nextInt(20) + 1;
 	}
