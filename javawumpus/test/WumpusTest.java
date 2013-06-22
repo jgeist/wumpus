@@ -220,7 +220,7 @@ public class WumpusTest {
     }
 
     @Test
-    public void testShootArrowMissing() {   
+    public void testShootArrowMissing() throws IOException {   
         Wumpus.l[1] = 1;
         Wumpus.l[2] = 19;
         Wumpus.l[3] = 19;
@@ -240,10 +240,8 @@ public class WumpusTest {
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
         Wumpus.f = -999;  
-        Wumpus.pushGosubReturnAddressForTests(9999);
-        Wumpus.currentLine = 715;   
-        
-        Wumpus.main(null);
+
+        Wumpus.promptAndShootArrow();
 
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
@@ -252,7 +250,7 @@ public class WumpusTest {
     }
 
     @Test
-    public void testShootArrowHitting() {   
+    public void testShootArrowHitting() throws IOException {   
         Wumpus.l[1] = 1;
         Wumpus.l[2] = 2;
         Wumpus.l[3] = 19;
@@ -272,10 +270,8 @@ public class WumpusTest {
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
         Wumpus.f = -999;  
-        Wumpus.pushGosubReturnAddressForTests(9999);
-        Wumpus.currentLine = 715;   
-        
-        Wumpus.main(null);
+
+        Wumpus.promptAndShootArrow();
 
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
@@ -283,7 +279,7 @@ public class WumpusTest {
     }
 
     @Test
-    public void testShootArrowAtSelf() {   
+    public void testShootArrowAtSelf() throws IOException {   
         Wumpus.l[1] = 1;
         Wumpus.l[2] = 19;
         Wumpus.l[3] = 19;
@@ -304,10 +300,8 @@ public class WumpusTest {
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
         Wumpus.f = -999;  
-        Wumpus.pushGosubReturnAddressForTests(9999);
-        Wumpus.currentLine = 715;   
-        
-        Wumpus.main(null);
+
+        Wumpus.promptAndShootArrow();
 
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
@@ -316,7 +310,7 @@ public class WumpusTest {
     }
 
     @Test
-    public void testShootArrowBackwards() {   
+    public void testShootArrowBackwards() throws IOException  {   
         Wumpus.l[1] = 1;
         Wumpus.l[2] = 19;
         Wumpus.l[3] = 19;
@@ -339,10 +333,11 @@ public class WumpusTest {
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
         Wumpus.f = -999;  
-        Wumpus.pushGosubReturnAddressForTests(9999);
-        Wumpus.currentLine = 715;   
-        
-        Wumpus.main(null);
+
+        try {
+            Wumpus.promptAndShootArrow();
+        } catch (IOException e) {
+        }
 
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
@@ -351,7 +346,7 @@ public class WumpusTest {
     }
 
     @Test
-    public void testShootArrowWall() {   
+    public void testShootArrowWall() throws IOException {   
         Wumpus.l[1] = 1;
         Wumpus.l[2] = 19;
         Wumpus.l[3] = 19;
@@ -371,10 +366,8 @@ public class WumpusTest {
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
         Wumpus.f = -999;  
-        Wumpus.pushGosubReturnAddressForTests(9999);
-        Wumpus.currentLine = 715;   
-        
-        Wumpus.main(null);
+
+        Wumpus.promptAndShootArrow();
 
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    

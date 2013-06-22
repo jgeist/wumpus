@@ -46,8 +46,6 @@ public class Wumpus {
 				switch (currentLine) {
 				case 5: runMainLoop(); break;				 													// 5 rem *** HUNT THE WUMPUS ***
 
-				case 715: promptAndShootArrow(); returnFromGosub(); break;										// 715 rem *** ARROW ROUTINE ***
-
 				case 935: moveWumpus(); break;																	// 935 rem *** MOVE WUMPUS ROUTINE ***
 				case 970: returnFromGosub(); break;																// 970 return
 
