@@ -22,7 +22,6 @@ public class Wumpus {
     public static int[] originalObjectPositions = new int[MAP_OBJECT_COUNT + 1];
     public static int arrowInventory = 5;
 
-    public static int o = 1;
     public static int f = 0;
 			
     public static int j = 0;
@@ -339,9 +338,8 @@ public class Wumpus {
 
             while (true) {
                 printRoomDescription();
-                o = promptForShootOrMove();
 
-                switch (o) {
+                switch (promptForShootOrMove()) {
                 case 1:
                     promptAndShootArrow();
                     break;
