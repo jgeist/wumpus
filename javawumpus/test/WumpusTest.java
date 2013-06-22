@@ -11,7 +11,6 @@ import java.io.ByteArrayInputStream;
 import java.io.PrintStream;
 import java.io.IOException;
 
-
 public class WumpusTest {
     private final ByteArrayOutputStream textOutput = new ByteArrayOutputStream();
     private final String CR = "\r";

@@ -4,7 +4,7 @@ BASEDIR=$(dirname $0)/..
 # compile
 #
 pushd $BASEDIR/src > /dev/null
-javac Wumpus.java
+javac Wumpus.java WumpusMap.java
 if [ $? -ne 0 ] ; then 
   echo "Compile of game failed"
   popd > /dev/null
