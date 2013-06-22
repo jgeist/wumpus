@@ -20,7 +20,6 @@ public class Wumpus {
 
     public static int[] objectPositions = new int[MAP_OBJECT_COUNT + 1];
     public static int[] originalObjectPositions = new int[MAP_OBJECT_COUNT + 1];
-    public static int[] p = new int[6];
     public static int aa = 5;
     public static int ll = aa;
     public static int o = 1;
@@ -197,6 +196,8 @@ public class Wumpus {
     }
 
     public static void promptAndShootArrow() throws IOException {
+        int[] p = new int[6];
+
         f = 0;
         
         // path of arrow
