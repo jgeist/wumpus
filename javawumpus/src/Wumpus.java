@@ -49,7 +49,7 @@ public class Wumpus {
 	public static int randomRoom() {
 		return random.nextInt(NUMBER_OF_ROOMS) + 1;
 	}
-	public static int fnB() {
+	public static int randomConnection() {
 		return random.nextInt(NUMBER_OF_CONNECTIONS_PER_ROOM) + 1;
 	}
 	public static int fnC() {
@@ -231,7 +231,7 @@ public class Wumpus {
                 }
             }
             if (k1 == 4) {
-                arrowPosition = caveStructure[arrowPosition][fnB()];
+                arrowPosition = caveStructure[arrowPosition][randomConnection()];
             }
              
             if (arrowPosition == objectPositions[2]) {

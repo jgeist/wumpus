@@ -44,17 +44,17 @@ public class WumpusTest {
 	}
 
 	@Test
-	public void fnB() throws Exception {
-		assertEquals(1, Wumpus.fnB());
-		assertEquals(2, Wumpus.fnB());
-		assertEquals(2, Wumpus.fnB());
-		assertEquals(3, Wumpus.fnB());
-		assertEquals(3, Wumpus.fnB());
-		assertEquals(3, Wumpus.fnB());
-		assertEquals(3, Wumpus.fnB());
-		assertEquals(1, Wumpus.fnB());
-		assertEquals(1, Wumpus.fnB());
-		assertEquals(3, Wumpus.fnB());
+	public void randomConnection() throws Exception {
+		assertEquals(1, Wumpus.randomConnection());
+		assertEquals(2, Wumpus.randomConnection());
+		assertEquals(2, Wumpus.randomConnection());
+		assertEquals(3, Wumpus.randomConnection());
+		assertEquals(3, Wumpus.randomConnection());
+		assertEquals(3, Wumpus.randomConnection());
+		assertEquals(3, Wumpus.randomConnection());
+		assertEquals(1, Wumpus.randomConnection());
+		assertEquals(1, Wumpus.randomConnection());
+		assertEquals(3, Wumpus.randomConnection());
 	}
 	
 	@Test
