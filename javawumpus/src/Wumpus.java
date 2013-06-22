@@ -30,7 +30,6 @@ public class Wumpus {
 
     public static WinLoseState winLoseState = WinLoseState.PLAYING;
 
-    public static int j9 = 0;
 
     public static boolean throwOnIOErrorForTests = false;
 
@@ -197,6 +196,7 @@ public class Wumpus {
 
     public static void promptAndShootArrow() throws IOException {
         int[] p = new int[6];
+        int j9;
 
         winLoseState = WinLoseState.PLAYING;
         
