@@ -22,8 +22,14 @@ public class Wumpus {
     public static int[] originalObjectPositions = new int[MAP_OBJECT_COUNT + 1];
     public static int arrowInventory = 5;
 
-    public static int f = 0;
-			
+    public enum WinLoseState {
+        LOST,
+        PLAYING,
+        WON    
+    };
+
+    public static WinLoseState winLoseState = WinLoseState.PLAYING;
+
     public static int j = 0;
     public static int k = 0;
     public static int k1 = 0;
@@ -188,14 +194,14 @@ public class Wumpus {
         }
         if (objectPositions[2] == objectPositions[1]) {
             System.out.println("TSK TSK TSK - WUMPUS GOT YOU!");
-            f = -1;
+            winLoseState = WinLoseState.LOST;
         }
     }
 
     public static void promptAndShootArrow() throws IOException {
         int[] p = new int[6];
 
-        f = 0;
+        winLoseState = WinLoseState.PLAYING;
         
         // path of arrow
         System.out.print("NO. OF ROOMS (1-5) ");
@@ -230,12 +236,12 @@ public class Wumpus {
              
             if (arrowPosition == objectPositions[2]) {
                 System.out.println("AHA! YOU GOT THE WUMPUS!");
-                f = 1;
+                winLoseState = WinLoseState.WON;
                 return;
             }   
             if (arrowPosition == objectPositions[1]) {
                 System.out.println("OUCH! ARROW GOT YOU!");
-                f = -1;
+                winLoseState = WinLoseState.LOST;
                 return;
             }
         }
@@ -245,12 +251,12 @@ public class Wumpus {
         moveWumpus();
         arrowInventory--;
         if (arrowInventory <= 0) {
-            f = -1;
+            winLoseState =  WinLoseState.LOST;
         }
     }
 
     public static void promptAndMovePlayer() throws IOException {
-        f = 0;
+        winLoseState = WinLoseState.PLAYING;
 
         int roomToMoveTo;
 
@@ -277,14 +283,14 @@ public class Wumpus {
             if (roomToMoveTo == objectPositions[2]) {
                 System.out.println("... OOPS! BUMPED A WUMPUS!");
                 moveWumpus();
-                if (f != 0) {
+                if (winLoseState != WinLoseState.PLAYING) {
                     return;
                 }
             }
         
             if (roomToMoveTo == objectPositions[3] || roomToMoveTo == objectPositions[4]) {
                 System.out.println("YYYYIIIIEEEE . . . FELL IN PIT");
-                f = -1;
+                winLoseState = WinLoseState.LOST;
                 return;
             }
         
@@ -349,12 +355,12 @@ public class Wumpus {
                     break;
                 }
             
-                if (f != 0) {
+                if (winLoseState != WinLoseState.PLAYING) {
                     break;
                 }
             }
 
-            if (f > 0) {
+            if (winLoseState == WinLoseState.WON) {
                 System.out.println("HEE HEE HEE - THE WUMPUS'LL GET YOU NEXT TIME!!");
             } else {
                 System.out.println ("HA HA HA - YOU LOSE!");
