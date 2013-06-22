@@ -53,7 +53,7 @@ public class Wumpus {
 		return random.nextInt(NUMBER_OF_CONNECTIONS_PER_ROOM) + 1;
 	}
 	public static int fnC() {
-		return random.nextInt(4) + 1;
+		return random.nextInt(NUMBER_OF_CONNECTIONS_PER_ROOM + 1) + 1;
 	}
 
 	public static int readInt() throws IOException {
