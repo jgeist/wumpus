@@ -162,12 +162,12 @@ public class Wumpus {
         
         System.out.print("YOUR ARE IN ROOM ");
         System.out.println(objectPositions[1]);
-        System.out.print("TUNNELS LEAD TO ");
-        System.out.print(caveStructure[objectPositions[1]][1]);
-        System.out.print(" ");
-        System.out.print(caveStructure[objectPositions[1]][2]);
-        System.out.print(" ");
-        System.out.print(caveStructure[objectPositions[1]][3]);
+        System.out.print("TUNNELS LEAD TO");
+        
+        for (int k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
+            System.out.print(" ");
+            System.out.print(caveStructure[objectPositions[1]][k]);
+        }
         System.out.println("");
         System.out.println("");
     } 
