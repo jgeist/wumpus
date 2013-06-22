@@ -41,14 +41,7 @@ public class Wumpus {
 	 */
 	public static void main(String[] args) {
 		try {
-			while (currentLine <= 1150) {
-				nextLine = currentLine + 1;
-				switch (currentLine) {
-				case 5: runMainLoop(); break;				 													// 5 rem *** HUNT THE WUMPUS ***
-
-				}
-				currentLine = nextLine;
-			}
+            runMainLoop();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
