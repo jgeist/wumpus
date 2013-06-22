@@ -189,13 +189,11 @@ public class WumpusTest {
         String expectedOutput = "SHOOT OR MOVE (S-M) ";
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
-        Wumpus.o = 0;
-
-        Wumpus.promptForShootOrMove();
+        int o = Wumpus.promptForShootOrMove();
 
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
-        assertEquals(1, Wumpus.o);
+        assertEquals(1, o);
     }
 
     @Test
@@ -204,13 +202,11 @@ public class WumpusTest {
         String expectedOutput = "SHOOT OR MOVE (S-M) ";
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
-        Wumpus.o = 0;
-
-        Wumpus.promptForShootOrMove();
+        int o = Wumpus.promptForShootOrMove();
 
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
-        assertEquals(2, Wumpus.o);
+        assertEquals(2, o);
     }
 
     @Test

@@ -169,17 +169,15 @@ public class Wumpus {
         System.out.println("");
     } 
 
-    public static void promptForShootOrMove() throws IOException {
+    public static int promptForShootOrMove() throws IOException {
         while (true) {
             System.out.print("SHOOT OR MOVE (S-M) ");
             char i$ = (char) System.in.read();
             System.in.read();
             if (i$ == 'S' || i$ == 's') {
-                o = 1;
-                break;
+                return 1;
             } else if (i$ == 'M' || i$ == 'm') {
-                o = 2;
-                break;
+                return 2;
             }
         }
     }
@@ -341,7 +339,7 @@ public class Wumpus {
 
             while (true) {
                 printRoomDescription();
-                promptForShootOrMove();
+                o = promptForShootOrMove();
 
                 switch (o) {
                 case 1:
