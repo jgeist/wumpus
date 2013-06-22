@@ -30,7 +30,6 @@ public class Wumpus {
 
     public static WinLoseState winLoseState = WinLoseState.PLAYING;
 
-    public static int k = 0;
     public static int k1 = 0;
     public static int j9 = 0;
 
@@ -140,7 +139,7 @@ public class Wumpus {
     public static void printRoomDescription() throws IOException {
         System.out.println("");
         for (int j = 2; j <= MAP_OBJECT_COUNT; j++) {   
-            for (k = 1; k <= 3; k++) {
+            for (int k = 1; k <= 3; k++) {
                 if (caveStructure[objectPositions[1]][k] == objectPositions[j]) {
                     switch (j-1) {
                     case 1:
@@ -187,7 +186,7 @@ public class Wumpus {
     }
 
     public static void moveWumpus() {
-        k = fnC();
+        int k = fnC();
         if (k != 4) {
             objectPositions[2] = caveStructure[objectPositions[2]][k]; 
         }
@@ -211,7 +210,7 @@ public class Wumpus {
             }
         }
         
-        for (k = 1; k <= j9; k++) {
+        for (int k = 1; k <= j9; k++) {
             System.out.print("ROOM # ");    
             p[k] = readInt();
             if (k > 2 && p[k] == p[k-2]) {
@@ -222,7 +221,7 @@ public class Wumpus {
         }
 
         int arrowPosition = objectPositions[1];
-        for (k = 1; k <= j9; k++) {
+        for (int k = 1; k <= j9; k++) {
             for (k1 = 1; k1 <= 3; k1++) {
                 if (caveStructure[arrowPosition][k1] == p[k]) {
                     arrowPosition = p[k];  
@@ -265,6 +264,8 @@ public class Wumpus {
             if (roomToMoveTo < 1 || roomToMoveTo > 20) {
                 continue;
             }
+
+            int k;
             for (k = 1; k <= 3; k++) {
                 if (caveStructure[objectPositions[1]][k] == roomToMoveTo) {
                     break;
@@ -317,6 +318,7 @@ public class Wumpus {
                         originalObjectPositions[j] = objectPositions[j];
                     }
 
+                    int k = 0;
                     for (int j = 1; j <= MAP_OBJECT_COUNT; j++) {
                         for (k = 1; k <= MAP_OBJECT_COUNT; k++) {
                             if (j == k) {
