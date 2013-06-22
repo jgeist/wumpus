@@ -12,6 +12,7 @@ public class Wumpus {
     private static final int MAP_OBJECT_COUNT = 6;
     private static final int INITIAL_ARROWS = 5;
     private static final int NUMBER_OF_ROOMS = 20;
+    private static final int NUMBER_OF_CONNECTIONS_PER_ROOM = 3;
 
 	public static int[][] caveStructure = {{0,0,0,0},
                         {0,2,5,8},		{0,1,3,10},		{0,2,4,12},		{0,3,5,14},		{0,1,4,6},
@@ -49,7 +50,7 @@ public class Wumpus {
 		return random.nextInt(NUMBER_OF_ROOMS) + 1;
 	}
 	public static int fnB() {
-		return random.nextInt(3) + 1;
+		return random.nextInt(NUMBER_OF_CONNECTIONS_PER_ROOM) + 1;
 	}
 	public static int fnC() {
 		return random.nextInt(4) + 1;
@@ -76,7 +77,7 @@ public class Wumpus {
     private static void printInstructions() throws IOException {
         System.out.println("WELCOME TO 'HUNT THE WUMPUS'");
         System.out.println(String.format("  THE WUMPUS LIVES IN A CAVE OF %d ROOMS. EACH ROOM", NUMBER_OF_ROOMS));	
-        System.out.println("HAS 3 TUNNELS LEADING TO OTHER ROOMS. (LOOK AT A");
+        System.out.println(String.format("HAS %d TUNNELS LEADING TO OTHER ROOMS. (LOOK AT A", NUMBER_OF_CONNECTIONS_PER_ROOM));
         System.out.println("DODECAHEDRON TO SEE HOW THIS WORKS-IF YOU DON'T KNOW");
         System.out.println("WHAT A DODECAHEDRON IS, ASK SOMEONE)");
         System.out.println("");
@@ -138,7 +139,7 @@ public class Wumpus {
     public static void printRoomDescription() throws IOException {
         System.out.println("");
         for (int j = 2; j <= MAP_OBJECT_COUNT; j++) {   
-            for (int k = 1; k <= 3; k++) {
+            for (int k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
                 if (caveStructure[objectPositions[1]][k] == objectPositions[j]) {
                     switch (j-1) {
                     case 1:
@@ -223,7 +224,7 @@ public class Wumpus {
         int arrowPosition = objectPositions[1];
         for (int k = 1; k <= roomCount; k++) {
             int k1;
-            for (k1 = 1; k1 <= 3; k1++) {
+            for (k1 = 1; k1 <= NUMBER_OF_CONNECTIONS_PER_ROOM; k1++) {
                 if (caveStructure[arrowPosition][k1] == p[k]) {
                     arrowPosition = p[k];  
                     break;
@@ -267,12 +268,12 @@ public class Wumpus {
             }
 
             int k;
-            for (k = 1; k <= 3; k++) {
+            for (k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
                 if (caveStructure[objectPositions[1]][k] == roomToMoveTo) {
                     break;
                 }
             }
-            if (k > 3 && roomToMoveTo != objectPositions[1]) {
+            if (k > NUMBER_OF_CONNECTIONS_PER_ROOM && roomToMoveTo != objectPositions[1]) {
                 System.out.print("NOT POSSIBLE - ");
                 continue;
             }
