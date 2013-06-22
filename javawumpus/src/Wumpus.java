@@ -19,7 +19,7 @@ public class Wumpus {
                         {0,15,17,20},	{0,7,16,18},	{0,9,17,19},	{0,11,18,20},	{0,13,16,19}};
 
     public static int[] objectPositions = new int[MAP_OBJECT_COUNT + 1];
-    public static int[] m = new int[MAP_OBJECT_COUNT + 1];
+    public static int[] originalObjectPositions = new int[MAP_OBJECT_COUNT + 1];
     public static int[] p = new int[6];
     public static int aa = 5;
     public static int ll = aa;
@@ -309,7 +309,7 @@ public class Wumpus {
                 while (true) {
                     for (j = 1; j <= MAP_OBJECT_COUNT; j++) {
                         objectPositions[j] = fnA();
-                        m[j] = objectPositions[j];
+                        originalObjectPositions[j] = objectPositions[j];
                     }
 
                     for (j = 1; j <= MAP_OBJECT_COUNT; j++) {
@@ -363,7 +363,7 @@ public class Wumpus {
             }
         
             for (j = 1; j < MAP_OBJECT_COUNT; j++) {
-                objectPositions[j] = m[j];
+                objectPositions[j] = originalObjectPositions[j];
             }
             
             System.out.print("SAME SETUP (Y-N)"); 
