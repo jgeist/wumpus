@@ -21,7 +21,7 @@ public class Wumpus {
     public static int[] objectPositions = new int[MAP_OBJECT_COUNT + 1];
     public static int[] originalObjectPositions = new int[MAP_OBJECT_COUNT + 1];
     public static int arrowInventory = 5;
-    public static int ll = arrowInventory;
+
     public static int o = 1;
     public static int f = 0;
 			
@@ -336,7 +336,6 @@ public class Wumpus {
             }
 
             arrowInventory = 5; 
-            ll = objectPositions[1];
 
             System.out.println("HUNT THE WUMPUS");
 
