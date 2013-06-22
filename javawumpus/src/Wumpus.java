@@ -12,7 +12,6 @@ public class Wumpus {
     
     private static final int MAP_OBJECT_COUNT = 6;
 
-    public static char i$ = '\0';
 	public static int[][] s = {{0,0,0,0},
                         {0,2,5,8},		{0,1,3,10},		{0,2,4,12},		{0,3,5,14},		{0,1,4,6},
                         {0,5,7,15},		{0,6,8,17},		{0,1,7,9},		{0,8,10,18},	{0,2,9,11},
@@ -173,7 +172,7 @@ public class Wumpus {
     public static void promptForShootOrMove() throws IOException {
         while (true) {
             System.out.print("SHOOT OR MOVE (S-M) ");
-            i$ = (char) System.in.read();
+            char i$ = (char) System.in.read();
             System.in.read();
             if (i$ == 'S' || i$ == 's') {
                 o = 1;
@@ -367,7 +366,7 @@ public class Wumpus {
             }
             
             System.out.print("SAME SETUP (Y-N)"); 
-            i$ = (char) System.in.read(); System.in.read();
+            char i$ = (char) System.in.read(); System.in.read();
             
             randomize = true;
             if (i$ == 'y' || i$ == 'Y') {
