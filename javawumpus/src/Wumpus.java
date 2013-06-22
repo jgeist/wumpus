@@ -160,11 +160,11 @@ public class Wumpus {
         System.out.print("YOUR ARE IN ROOM ");
         System.out.println(objectPositions[1]);
         System.out.print("TUNNELS LEAD TO ");
-        System.out.print(caveStructure[ll][1]);
+        System.out.print(caveStructure[objectPositions[1]][1]);
         System.out.print(" ");
-        System.out.print(caveStructure[ll][2]);
+        System.out.print(caveStructure[objectPositions[1]][2]);
         System.out.print(" ");
-        System.out.print(caveStructure[ll][3]);
+        System.out.print(caveStructure[objectPositions[1]][3]);
         System.out.println("");
         System.out.println("");
     } 
