@@ -18,7 +18,7 @@ public class Wumpus {
                         {0,10,12,19},	{0,3,11,13},	{0,12,14,20},	{0,4,13,15},	{0,6,14,16},
                         {0,15,17,20},	{0,7,16,18},	{0,9,17,19},	{0,11,18,20},	{0,13,16,19}};
 
-    public static int[] l = new int[MAP_OBJECT_COUNT + 1];
+    public static int[] objectPositions = new int[MAP_OBJECT_COUNT + 1];
     public static int[] m = new int[MAP_OBJECT_COUNT + 1];
     public static int[] p = new int[6];
     public static int aa = 5;
@@ -138,7 +138,7 @@ public class Wumpus {
         System.out.println("");
         for (j = 2; j <= MAP_OBJECT_COUNT; j++) {   
             for (k = 1; k <= 3; k++) {
-                if (caveStructure[l[1]][k] == l[j]) {
+                if (caveStructure[objectPositions[1]][k] == objectPositions[j]) {
                     switch (j-1) {
                     case 1:
                         System.out.println("I SMELL A WUMPUS!");
@@ -159,7 +159,7 @@ public class Wumpus {
         }
         
         System.out.print("YOUR ARE IN ROOM ");
-        System.out.println(l[1]);
+        System.out.println(objectPositions[1]);
         System.out.print("TUNNELS LEAD TO ");
         System.out.print(caveStructure[ll][1]);
         System.out.print(" ");
@@ -188,9 +188,9 @@ public class Wumpus {
     public static void moveWumpus() {
         k = fnC();
         if (k != 4) {
-            l[2] = caveStructure[l[2]][k]; 
+            objectPositions[2] = caveStructure[objectPositions[2]][k]; 
         }
-        if (l[2] == ll) {
+        if (objectPositions[2] == ll) {
             System.out.println("TSK TSK TSK - WUMPUS GOT YOU!");
             f = -1;
         }
@@ -218,7 +218,7 @@ public class Wumpus {
             }
         }
 
-        ll = l[1];
+        ll = objectPositions[1];
         for (k = 1; k <= j9; k++) {
             for (k1 = 1; k1 <= 3; k1++) {
                 if (caveStructure[ll][k1] == p[k]) {
@@ -230,12 +230,12 @@ public class Wumpus {
                 ll = caveStructure[ll][fnB()];
             }
              
-            if (ll == l[2]) {
+            if (ll == objectPositions[2]) {
                 System.out.println("AHA! YOU GOT THE WUMPUS!");
                 f = 1;
                 return;
             }   
-            if (ll == l[1]) {
+            if (ll == objectPositions[1]) {
                 System.out.println("OUCH! ARROW GOT YOU!");
                 f = -1;
                 return;
@@ -243,7 +243,7 @@ public class Wumpus {
         }
 
         System.out.println("MISSED");
-        ll = l[1];
+        ll = objectPositions[1];
         moveWumpus();
         aa--;
         if (aa <= 0) {
@@ -261,11 +261,11 @@ public class Wumpus {
                 continue;
             }
             for (k = 1; k <= 3; k++) {
-                if (caveStructure[l[1]][k] == ll) {
+                if (caveStructure[objectPositions[1]][k] == ll) {
                     break;
                 }
             }
-            if (k > 3 && ll != l[1]) {
+            if (k > 3 && ll != objectPositions[1]) {
                 System.out.print("NOT POSSIBLE - ");
                 continue;
             }
@@ -273,8 +273,8 @@ public class Wumpus {
         }
         
         while (true) {
-            l[1] = ll;
-            if (ll == l[2]) {
+            objectPositions[1] = ll;
+            if (ll == objectPositions[2]) {
                 System.out.println("... OOPS! BUMPED A WUMPUS!");
                 moveWumpus();
                 if (f != 0) {
@@ -282,13 +282,13 @@ public class Wumpus {
                 }
             }
         
-            if (ll == l[3] || ll == l[4]) {
+            if (ll == objectPositions[3] || ll == objectPositions[4]) {
                 System.out.println("YYYYIIIIEEEE . . . FELL IN PIT");
                 f = -1;
                 return;
             }
         
-            if (ll == l[5] || ll == l[6]) {
+            if (ll == objectPositions[5] || ll == objectPositions[6]) {
                 System.out.println("ZAP--SUPER BAT SNATCH! ELSEWHEREVILLE FOR YOU!");
                 ll = fnA();
                 continue;
@@ -308,8 +308,8 @@ public class Wumpus {
             if (randomize) {
                 while (true) {
                     for (j = 1; j <= MAP_OBJECT_COUNT; j++) {
-                        l[j] = fnA();
-                        m[j] = l[j];
+                        objectPositions[j] = fnA();
+                        m[j] = objectPositions[j];
                     }
 
                     for (j = 1; j <= MAP_OBJECT_COUNT; j++) {
@@ -317,7 +317,7 @@ public class Wumpus {
                             if (j == k) {
                                 continue;
                             }   
-                            if (l[j] == l[k]) {
+                            if (objectPositions[j] == objectPositions[k]) {
                                 break;
                             }
                         }
@@ -333,7 +333,7 @@ public class Wumpus {
             }
 
             aa = 5; 
-            ll = l[1];
+            ll = objectPositions[1];
 
             System.out.println("HUNT THE WUMPUS");
 
@@ -363,7 +363,7 @@ public class Wumpus {
             }
         
             for (j = 1; j < MAP_OBJECT_COUNT; j++) {
-                l[j] = m[j];
+                objectPositions[j] = m[j];
             }
             
             System.out.print("SAME SETUP (Y-N)"); 
