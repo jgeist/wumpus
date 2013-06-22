@@ -5,12 +5,12 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Random;
 
-
 public class Wumpus {
 
 	public static Random random = new Random();
     
     private static final int MAP_OBJECT_COUNT = 6;
+    private static final int INITIAL_ARROWS = 5;
 
 	public static int[][] caveStructure = {{0,0,0,0},
                         {0,2,5,8},		{0,1,3,10},		{0,2,4,12},		{0,3,5,14},		{0,1,4,6},
@@ -20,7 +20,7 @@ public class Wumpus {
 
     public static int[] objectPositions = new int[MAP_OBJECT_COUNT + 1];
     public static int[] originalObjectPositions = new int[MAP_OBJECT_COUNT + 1];
-    public static int arrowInventory = 5;
+    public static int arrowInventory = INITIAL_ARROWS;
 
     public enum WinLoseState {
         LOST,
@@ -339,7 +339,7 @@ public class Wumpus {
                 }
             }
 
-            arrowInventory = 5; 
+            arrowInventory = INITIAL_ARROWS; 
 
             System.out.println("HUNT THE WUMPUS");
 
@@ -381,4 +381,3 @@ public class Wumpus {
         }
     }
 }
-      
