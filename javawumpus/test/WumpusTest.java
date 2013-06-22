@@ -9,6 +9,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.PrintStream;
+import java.io.IOException;
 
 
 public class WumpusTest {
@@ -72,7 +73,7 @@ public class WumpusTest {
 	}
 
     @Test
-    public void testRoomDescriptionNormal() {
+    public void testRoomDescriptionNormal() throws IOException {
         // player is in room 1, everything else is off the map
         Wumpus.l[1] = 1;
         Wumpus.l[2] = 999;
@@ -88,17 +89,14 @@ public class WumpusTest {
             "TUNNELS LEAD TO 2 5 8\n" +
             "\n";
         
-        Wumpus.pushGosubReturnAddressForTests(9999);
-        Wumpus.currentLine = 585;
-        
-        Wumpus.main(null);
+        Wumpus.printRoomDescription();
         
         System.out.flush();        
         assertEquals(expectedOutput, textOutput.toString());
     }
 
     @Test
-    public void testRoomDescriptionWumpus() {
+    public void testRoomDescriptionWumpus() throws IOException {
         Wumpus.l[1] = 1;
         Wumpus.l[2] = 2;
         Wumpus.l[3] = 999;
@@ -114,17 +112,14 @@ public class WumpusTest {
             "TUNNELS LEAD TO 2 5 8\n" +
             "\n";
         
-        Wumpus.pushGosubReturnAddressForTests(9999);
-        Wumpus.currentLine = 585;
-        
-        Wumpus.main(null);
+        Wumpus.printRoomDescription();
         
         System.out.flush();        
         assertEquals(expectedOutput, textOutput.toString());
     }
 
     @Test
-    public void testRoomDescriptionPits() {
+    public void testRoomDescriptionPits() throws IOException {
         Wumpus.l[1] = 1;
         Wumpus.l[2] = 999;
         Wumpus.l[3] = 2;
@@ -140,17 +135,14 @@ public class WumpusTest {
             "TUNNELS LEAD TO 2 5 8\n" +
             "\n";
         
-        Wumpus.pushGosubReturnAddressForTests(9999);
-        Wumpus.currentLine = 585;
-        
-        Wumpus.main(null);
+        Wumpus.printRoomDescription();
         
         System.out.flush();        
         assertEquals(expectedOutput, textOutput.toString());
     }
 
     @Test
-    public void testRoomDescriptionBats() {
+    public void testRoomDescriptionBats() throws IOException {
         Wumpus.l[1] = 1;
         Wumpus.l[2] = 999;
         Wumpus.l[3] = 999;
@@ -166,17 +158,14 @@ public class WumpusTest {
             "TUNNELS LEAD TO 2 5 8\n" +
             "\n";
         
-        Wumpus.pushGosubReturnAddressForTests(9999);
-        Wumpus.currentLine = 585;
-        
-        Wumpus.main(null);
+        Wumpus.printRoomDescription();
         
         System.out.flush();        
         assertEquals(expectedOutput, textOutput.toString());
     }
 
     @Test
-    public void testRoomDescriptionEverything() {
+    public void testRoomDescriptionEverything() throws IOException {
         Wumpus.l[1] = 1;
         Wumpus.l[2] = 2;
         Wumpus.l[3] = 5;
@@ -193,11 +182,8 @@ public class WumpusTest {
             "YOUR ARE IN ROOM 1\n" +
             "TUNNELS LEAD TO 2 5 8\n" +
             "\n";
-        
-        Wumpus.pushGosubReturnAddressForTests(9999);
-        Wumpus.currentLine = 585;
-        
-        Wumpus.main(null);
+
+        Wumpus.printRoomDescription();
         
         System.out.flush();        
         assertEquals(expectedOutput, textOutput.toString());

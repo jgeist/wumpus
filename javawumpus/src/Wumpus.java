@@ -41,14 +41,11 @@ public class Wumpus {
 	 */
 	public static void main(String[] args) {
 		try {
-
-
 			while (currentLine <= 1150) {
 				nextLine = currentLine + 1;
 				switch (currentLine) {
 				case 5: runMainLoop(); break;				 													// 5 rem *** HUNT THE WUMPUS ***
-				case 585: printRoomDescription(); break;														// 585 rem *** PRINT LOCATION & HAZARD WARNINGS ***
-				case 665: returnFromGosub(); break;																// 665 return
+
 				case 670: promptForShootOrMove(); break;														// 670 rem *** CHOOSE OPTION ***
 				case 710: returnFromGosub(); break;																// 710 return
 				case 715: promptAndShootArrow(); returnFromGosub(); break;										// 715 rem *** ARROW ROUTINE ***
