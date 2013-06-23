@@ -387,14 +387,10 @@ public class Wumpus {
 
             System.out.println("HUNT THE WUMPUS");
 
-            while (true) {
+            do {
                 printRoomDescription();
                 promptAndExecutePlayerAction();
-
-                if (winLoseState != WinLoseState.PLAYING) {
-                    break;
-                }
-            }
+            } while (winLoseState == WinLoseState.PLAYING);
 
             if (winLoseState == WinLoseState.WON) {
                 System.out.println("HEE HEE HEE - THE WUMPUS'LL GET YOU NEXT TIME!!");
