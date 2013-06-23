@@ -360,6 +360,18 @@ public class Wumpus {
         }
     }
 
+    public static void promptAndExecutePlayerAction() throws IOException{
+        switch (promptForShootOrMove()) {
+        case SHOOT:
+            promptAndShootArrow();
+            break;
+            
+        case MOVE:
+            promptAndMovePlayer();
+            break;
+        }            
+    }
+
     public static void runMainLoop() throws IOException {
         boolean randomize = true;
 
@@ -377,17 +389,8 @@ public class Wumpus {
 
             while (true) {
                 printRoomDescription();
+                promptAndExecutePlayerAction();
 
-                switch (promptForShootOrMove()) {
-                case SHOOT:
-                    promptAndShootArrow();
-                    break;
-
-                case MOVE:
-                    promptAndMovePlayer();
-                    break;
-                }
-            
                 if (winLoseState != WinLoseState.PLAYING) {
                     break;
                 }
