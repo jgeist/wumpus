@@ -138,11 +138,9 @@ public class Wumpus {
     private static void promptAndShowInstructions() throws IOException {
         char i$ = promptAndReadSingleCharacterOption("INSTRUCTIONS (Y-N) ");
 
-        if (i$ == 'N' || i$ =='n') {    
-            return;
+        if (i$ != 'N' && i$ != 'n') {    
+            printInstructions();
         }
-
-        printInstructions();
     }
     
     public static void printHazardDescriptions() {
