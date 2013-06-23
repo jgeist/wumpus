@@ -380,6 +380,16 @@ public class Wumpus {
         }
     }
 
+    public static boolean promptToReplaySameMap() throws IOException {
+        System.out.print("SAME SETUP (Y-N)"); 
+        char i$ = (char) System.in.read(); System.in.read();
+        
+        if (i$ == 'y' || i$ == 'Y') {
+            return true;
+        }
+        return false;
+    }
+
     public static void runMainLoop() throws IOException {
         boolean randomize = true;
 
@@ -403,14 +413,8 @@ public class Wumpus {
             printWinLoseState(winLoseState);
         
             map = (WumpusMap)startingMap.clone();
-            
-            System.out.print("SAME SETUP (Y-N)"); 
-            char i$ = (char) System.in.read(); System.in.read();
-            
-            randomize = true;
-            if (i$ == 'y' || i$ == 'Y') {
-                randomize = false;
-            }
+
+            randomize = !promptToReplaySameMap();            
         }
     }
 }
