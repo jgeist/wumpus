@@ -253,6 +253,11 @@ public class Wumpus {
         return WinLoseState.PLAYING;
     }
 
+    public static boolean consumeArrowAndTestIfOut() {
+        arrowInventory--;
+        return arrowInventory <= 0;
+    }
+
     public static void promptAndShootArrow() throws IOException {
         int[] p = new int[MAX_ROOMS_FOR_ARROW_SHOT+1];
         int roomCount;
@@ -268,18 +273,14 @@ public class Wumpus {
         if (winLoseState == WinLoseState.PLAYING) {
             System.out.println("MISSED");
             moveWumpus();
-
-            arrowInventory--;
-            if (arrowInventory <= 0) {
-                winLoseState =  WinLoseState.LOST;
+            if (consumeArrowAndTestIfOut()) {
+                winLoseState = WinLoseState.LOST;
             }
         }
     }
 
-    public static void promptAndMovePlayer() throws IOException {
-        winLoseState = WinLoseState.PLAYING;
-
-        int roomToMoveTo;
+    public static int promptForRoomToMoveTo() throws IOException {
+        int roomToMoveTo = 0;
 
         while (true) {
             System.out.print("WHERE TO "); 
@@ -300,6 +301,15 @@ public class Wumpus {
             }
             break;
         }
+        
+        return roomToMoveTo;
+    }
+
+    public static void promptAndMovePlayer() throws IOException {
+        winLoseState = WinLoseState.PLAYING;
+
+        int roomToMoveTo = promptForRoomToMoveTo();
+
         
         while (true) {
             map.setPlayerPosition(roomToMoveTo);
