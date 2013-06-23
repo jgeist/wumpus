@@ -381,12 +381,8 @@ public class Wumpus {
     }
 
     public static boolean promptToReplaySameMap() throws IOException {
-        char i$ = promptAndReadSingleCharacterOption("SAME SETUP (Y-N)");
-        
-        if (i$ == 'y' || i$ == 'Y') {
-            return true;
-        }
-        return false;
+        char i$ = promptAndReadSingleCharacterOption("SAME SETUP (Y-N)");        
+        return i$ == 'y' || i$ == 'Y';
     }
 
     public static void runMainLoop() throws IOException {
