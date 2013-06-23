@@ -53,13 +53,19 @@ public class Wumpus {
 		return random.nextInt(NUMBER_OF_ROOMS) + 1;
 	}
 
-	public static int randomConnection() {
-		return random.nextInt(NUMBER_OF_CONNECTIONS_PER_ROOM) + 1;
+	public static int randomConnection(int room) {
+		return random.nextInt(connectionsFromRoom(room)) + 1;
 	}
 
 	public static int randomWumpusMove() {
-		return random.nextInt(NUMBER_OF_CONNECTIONS_PER_ROOM + 1) + 1;
+        int connections = connectionsFromRoom(map.wumpusPosition());
+        int move = random.nextInt(connections + 1) + 1;
+        return (move <= connections) ? move : 0;
 	}
+    
+    public static int connectionsFromRoom(int n) {
+        return caveStructure[n].length - 1;
+    }
 
 	public static int readInt() throws IOException {
 		String line = "";
@@ -144,18 +150,19 @@ public class Wumpus {
     }
     
     public static void printHazardDescriptions() {
-        for (int k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
+        int connections = connectionsFromRoom(map.playerPosition());
+        for (int k = 1; k <= connections; k++) {
             if (caveStructure[map.playerPosition()][k] == map.wumpusPosition()) {
                 System.out.println("I SMELL A WUMPUS!");
             }
         }
-        for (int k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
+        for (int k = 1; k <= connections; k++) {
             int room = caveStructure[map.playerPosition()][k];
             if (map.hasPitAt(room)) {
                 System.out.println("I FEEL A DRAFT");
             }
         }
-        for (int k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
+        for (int k = 1; k <= connections; k++) {
             if (map.hasBatAt(caveStructure[map.playerPosition()][k])) {
                 System.out.println("BATS NEARBY!");
             }
@@ -167,7 +174,8 @@ public class Wumpus {
         System.out.println(map.playerPosition());
         System.out.print("TUNNELS LEAD TO");
         
-        for (int k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
+        int connections = connectionsFromRoom(map.playerPosition());
+        for (int k = 1; k <= connections; k++) {
             System.out.print(" ");
             System.out.print(caveStructure[map.playerPosition()][k]);
         }
@@ -196,7 +204,7 @@ public class Wumpus {
 
     public static void moveWumpus() {
         int k = randomWumpusMove();
-        if (k != NUMBER_OF_CONNECTIONS_PER_ROOM + 1) {
+        if (k != 0) {
             map.setWumpusPosition( caveStructure[map.wumpusPosition()][k] );
         }
         if (map.wumpusPosition() == map.playerPosition()) {
@@ -235,14 +243,14 @@ public class Wumpus {
         int arrowPosition = map.playerPosition();
         for (int k = 1; k <= pathLength; k++) {
             int k1;
-            for (k1 = 1; k1 <= NUMBER_OF_CONNECTIONS_PER_ROOM; k1++) {
+            for (k1 = 1; k1 <= connectionsFromRoom(arrowPosition); k1++) {
                 if (caveStructure[arrowPosition][k1] == rooms[k]) {
                     arrowPosition = rooms[k];  
                     break;
                 }
             }
-            if (k1 > NUMBER_OF_CONNECTIONS_PER_ROOM) {
-                arrowPosition = caveStructure[arrowPosition][randomConnection()];
+            if (k1 > connectionsFromRoom(arrowPosition)) {
+                arrowPosition = caveStructure[arrowPosition][randomConnection(arrowPosition)];
             }
              
             if (arrowPosition == map.wumpusPosition()) {
@@ -295,12 +303,12 @@ public class Wumpus {
             }
 
             int k;
-            for (k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
+            for (k = 1; k <= connectionsFromRoom(map.playerPosition()); k++) {
                 if (caveStructure[map.playerPosition()][k] == roomToMoveTo) {
                     break;
                 }
             }
-            if (k > NUMBER_OF_CONNECTIONS_PER_ROOM && roomToMoveTo != map.playerPosition()) {
+            if (k > connectionsFromRoom(map.playerPosition()) && roomToMoveTo != map.playerPosition()) {
                 System.out.print("NOT POSSIBLE - ");
                 continue;
             }

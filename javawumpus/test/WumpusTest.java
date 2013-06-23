@@ -45,22 +45,22 @@ public class WumpusTest {
 
 	@Test
 	public void randomConnection() throws Exception {
-		assertEquals(1, Wumpus.randomConnection());
-		assertEquals(2, Wumpus.randomConnection());
-		assertEquals(2, Wumpus.randomConnection());
-		assertEquals(3, Wumpus.randomConnection());
-		assertEquals(3, Wumpus.randomConnection());
-		assertEquals(3, Wumpus.randomConnection());
-		assertEquals(3, Wumpus.randomConnection());
-		assertEquals(1, Wumpus.randomConnection());
-		assertEquals(1, Wumpus.randomConnection());
-		assertEquals(3, Wumpus.randomConnection());
+		assertEquals(1, Wumpus.randomConnection(3));
+		assertEquals(2, Wumpus.randomConnection(3));
+		assertEquals(2, Wumpus.randomConnection(3));
+		assertEquals(3, Wumpus.randomConnection(3));
+		assertEquals(3, Wumpus.randomConnection(3));
+		assertEquals(3, Wumpus.randomConnection(3));
+		assertEquals(3, Wumpus.randomConnection(3));
+		assertEquals(1, Wumpus.randomConnection(3));
+		assertEquals(1, Wumpus.randomConnection(3));
+		assertEquals(3, Wumpus.randomConnection(3));
 	}
 	
 	@Test
 	public void randomWumpusMove() throws Exception {
 		assertEquals(3, Wumpus.randomWumpusMove());
-		assertEquals(4, Wumpus.randomWumpusMove());
+		assertEquals(0, Wumpus.randomWumpusMove());
 		assertEquals(1, Wumpus.randomWumpusMove());
 		assertEquals(3, Wumpus.randomWumpusMove());
 		assertEquals(3, Wumpus.randomWumpusMove());
@@ -68,7 +68,7 @@ public class WumpusTest {
 		assertEquals(3, Wumpus.randomWumpusMove());
 		assertEquals(1, Wumpus.randomWumpusMove());
 		assertEquals(3, Wumpus.randomWumpusMove());
-		assertEquals(4, Wumpus.randomWumpusMove());
+		assertEquals(0, Wumpus.randomWumpusMove());
 	}
 
     @Test
