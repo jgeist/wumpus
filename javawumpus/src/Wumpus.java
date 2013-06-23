@@ -35,10 +35,6 @@ public class Wumpus {
 
     public static boolean throwOnIOErrorForTests = false;
 
-    public static boolean isBatAt(int n) {
-        return map.hasBatAt(n);
-    }
-
 	/**
 	 * @param args
 	 */
@@ -154,7 +150,7 @@ public class Wumpus {
             }
         }
         for (int k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
-            if (isBatAt(caveStructure[map.playerPosition()][k])) {
+            if (map.hasBatAt(caveStructure[map.playerPosition()][k])) {
                 System.out.println("BATS NEARBY!");
             }
         }
@@ -295,7 +291,7 @@ public class Wumpus {
                 return;
             }
         
-            if (isBatAt(roomToMoveTo)) {
+            if (map.hasBatAt(roomToMoveTo)) {
                 System.out.println("ZAP--SUPER BAT SNATCH! ELSEWHEREVILLE FOR YOU!");
                 roomToMoveTo = randomRoom();
                 continue;
