@@ -154,11 +154,7 @@ public class Wumpus {
         }
     }
 
-    public static void printRoomDescription() throws IOException {
-        System.out.println("");
-
-        printHazardDescriptions();
-        
+    public static void printRoomGeometry() {
         System.out.print("YOUR ARE IN ROOM ");
         System.out.println(map.playerPosition());
         System.out.print("TUNNELS LEAD TO");
@@ -167,6 +163,14 @@ public class Wumpus {
             System.out.print(" ");
             System.out.print(caveStructure[map.playerPosition()][k]);
         }
+    }
+
+    public static void printRoomDescription() throws IOException {
+        System.out.println("");
+
+        printHazardDescriptions(); 
+        printRoomGeometry();
+        
         System.out.println("");
         System.out.println("");
     } 
