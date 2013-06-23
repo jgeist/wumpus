@@ -51,6 +51,10 @@ public class Wumpus {
         return objectPositions[2];
     }
 
+    public static boolean isPitAt(int n) {
+        return objectPositions[3] == n || objectPositions[4] == n;
+    }
+
 	/**
 	 * @param args
 	 */
@@ -154,19 +158,21 @@ public class Wumpus {
 
     public static void printRoomDescription() throws IOException {
         System.out.println("");
-        for (int j = 2; j <= MAP_OBJECT_COUNT; j++) {   
+        for (int k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
+            if (caveStructure[playerPosition()][k] == wumpusPosition()) {
+                System.out.println("I SMELL A WUMPUS!");
+            }
+        }
+        for (int k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
+            if (isPitAt(caveStructure[playerPosition()][k])) {
+                System.out.println("I FEEL A DRAFT");
+            }
+        }
+
+        for (int j = 5; j <= MAP_OBJECT_COUNT; j++) {   
             for (int k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
                 if (caveStructure[playerPosition()][k] == objectPositions[j]) {
                     switch (j-1) {
-                    case 1:
-                        System.out.println("I SMELL A WUMPUS!");
-                        break;
-
-                    case 2:                        
-                    case 3:
-                        System.out.println("I FEEL A DRAFT");
-                        break;
-
                     case 4:
                     case 5:
                         System.out.println("BATS NEARBY!");
@@ -306,7 +312,7 @@ public class Wumpus {
                 }
             }
         
-            if (roomToMoveTo == objectPositions[3] || roomToMoveTo == objectPositions[4]) {
+            if (isPitAt(roomToMoveTo)) {
                 System.out.println("YYYYIIIIEEEE . . . FELL IN PIT");
                 winLoseState = WinLoseState.LOST;
                 return;
