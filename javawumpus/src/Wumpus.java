@@ -9,7 +9,6 @@ public class Wumpus {
 
 	public static Random random = new Random();
     
-    private static final int MAP_OBJECT_COUNT = 6;
     private static final int INITIAL_ARROWS = 5;
     private static final int NUMBER_OF_ROOMS = 20;
     private static final int NUMBER_OF_CONNECTIONS_PER_ROOM = 3;
