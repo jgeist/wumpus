@@ -6,13 +6,11 @@ import java.util.Deque;
 import java.util.Random;
 
 public class Wumpus {
-
-	public static Random random = new Random();
-    
     private static final int INITIAL_ARROWS = 5;
     private static final int NUMBER_OF_ROOMS = 20;
     private static final int NUMBER_OF_CONNECTIONS_PER_ROOM = 3;
 
+	public static Random random = new Random();
 	public static int[][] caveStructure = {{0,0,0,0},
                         {0,2,5,8},		{0,1,3,10},		{0,2,4,12},		{0,3,5,14},		{0,1,4,6},
                         {0,5,7,15},		{0,6,8,17},		{0,1,7,9},		{0,8,10,18},	{0,2,9,11},
@@ -31,7 +29,6 @@ public class Wumpus {
 
     public static WinLoseState winLoseState = WinLoseState.PLAYING;
 
-
     public static boolean throwOnIOErrorForTests = false;
 
 	/**
@@ -45,12 +42,15 @@ public class Wumpus {
 			e.printStackTrace();
 		}
 	}
+
 	public static int randomRoom() {
 		return random.nextInt(NUMBER_OF_ROOMS) + 1;
 	}
+
 	public static int randomConnection() {
 		return random.nextInt(NUMBER_OF_CONNECTIONS_PER_ROOM) + 1;
 	}
+
 	public static int randomWumpusMove() {
 		return random.nextInt(NUMBER_OF_CONNECTIONS_PER_ROOM + 1) + 1;
 	}
@@ -134,9 +134,8 @@ public class Wumpus {
 
         printInstructions();
     }
-
-    public static void printRoomDescription() throws IOException {
-        System.out.println("");
+    
+    public static void printHazardDescriptions() {
         for (int k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
             if (caveStructure[map.playerPosition()][k] == map.wumpusPosition()) {
                 System.out.println("I SMELL A WUMPUS!");
@@ -153,6 +152,12 @@ public class Wumpus {
                 System.out.println("BATS NEARBY!");
             }
         }
+    }
+
+    public static void printRoomDescription() throws IOException {
+        System.out.println("");
+
+        printHazardDescriptions();
         
         System.out.print("YOUR ARE IN ROOM ");
         System.out.println(map.playerPosition());
