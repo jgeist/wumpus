@@ -215,7 +215,7 @@ public class Wumpus {
     }
 
     public static void promptAndShootArrow() throws IOException {
-        int[] p = new int[6];
+        int[] p = new int[MAX_ROOMS_FOR_ARROW_SHOT+1];
         int roomCount;
 
         winLoseState = WinLoseState.PLAYING;
