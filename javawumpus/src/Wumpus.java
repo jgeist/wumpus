@@ -6,7 +6,6 @@ import java.util.Deque;
 import java.util.Random;
 
 public class Wumpus {
-    private static final int INITIAL_ARROWS = 5;
     private static final int NUMBER_OF_ROOMS = 20;
     private static final int NUMBER_OF_CONNECTIONS_PER_ROOM = 3;
     private static final int MAX_ROOMS_FOR_ARROW_SHOT = 5;
