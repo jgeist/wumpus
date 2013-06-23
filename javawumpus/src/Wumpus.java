@@ -406,6 +406,16 @@ public class Wumpus {
     public static void loadGameMapFromStartingMap() {
         map = (WumpusMap)startingMap.clone();
     }
+    
+    public static void setUpGame(boolean regenerateLevel) {
+        if (regenerateLevel) {
+            placeObjectsRandomlyOnMap();
+            saveStartingMapFromGameMap();
+        }
+        
+        gameOver = false;
+        player.resetToStartOfGameState();
+    }
 
     public static void runMainLoop() throws IOException {
         boolean randomize = true;
@@ -413,13 +423,7 @@ public class Wumpus {
         promptAndShowInstructions();
 
         while (true) {
-            if (randomize) {
-                placeObjectsRandomlyOnMap();
-                saveStartingMapFromGameMap();
-            }
-            
-            gameOver = false;
-            player.resetToStartOfGameState();
+            setUpGame(randomize);
 
             System.out.println("HUNT THE WUMPUS");
 

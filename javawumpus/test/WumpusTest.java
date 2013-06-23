@@ -212,14 +212,13 @@ public class WumpusTest {
 
     @Test
     public void testShootArrowMissing() throws IOException {   
+        Wumpus.setUpGame(false);
         Wumpus.map.setPlayerPosition(1);
         Wumpus.map.setWumpusPosition(19);
         Wumpus.map.addPit(18);
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
-        Wumpus.map.addBat(19);        
-        Wumpus.gameOver = false;
-        Wumpus.player.resetToStartOfGameState();
+        Wumpus.map.addBat(19);
 
         String input = "1" + CR + "2" + CR;     // shoot arrow into room 2
         
@@ -240,14 +239,13 @@ public class WumpusTest {
 
     @Test
     public void testShootArrowHitting() throws IOException {   
+        Wumpus.setUpGame(false);
         Wumpus.map.setPlayerPosition(1);
         Wumpus.map.setWumpusPosition(2);
         Wumpus.map.addPit(18);
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
-        Wumpus.gameOver = false;
-        Wumpus.player.resetToStartOfGameState();
 
         String input = "1" + CR + "2" + CR;     // shoot arrow into room 2
         
@@ -268,14 +266,13 @@ public class WumpusTest {
 
     @Test
     public void testShootArrowAtSelf() throws IOException {   
+        Wumpus.setUpGame(false);
         Wumpus.map.setPlayerPosition(1);
         Wumpus.map.setWumpusPosition(19);
         Wumpus.map.addPit(18);
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
-        Wumpus.gameOver = false;
-        Wumpus.player.resetToStartOfGameState();
 
         String input = "2" + CR + "2" + CR + "1" + CR;     // shoot arrow into next room and back
         
@@ -298,14 +295,13 @@ public class WumpusTest {
 
     @Test
     public void testShootArrowBackwards() throws IOException  {   
+        Wumpus.setUpGame(false);
         Wumpus.map.setPlayerPosition(1);
         Wumpus.map.setWumpusPosition(19);
         Wumpus.map.addPit(18);
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
-        Wumpus.gameOver = false;
-        Wumpus.player.resetToStartOfGameState();
 
         String input = "3" + CR + "2" + CR + "3" + CR + "2" + CR;     // shoot arrow into next room and back
         
@@ -333,14 +329,13 @@ public class WumpusTest {
 
     @Test
     public void testShootArrowWall() throws IOException {   
+        Wumpus.setUpGame(false);
         Wumpus.map.setPlayerPosition(1);
         Wumpus.map.setWumpusPosition(19);
         Wumpus.map.addPit(18);
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
-        Wumpus.gameOver = false;
-        Wumpus.player.resetToStartOfGameState();
 
         String input = "1" + CR + "12" + CR;
         
@@ -382,14 +377,13 @@ public class WumpusTest {
 
     @Test
     public void testMovePlayerNotPossible() throws IOException {
+        Wumpus.setUpGame(false);
         Wumpus.map.setPlayerPosition(1);
         Wumpus.map.setWumpusPosition(19);
         Wumpus.map.addPit(18);
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
-        Wumpus.gameOver = false;
-        Wumpus.player.resetToStartOfGameState();
         
         String input = "10" + CR;
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
@@ -412,14 +406,13 @@ public class WumpusTest {
 
     @Test
     public void testMovePlayerNothingHappens() throws IOException{
+        Wumpus.setUpGame(false);
         Wumpus.map.setPlayerPosition(1);
         Wumpus.map.setWumpusPosition(19);
         Wumpus.map.addPit(18);
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
-        Wumpus.gameOver = false;
-        Wumpus.player.resetToStartOfGameState();
         
         String input = "2" + CR;
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
@@ -438,14 +431,13 @@ public class WumpusTest {
 
     @Test
     public void testMovePlayerRunIntoWumpus() throws IOException {
+        Wumpus.setUpGame(false);
         Wumpus.map.setPlayerPosition(1);
         Wumpus.map.setWumpusPosition(2);
         Wumpus.map.addPit(18);
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
-        Wumpus.gameOver = false;
-        Wumpus.player.resetToStartOfGameState();
         
         String input = "2" + CR;
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
@@ -465,14 +457,13 @@ public class WumpusTest {
 
     @Test
     public void testMovePlayerRunIntoPit() throws IOException {
+        Wumpus.setUpGame(false);
         Wumpus.map.setPlayerPosition(1);
         Wumpus.map.setWumpusPosition(19);
         Wumpus.map.addPit(2);
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
-        Wumpus.gameOver = false;
-        Wumpus.player.resetToStartOfGameState();
         
         String input = "2" + CR;
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
@@ -493,14 +484,13 @@ public class WumpusTest {
 
     @Test
     public void testMovePlayerRunIntoBat() throws IOException {
+        Wumpus.setUpGame(false);
         Wumpus.map.setPlayerPosition(1);
         Wumpus.map.setWumpusPosition(19);
         Wumpus.map.addPit(18);
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(2);
         Wumpus.map.addBat(19);
-        Wumpus.gameOver = false;
-        Wumpus.player.resetToStartOfGameState();
         
         String input = "2" + CR;
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
