@@ -35,6 +35,14 @@ public class Wumpus {
 
     public static boolean throwOnIOErrorForTests = false;
 
+    public static void setPlayerPosition(int n) {
+        objectPositions[1] = n;
+    }
+    
+    public static int playerPosition() {
+        return objectPositions[1];
+    }
+
 	/**
 	 * @param args
 	 */
@@ -140,7 +148,7 @@ public class Wumpus {
         System.out.println("");
         for (int j = 2; j <= MAP_OBJECT_COUNT; j++) {   
             for (int k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
-                if (caveStructure[objectPositions[1]][k] == objectPositions[j]) {
+                if (caveStructure[playerPosition()][k] == objectPositions[j]) {
                     switch (j-1) {
                     case 1:
                         System.out.println("I SMELL A WUMPUS!");
@@ -161,12 +169,12 @@ public class Wumpus {
         }
         
         System.out.print("YOUR ARE IN ROOM ");
-        System.out.println(objectPositions[1]);
+        System.out.println(playerPosition());
         System.out.print("TUNNELS LEAD TO");
         
         for (int k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
             System.out.print(" ");
-            System.out.print(caveStructure[objectPositions[1]][k]);
+            System.out.print(caveStructure[playerPosition()][k]);
         }
         System.out.println("");
         System.out.println("");
@@ -190,7 +198,7 @@ public class Wumpus {
         if (k != NUMBER_OF_CONNECTIONS_PER_ROOM + 1) {
             objectPositions[2] = caveStructure[objectPositions[2]][k]; 
         }
-        if (objectPositions[2] == objectPositions[1]) {
+        if (objectPositions[2] == playerPosition()) {
             System.out.println("TSK TSK TSK - WUMPUS GOT YOU!");
             winLoseState = WinLoseState.LOST;
         }
@@ -221,7 +229,7 @@ public class Wumpus {
             }
         }
 
-        int arrowPosition = objectPositions[1];
+        int arrowPosition = playerPosition();
         for (int k = 1; k <= roomCount; k++) {
             int k1;
             for (k1 = 1; k1 <= NUMBER_OF_CONNECTIONS_PER_ROOM; k1++) {
@@ -239,7 +247,7 @@ public class Wumpus {
                 winLoseState = WinLoseState.WON;
                 return;
             }   
-            if (arrowPosition == objectPositions[1]) {
+            if (arrowPosition == playerPosition()) {
                 System.out.println("OUCH! ARROW GOT YOU!");
                 winLoseState = WinLoseState.LOST;
                 return;
@@ -269,11 +277,11 @@ public class Wumpus {
 
             int k;
             for (k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
-                if (caveStructure[objectPositions[1]][k] == roomToMoveTo) {
+                if (caveStructure[playerPosition()][k] == roomToMoveTo) {
                     break;
                 }
             }
-            if (k > NUMBER_OF_CONNECTIONS_PER_ROOM && roomToMoveTo != objectPositions[1]) {
+            if (k > NUMBER_OF_CONNECTIONS_PER_ROOM && roomToMoveTo != playerPosition()) {
                 System.out.print("NOT POSSIBLE - ");
                 continue;
             }
@@ -281,7 +289,7 @@ public class Wumpus {
         }
         
         while (true) {
-            objectPositions[1] = roomToMoveTo;
+            setPlayerPosition(roomToMoveTo);
             if (roomToMoveTo == objectPositions[2]) {
                 System.out.println("... OOPS! BUMPED A WUMPUS!");
                 moveWumpus();
