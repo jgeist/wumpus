@@ -35,10 +35,6 @@ public class Wumpus {
 
     public static boolean throwOnIOErrorForTests = false;
 
-    public static void setPlayerPosition(int n) {
-        map.setPlayerPosition(n);
-    }
-    
     public static int playerPosition() {
         return map.playerPosition();
     }
@@ -300,7 +296,7 @@ public class Wumpus {
         }
         
         while (true) {
-            setPlayerPosition(roomToMoveTo);
+            map.setPlayerPosition(roomToMoveTo);
             if (roomToMoveTo == wumpusPosition()) {
                 System.out.println("... OOPS! BUMPED A WUMPUS!");
                 moveWumpus();
