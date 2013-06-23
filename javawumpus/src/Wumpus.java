@@ -35,10 +35,6 @@ public class Wumpus {
 
     public static boolean throwOnIOErrorForTests = false;
 
-    public static void setWumpusPosition(int n) {
-        map.setWumpusPosition(n);
-    }   
-
     public static int wumpusPosition() {
         return map.wumpusPosition();
     }
@@ -199,7 +195,7 @@ public class Wumpus {
     public static void moveWumpus() {
         int k = randomWumpusMove();
         if (k != NUMBER_OF_CONNECTIONS_PER_ROOM + 1) {
-            setWumpusPosition( caveStructure[wumpusPosition()][k] );
+            map.setWumpusPosition( caveStructure[wumpusPosition()][k] );
         }
         if (wumpusPosition() == map.playerPosition()) {
             System.out.println("TSK TSK TSK - WUMPUS GOT YOU!");
