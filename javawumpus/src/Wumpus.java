@@ -213,6 +213,18 @@ public class Wumpus {
 
         return roomCount;
     }
+    
+    public static void promptForArrowPathRooms(int pathLength, int[] roomsOut) throws IOException {
+        for (int k = 1; k <= pathLength; k++) {
+            System.out.print("ROOM # ");    
+            roomsOut[k] = readInt();
+            if (k > 2 && roomsOut[k] == roomsOut[k-2]) {
+                System.out.println("ARROWS AREN'T THAT CROOKED - TRY ANOTHER ROOM");
+                k--;
+                continue;
+            }
+        }
+    }
 
     public static void promptAndShootArrow() throws IOException {
         int[] p = new int[MAX_ROOMS_FOR_ARROW_SHOT+1];
@@ -222,16 +234,7 @@ public class Wumpus {
         
         // path of arrow
         roomCount = promptForArrowPathRoomCount(MAX_ROOMS_FOR_ARROW_SHOT);
-        
-        for (int k = 1; k <= roomCount; k++) {
-            System.out.print("ROOM # ");    
-            p[k] = readInt();
-            if (k > 2 && p[k] == p[k-2]) {
-                System.out.println("ARROWS AREN'T THAT CROOKED - TRY ANOTHER ROOM");
-                k--;
-                continue;
-            }
-        }
+        promptForArrowPathRooms(roomCount, p);
 
         int arrowPosition = map.playerPosition();
         for (int k = 1; k <= roomCount; k++) {
