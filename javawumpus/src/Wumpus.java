@@ -28,6 +28,11 @@ public class Wumpus {
         WON    
     };
 
+    public enum PlayerAction {
+        SHOOT,
+        MOVE
+    };
+
     public static WinLoseState winLoseState = WinLoseState.PLAYING;
 
     public static boolean throwOnIOErrorForTests = false;
@@ -176,15 +181,15 @@ public class Wumpus {
         System.out.println("");
     } 
 
-    public static int promptForShootOrMove() throws IOException {
+    public static PlayerAction promptForShootOrMove() throws IOException {
         while (true) {
             System.out.print("SHOOT OR MOVE (S-M) ");
             char i$ = (char) System.in.read();
             System.in.read();
             if (i$ == 'S' || i$ == 's') {
-                return 1;
+                return PlayerAction.SHOOT;
             } else if (i$ == 'M' || i$ == 'm') {
-                return 2;
+                return PlayerAction.MOVE;
             }
         }
     }
@@ -360,7 +365,6 @@ public class Wumpus {
 
         promptAndShowInstructions();
 
-
         while (true) {
             if (randomize) {
                 placeObjectsRandomlyOnMap();
@@ -375,11 +379,11 @@ public class Wumpus {
                 printRoomDescription();
 
                 switch (promptForShootOrMove()) {
-                case 1:
+                case SHOOT:
                     promptAndShootArrow();
                     break;
 
-                case 2:
+                case MOVE:
                     promptAndMovePlayer();
                     break;
                 }
