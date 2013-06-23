@@ -371,6 +371,14 @@ public class Wumpus {
             break;
         }            
     }
+    
+    public static void printWinLoseState(WinLoseState state) {
+        if (state == WinLoseState.WON) {
+            System.out.println("HEE HEE HEE - THE WUMPUS'LL GET YOU NEXT TIME!!");
+        } else {
+            System.out.println ("HA HA HA - YOU LOSE!");
+        }
+    }
 
     public static void runMainLoop() throws IOException {
         boolean randomize = true;
@@ -391,12 +399,8 @@ public class Wumpus {
                 printRoomDescription();
                 promptAndExecutePlayerAction();
             } while (winLoseState == WinLoseState.PLAYING);
-
-            if (winLoseState == WinLoseState.WON) {
-                System.out.println("HEE HEE HEE - THE WUMPUS'LL GET YOU NEXT TIME!!");
-            } else {
-                System.out.println ("HA HA HA - YOU LOSE!");
-            }
+            
+            printWinLoseState(winLoseState);
         
             map = (WumpusMap)startingMap.clone();
             
