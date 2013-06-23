@@ -55,6 +55,10 @@ public class Wumpus {
         return objectPositions[3] == n || objectPositions[4] == n;
     }
 
+    public static boolean isBatAt(int n) {
+        return objectPositions[5] == n || objectPositions[6] == n;
+    }
+
 	/**
 	 * @param args
 	 */
@@ -168,17 +172,9 @@ public class Wumpus {
                 System.out.println("I FEEL A DRAFT");
             }
         }
-
-        for (int j = 5; j <= MAP_OBJECT_COUNT; j++) {   
-            for (int k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
-                if (caveStructure[playerPosition()][k] == objectPositions[j]) {
-                    switch (j-1) {
-                    case 4:
-                    case 5:
-                        System.out.println("BATS NEARBY!");
-                        break;
-                    }
-                }
+        for (int k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
+            if (isBatAt(caveStructure[playerPosition()][k])) {
+                System.out.println("BATS NEARBY!");
             }
         }
         
@@ -318,7 +314,7 @@ public class Wumpus {
                 return;
             }
         
-            if (roomToMoveTo == objectPositions[5] || roomToMoveTo == objectPositions[6]) {
+            if (isBatAt(roomToMoveTo)) {
                 System.out.println("ZAP--SUPER BAT SNATCH! ELSEWHEREVILLE FOR YOU!");
                 roomToMoveTo = randomRoom();
                 continue;
