@@ -2,14 +2,8 @@ public class Player {
     private static final int INITIAL_ARROWS = 5;
 
     private int arrowInventory;
-
-    public enum WinLoseState {
-        LOST,
-        PLAYING,
-        WON    
-    };
-    
-    private WinLoseState winLoseState;
+    private boolean gameOver;
+    private boolean won;
 
     public Player() {
         resetToStartOfGameState();
@@ -17,7 +11,8 @@ public class Player {
 
     public void resetToStartOfGameState() {
         arrowInventory = INITIAL_ARROWS;
-        winLoseState = WinLoseState.PLAYING;
+        gameOver = false;
+        won = false;
     }
 
     public int arrowInventory() {
@@ -27,12 +22,22 @@ public class Player {
     public void setArrowInventory(int n) {
         arrowInventory = n;
     }
-
-    public WinLoseState winLoseState() {
-        return winLoseState;
+    
+    public boolean isGameOver() {
+        return gameOver;
+    }
+    
+    public void setWon() {
+        won = true;
+        gameOver = true;
     }
 
-    public void setWinLoseState(WinLoseState state) {
-        winLoseState = state;
+    public void setLost() {
+        won = false;
+        gameOver = true;
+    }
+    
+    public boolean won() {
+        return won;
     }
 }

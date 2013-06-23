@@ -61,19 +61,19 @@ public class Wumpus {
     }
     
     public static boolean isGameOver() {
-        return player.winLoseState() != Player.WinLoseState.PLAYING;
+        return player.isGameOver();
     }
 
     public static boolean didPlayerWin() {
-        return player.winLoseState() == Player.WinLoseState.WON;
+        return player.won();
     }
 
     public static void endGameWithPlayerLosing() {
-        player.setWinLoseState(Player.WinLoseState.LOST);
+        player.setLost();
     }
 
     public static void endGameWithPlayerWinning() {
-        player.setWinLoseState(Player.WinLoseState.WON);
+        player.setWon();
     }
 
 	public static int readInt() throws IOException {
@@ -383,7 +383,7 @@ public class Wumpus {
         }            
     }
     
-    public static void printWinLoseState(Player.WinLoseState state) {
+    public static void printWinLoseState() {
         if (didPlayerWin()) {
             System.out.println("HEE HEE HEE - THE WUMPUS'LL GET YOU NEXT TIME!!");
         } else {
@@ -424,7 +424,7 @@ public class Wumpus {
                 promptAndExecutePlayerAction();
             } while (!isGameOver());
             
-            printWinLoseState(player.winLoseState());
+            printWinLoseState();
             loadGameMapFromStartingMap();
 
             randomize = !promptToReplaySameMap();            

@@ -217,8 +217,8 @@ public class WumpusTest {
         Wumpus.map.addPit(18);
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
-        Wumpus.map.addBat(19);
-        Wumpus.player.setArrowInventory(5);
+        Wumpus.map.addBat(19);        
+        Wumpus.player.resetToStartOfGameState();
 
         String input = "1" + CR + "2" + CR;     // shoot arrow into room 2
         
@@ -229,13 +229,11 @@ public class WumpusTest {
         
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
-        Wumpus.player.setWinLoseState(Player.WinLoseState.PLAYING);
-
         Wumpus.promptAndShootArrow();
 
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
-        assertEquals(Player.WinLoseState.PLAYING, Wumpus.player.winLoseState());
+        assertEquals(false, Wumpus.isGameOver());
         assertEquals(20, Wumpus.map.wumpusPosition());      // on missed, Wumpus moves
     }
 
@@ -247,7 +245,7 @@ public class WumpusTest {
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
-        Wumpus.player.setArrowInventory(5);
+        Wumpus.player.resetToStartOfGameState();
 
         String input = "1" + CR + "2" + CR;     // shoot arrow into room 2
         
@@ -258,13 +256,12 @@ public class WumpusTest {
         
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
-        Wumpus.player.setWinLoseState(Player.WinLoseState.PLAYING);
-
         Wumpus.promptAndShootArrow();
 
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
-        assertEquals(Player.WinLoseState.WON, Wumpus.player.winLoseState());
+        assertEquals(true, Wumpus.isGameOver());
+        assertEquals(true, Wumpus.didPlayerWin());
     }
 
     @Test
@@ -275,7 +272,7 @@ public class WumpusTest {
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
-        Wumpus.player.setArrowInventory(5);
+        Wumpus.player.resetToStartOfGameState();
 
         String input = "2" + CR + "2" + CR + "1" + CR;     // shoot arrow into next room and back
         
@@ -287,13 +284,12 @@ public class WumpusTest {
         
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
-        Wumpus.player.setWinLoseState(Player.WinLoseState.PLAYING);
-
         Wumpus.promptAndShootArrow();
 
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
-        assertEquals(Player.WinLoseState.LOST, Wumpus.player.winLoseState());
+        assertEquals(true, Wumpus.isGameOver());
+        assertEquals(false, Wumpus.didPlayerWin());
         assertEquals(19, Wumpus.map.wumpusPosition());
     }
 
@@ -305,7 +301,7 @@ public class WumpusTest {
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
-        Wumpus.player.setArrowInventory(5);
+        Wumpus.player.resetToStartOfGameState();
 
         String input = "3" + CR + "2" + CR + "3" + CR + "2" + CR;     // shoot arrow into next room and back
         
@@ -319,7 +315,6 @@ public class WumpusTest {
         
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
-        Wumpus.player.setWinLoseState(Player.WinLoseState.PLAYING);
 
         try {
             Wumpus.promptAndShootArrow();
@@ -328,7 +323,7 @@ public class WumpusTest {
 
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
-        assertEquals(Player.WinLoseState.PLAYING, Wumpus.player.winLoseState());
+        assertEquals(false, Wumpus.isGameOver());
         assertEquals(19, Wumpus.map.wumpusPosition());
     }
 
@@ -340,7 +335,7 @@ public class WumpusTest {
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
-        Wumpus.player.setArrowInventory(5);
+        Wumpus.player.resetToStartOfGameState();
 
         String input = "1" + CR + "12" + CR;
         
@@ -351,13 +346,11 @@ public class WumpusTest {
         
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
-        Wumpus.player.setWinLoseState(Player.WinLoseState.PLAYING);
-
         Wumpus.promptAndShootArrow();
 
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
-        assertEquals(Player.WinLoseState.PLAYING, Wumpus.player.winLoseState());
+        assertEquals(false, Wumpus.isGameOver());
         assertEquals(19, Wumpus.map.wumpusPosition());
     }
 
@@ -378,7 +371,8 @@ public class WumpusTest {
         
         assertEquals(expectedOutput, textOutput.toString());
         assertEquals(1, Wumpus.map.wumpusPosition());
-        assertEquals(Player.WinLoseState.LOST, Wumpus.player.winLoseState());
+        assertEquals(true, Wumpus.isGameOver());
+        assertEquals(false, Wumpus.didPlayerWin());
     }
 
     @Test
@@ -389,8 +383,7 @@ public class WumpusTest {
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
-        Wumpus.player.setArrowInventory(5);  
-        Wumpus.player.setWinLoseState(Player.WinLoseState.PLAYING);
+        Wumpus.player.resetToStartOfGameState();
         
         String input = "10" + CR;
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
@@ -407,7 +400,7 @@ public class WumpusTest {
             "NOT POSSIBLE - WHERE TO ";
         
         assertEquals(expectedOutput, textOutput.toString());
-        assertEquals(Player.WinLoseState.PLAYING, Wumpus.player.winLoseState());
+        assertEquals(false, Wumpus.isGameOver());
         assertEquals(1, Wumpus.map.playerPosition());
     }
 
@@ -419,8 +412,7 @@ public class WumpusTest {
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
-        Wumpus.player.setArrowInventory(5);  
-        Wumpus.player.setWinLoseState(Player.WinLoseState.PLAYING);
+        Wumpus.player.resetToStartOfGameState();
         
         String input = "2" + CR;
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
@@ -433,7 +425,7 @@ public class WumpusTest {
             "WHERE TO ";
         
         assertEquals(expectedOutput, textOutput.toString());
-        assertEquals(Player.WinLoseState.PLAYING, Wumpus.player.winLoseState());
+        assertEquals(false, Wumpus.isGameOver());
         assertEquals(2, Wumpus.map.playerPosition());
     }
 
@@ -445,8 +437,7 @@ public class WumpusTest {
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
-        Wumpus.player.setArrowInventory(5);  
-        Wumpus.player.setWinLoseState(Player.WinLoseState.PLAYING);
+        Wumpus.player.resetToStartOfGameState();
         
         String input = "2" + CR;
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
@@ -460,7 +451,7 @@ public class WumpusTest {
             "... OOPS! BUMPED A WUMPUS!\n";
         
         assertEquals(expectedOutput, textOutput.toString());
-        assertEquals(Player.WinLoseState.PLAYING, Wumpus.player.winLoseState());
+        assertEquals(false, Wumpus.isGameOver());
         assertEquals(2, Wumpus.map.playerPosition());
     }
 
@@ -472,8 +463,7 @@ public class WumpusTest {
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
-        Wumpus.player.setArrowInventory(5);  
-        Wumpus.player.setWinLoseState(Player.WinLoseState.PLAYING);
+        Wumpus.player.resetToStartOfGameState();
         
         String input = "2" + CR;
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
@@ -487,7 +477,8 @@ public class WumpusTest {
             "YYYYIIIIEEEE . . . FELL IN PIT\n";
         
         assertEquals(expectedOutput, textOutput.toString());
-        assertEquals(Player.WinLoseState.LOST, Wumpus.player.winLoseState());
+        assertEquals(true, Wumpus.isGameOver());
+        assertEquals(false, Wumpus.didPlayerWin());
         assertEquals(2, Wumpus.map.playerPosition());
     }
 
@@ -499,8 +490,7 @@ public class WumpusTest {
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(2);
         Wumpus.map.addBat(19);
-        Wumpus.player.setArrowInventory(5);  
-        Wumpus.player.setWinLoseState(Player.WinLoseState.PLAYING);
+        Wumpus.player.resetToStartOfGameState();
         
         String input = "2" + CR;
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
@@ -514,7 +504,7 @@ public class WumpusTest {
             "ZAP--SUPER BAT SNATCH! ELSEWHEREVILLE FOR YOU!\n";
         
         assertEquals(expectedOutput, textOutput.toString());
-        assertEquals(Player.WinLoseState.PLAYING, Wumpus.player.winLoseState());
+        assertEquals(false, Wumpus.isGameOver());
         assertEquals(1, Wumpus.map.playerPosition());
     }
 
