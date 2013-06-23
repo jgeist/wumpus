@@ -20,20 +20,13 @@ public class Wumpus {
 
     public static WumpusMap map = new WumpusMap();
     public static WumpusMap startingMap = new WumpusMap();
-    public static int arrowInventory = INITIAL_ARROWS;
-
-    public enum WinLoseState {
-        LOST,
-        PLAYING,
-        WON    
-    };
+    public static Player player = new Player();
 
     public enum PlayerAction {
         SHOOT,
         MOVE
     };
 
-    public static WinLoseState winLoseState = WinLoseState.PLAYING;
 
     public static boolean throwOnIOErrorForTests = false;
 
@@ -209,7 +202,7 @@ public class Wumpus {
         }
         if (map.wumpusPosition() == map.playerPosition()) {
             System.out.println("TSK TSK TSK - WUMPUS GOT YOU!");
-            winLoseState = WinLoseState.LOST;
+            player.setWinLoseState(Player.WinLoseState.LOST);
         }
     }
 
@@ -239,7 +232,7 @@ public class Wumpus {
         }
     }
 
-    public static WinLoseState evaluateArrowShoot(int pathLength, int[] rooms) {
+    public static Player.WinLoseState evaluateArrowShoot(int pathLength, int[] rooms) {
         int arrowPosition = map.playerPosition();
         for (int k = 1; k <= pathLength; k++) {
             int k1;
@@ -255,39 +248,39 @@ public class Wumpus {
              
             if (arrowPosition == map.wumpusPosition()) {
                 System.out.println("AHA! YOU GOT THE WUMPUS!");
-                return WinLoseState.WON;
+                return Player.WinLoseState.WON;
             }   
             if (arrowPosition == map.playerPosition()) {
                 System.out.println("OUCH! ARROW GOT YOU!");
-                return WinLoseState.LOST;
+                return Player.WinLoseState.LOST;
             }
         }
         
-        return WinLoseState.PLAYING;
+        return Player.WinLoseState.PLAYING;
     }
 
     public static boolean consumeArrowAndTestIfOut() {
-        arrowInventory--;
-        return arrowInventory <= 0;
+        player.setArrowInventory(player.arrowInventory() - 1);
+        return player.arrowInventory() <= 0;
     }
 
     public static void promptAndShootArrow() throws IOException {
         int[] p = new int[MAX_ROOMS_FOR_ARROW_SHOT+1];
         int roomCount;
 
-        winLoseState = WinLoseState.PLAYING;
+        player.setWinLoseState(Player.WinLoseState.PLAYING);
         
         // path of arrow
         roomCount = promptForArrowPathRoomCount(MAX_ROOMS_FOR_ARROW_SHOT);
         promptForArrowPathRooms(roomCount, p);
 
-        winLoseState = evaluateArrowShoot(roomCount, p);
+        player.setWinLoseState(evaluateArrowShoot(roomCount, p));
 
-        if (winLoseState == WinLoseState.PLAYING) {
+        if (player.winLoseState() == Player.WinLoseState.PLAYING) {
             System.out.println("MISSED");
             moveWumpus();
             if (consumeArrowAndTestIfOut()) {
-                winLoseState = WinLoseState.LOST;
+                player.setWinLoseState(Player.WinLoseState.LOST);
             }
         }
     }
@@ -324,14 +317,14 @@ public class Wumpus {
             if (roomToMoveTo == map.wumpusPosition()) {
                 System.out.println("... OOPS! BUMPED A WUMPUS!");
                 moveWumpus();
-                if (winLoseState != WinLoseState.PLAYING) {
+                if (player.winLoseState() != Player.WinLoseState.PLAYING) {
                     return;
                 }
             }
         
             if (map.hasPitAt(roomToMoveTo)) {
                 System.out.println("YYYYIIIIEEEE . . . FELL IN PIT");
-                winLoseState = WinLoseState.LOST;
+                player.setWinLoseState(Player.WinLoseState.LOST);
                 return;
             }
         
@@ -346,7 +339,7 @@ public class Wumpus {
     }
 
     public static void promptAndMovePlayer() throws IOException {
-        winLoseState = WinLoseState.PLAYING;
+        player.setWinLoseState(Player.WinLoseState.PLAYING);
 
         int roomToMoveTo = promptForRoomToMoveTo();
         movePlayerAndTestHazards(roomToMoveTo);
@@ -380,8 +373,8 @@ public class Wumpus {
         }            
     }
     
-    public static void printWinLoseState(WinLoseState state) {
-        if (state == WinLoseState.WON) {
+    public static void printWinLoseState(Player.WinLoseState state) {
+        if (state == Player.WinLoseState.WON) {
             System.out.println("HEE HEE HEE - THE WUMPUS'LL GET YOU NEXT TIME!!");
         } else {
             System.out.println ("HA HA HA - YOU LOSE!");
@@ -411,17 +404,17 @@ public class Wumpus {
                 placeObjectsRandomlyOnMap();
                 saveStartingMapFromGameMap();
             }
-
-            arrowInventory = INITIAL_ARROWS; 
+            
+            player.resetToStartOfGameState();
 
             System.out.println("HUNT THE WUMPUS");
 
             do {
                 printRoomDescription();
                 promptAndExecutePlayerAction();
-            } while (winLoseState == WinLoseState.PLAYING);
+            } while (player.winLoseState() == Player.WinLoseState.PLAYING);
             
-            printWinLoseState(winLoseState);
+            printWinLoseState(player.winLoseState());
             loadGameMapFromStartingMap();
 
             randomize = !promptToReplaySameMap();            
