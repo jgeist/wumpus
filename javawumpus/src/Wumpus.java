@@ -304,13 +304,8 @@ public class Wumpus {
         
         return roomToMoveTo;
     }
-
-    public static void promptAndMovePlayer() throws IOException {
-        winLoseState = WinLoseState.PLAYING;
-
-        int roomToMoveTo = promptForRoomToMoveTo();
-
-        
+    
+    public static void movePlayerAndTestHazards(int roomToMoveTo) {
         while (true) {
             map.setPlayerPosition(roomToMoveTo);
             if (roomToMoveTo == map.wumpusPosition()) {
@@ -335,6 +330,13 @@ public class Wumpus {
             
             break;
         }
+    }
+
+    public static void promptAndMovePlayer() throws IOException {
+        winLoseState = WinLoseState.PLAYING;
+
+        int roomToMoveTo = promptForRoomToMoveTo();
+        movePlayerAndTestHazards(roomToMoveTo);
     }
 
     public static void runMainLoop() throws IOException {
