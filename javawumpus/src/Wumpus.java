@@ -384,6 +384,14 @@ public class Wumpus {
         char i$ = promptAndReadSingleCharacterOption("SAME SETUP (Y-N)");        
         return i$ == 'y' || i$ == 'Y';
     }
+    
+    public static void saveStartingMapFromGameMap() {
+        startingMap = (WumpusMap)map.clone();
+    }
+
+    public static void loadGameMapFromStartingMap() {
+        map = (WumpusMap)startingMap.clone();
+    }
 
     public static void runMainLoop() throws IOException {
         boolean randomize = true;
@@ -393,7 +401,7 @@ public class Wumpus {
         while (true) {
             if (randomize) {
                 placeObjectsRandomlyOnMap();
-                startingMap = (WumpusMap)map.clone();
+                saveStartingMapFromGameMap();
             }
 
             arrowInventory = INITIAL_ARROWS; 
@@ -406,8 +414,7 @@ public class Wumpus {
             } while (winLoseState == WinLoseState.PLAYING);
             
             printWinLoseState(winLoseState);
-        
-            map = (WumpusMap)startingMap.clone();
+            loadGameMapFromStartingMap();
 
             randomize = !promptToReplaySameMap();            
         }
