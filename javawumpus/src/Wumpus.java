@@ -9,6 +9,7 @@ public class Wumpus {
     private static final int INITIAL_ARROWS = 5;
     private static final int NUMBER_OF_ROOMS = 20;
     private static final int NUMBER_OF_CONNECTIONS_PER_ROOM = 3;
+    private static final int MAX_ROOMS_FOR_ARROW_SHOT = 5;
 
 	public static Random random = new Random();
 	public static int[][] caveStructure = {{0,0,0,0},
@@ -209,7 +210,7 @@ public class Wumpus {
         System.out.print("NO. OF ROOMS (1-5) ");
         while (true) {
             roomCount = readInt();
-            if (roomCount >= 1 && roomCount <= 5) {
+            if (roomCount >= 1 && roomCount <= MAX_ROOMS_FOR_ARROW_SHOT) {
                 break;
             }
         }
