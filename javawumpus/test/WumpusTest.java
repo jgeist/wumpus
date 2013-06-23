@@ -236,7 +236,7 @@ public class WumpusTest {
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
         assertEquals(Wumpus.WinLoseState.PLAYING, Wumpus.winLoseState);
-        assertEquals(20, Wumpus.wumpusPosition());      // on missed, Wumpus moves
+        assertEquals(20, Wumpus.map.wumpusPosition());      // on missed, Wumpus moves
     }
 
     @Test
@@ -294,7 +294,7 @@ public class WumpusTest {
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
         assertEquals(Wumpus.WinLoseState.LOST, Wumpus.winLoseState);
-        assertEquals(19, Wumpus.wumpusPosition());
+        assertEquals(19, Wumpus.map.wumpusPosition());
     }
 
     @Test
@@ -329,7 +329,7 @@ public class WumpusTest {
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
         assertEquals(Wumpus.WinLoseState.PLAYING, Wumpus.winLoseState);
-        assertEquals(19, Wumpus.wumpusPosition());
+        assertEquals(19, Wumpus.map.wumpusPosition());
     }
 
     @Test
@@ -358,7 +358,7 @@ public class WumpusTest {
         System.out.flush();
         assertEquals(expectedOutput, textOutput.toString());    
         assertEquals(Wumpus.WinLoseState.PLAYING, Wumpus.winLoseState);
-        assertEquals(19, Wumpus.wumpusPosition());
+        assertEquals(19, Wumpus.map.wumpusPosition());
     }
 
     @Test
@@ -366,10 +366,10 @@ public class WumpusTest {
         Wumpus.map.setWumpusPosition(1);
         Wumpus.map.setPlayerPosition(1);
         Wumpus.moveWumpus();
-        assertEquals(8, Wumpus.wumpusPosition());
+        assertEquals(8, Wumpus.map.wumpusPosition());
 
         Wumpus.moveWumpus();
-        assertEquals(8, Wumpus.wumpusPosition());
+        assertEquals(8, Wumpus.map.wumpusPosition());
 
         Wumpus.moveWumpus();
         System.out.flush();
@@ -377,7 +377,7 @@ public class WumpusTest {
         String expectedOutput = "TSK TSK TSK - WUMPUS GOT YOU!\n";
         
         assertEquals(expectedOutput, textOutput.toString());
-        assertEquals(1, Wumpus.wumpusPosition());
+        assertEquals(1, Wumpus.map.wumpusPosition());
         assertEquals(Wumpus.WinLoseState.LOST, Wumpus.winLoseState);
     }
 

@@ -35,10 +35,6 @@ public class Wumpus {
 
     public static boolean throwOnIOErrorForTests = false;
 
-    public static int wumpusPosition() {
-        return map.wumpusPosition();
-    }
-
     public static boolean isPitAt(int n) {
         return map.hasPitAt(n);
     }
@@ -151,7 +147,7 @@ public class Wumpus {
     public static void printRoomDescription() throws IOException {
         System.out.println("");
         for (int k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
-            if (caveStructure[map.playerPosition()][k] == wumpusPosition()) {
+            if (caveStructure[map.playerPosition()][k] == map.wumpusPosition()) {
                 System.out.println("I SMELL A WUMPUS!");
             }
         }
@@ -195,9 +191,9 @@ public class Wumpus {
     public static void moveWumpus() {
         int k = randomWumpusMove();
         if (k != NUMBER_OF_CONNECTIONS_PER_ROOM + 1) {
-            map.setWumpusPosition( caveStructure[wumpusPosition()][k] );
+            map.setWumpusPosition( caveStructure[map.wumpusPosition()][k] );
         }
-        if (wumpusPosition() == map.playerPosition()) {
+        if (map.wumpusPosition() == map.playerPosition()) {
             System.out.println("TSK TSK TSK - WUMPUS GOT YOU!");
             winLoseState = WinLoseState.LOST;
         }
@@ -241,7 +237,7 @@ public class Wumpus {
                 arrowPosition = caveStructure[arrowPosition][randomConnection()];
             }
              
-            if (arrowPosition == wumpusPosition()) {
+            if (arrowPosition == map.wumpusPosition()) {
                 System.out.println("AHA! YOU GOT THE WUMPUS!");
                 winLoseState = WinLoseState.WON;
                 return;
@@ -289,7 +285,7 @@ public class Wumpus {
         
         while (true) {
             map.setPlayerPosition(roomToMoveTo);
-            if (roomToMoveTo == wumpusPosition()) {
+            if (roomToMoveTo == map.wumpusPosition()) {
                 System.out.println("... OOPS! BUMPED A WUMPUS!");
                 moveWumpus();
                 if (winLoseState != WinLoseState.PLAYING) {
