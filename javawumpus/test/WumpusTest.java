@@ -218,6 +218,7 @@ public class WumpusTest {
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);        
+        Wumpus.gameOver = false;
         Wumpus.player.resetToStartOfGameState();
 
         String input = "1" + CR + "2" + CR;     // shoot arrow into room 2
@@ -245,6 +246,7 @@ public class WumpusTest {
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
+        Wumpus.gameOver = false;
         Wumpus.player.resetToStartOfGameState();
 
         String input = "1" + CR + "2" + CR;     // shoot arrow into room 2
@@ -272,6 +274,7 @@ public class WumpusTest {
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
+        Wumpus.gameOver = false;
         Wumpus.player.resetToStartOfGameState();
 
         String input = "2" + CR + "2" + CR + "1" + CR;     // shoot arrow into next room and back
@@ -301,6 +304,7 @@ public class WumpusTest {
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
+        Wumpus.gameOver = false;
         Wumpus.player.resetToStartOfGameState();
 
         String input = "3" + CR + "2" + CR + "3" + CR + "2" + CR;     // shoot arrow into next room and back
@@ -335,6 +339,7 @@ public class WumpusTest {
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
+        Wumpus.gameOver = false;
         Wumpus.player.resetToStartOfGameState();
 
         String input = "1" + CR + "12" + CR;
@@ -383,6 +388,7 @@ public class WumpusTest {
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
+        Wumpus.gameOver = false;
         Wumpus.player.resetToStartOfGameState();
         
         String input = "10" + CR;
@@ -412,6 +418,7 @@ public class WumpusTest {
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
+        Wumpus.gameOver = false;
         Wumpus.player.resetToStartOfGameState();
         
         String input = "2" + CR;
@@ -437,6 +444,7 @@ public class WumpusTest {
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
+        Wumpus.gameOver = false;
         Wumpus.player.resetToStartOfGameState();
         
         String input = "2" + CR;
@@ -463,6 +471,7 @@ public class WumpusTest {
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(18);
         Wumpus.map.addBat(19);
+        Wumpus.gameOver = false;
         Wumpus.player.resetToStartOfGameState();
         
         String input = "2" + CR;
@@ -490,6 +499,7 @@ public class WumpusTest {
         Wumpus.map.addPit(19);
         Wumpus.map.addBat(2);
         Wumpus.map.addBat(19);
+        Wumpus.gameOver = false;
         Wumpus.player.resetToStartOfGameState();
         
         String input = "2" + CR;

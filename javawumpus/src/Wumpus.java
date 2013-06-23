@@ -21,6 +21,7 @@ public class Wumpus {
     public static WumpusMap map = new WumpusMap();
     public static WumpusMap startingMap = new WumpusMap();
     public static Player player = new Player();
+    public static boolean gameOver = false;
 
     public enum PlayerAction {
         SHOOT,
@@ -61,7 +62,7 @@ public class Wumpus {
     }
     
     public static boolean isGameOver() {
-        return player.isGameOver();
+        return gameOver;
     }
 
     public static boolean didPlayerWin() {
@@ -69,10 +70,12 @@ public class Wumpus {
     }
 
     public static void endGameWithPlayerLosing() {
+        gameOver = true;
         player.setLost();
     }
 
     public static void endGameWithPlayerWinning() {
+        gameOver = true;
         player.setWon();
     }
 
@@ -415,6 +418,7 @@ public class Wumpus {
                 saveStartingMapFromGameMap();
             }
             
+            gameOver = false;
             player.resetToStartOfGameState();
 
             System.out.println("HUNT THE WUMPUS");
