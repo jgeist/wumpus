@@ -35,10 +35,6 @@ public class Wumpus {
 
     public static boolean throwOnIOErrorForTests = false;
 
-    public static boolean isPitAt(int n) {
-        return map.hasPitAt(n);
-    }
-
     public static boolean isBatAt(int n) {
         return map.hasBatAt(n);
     }
@@ -153,7 +149,7 @@ public class Wumpus {
         }
         for (int k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
             int room = caveStructure[map.playerPosition()][k];
-            if (isPitAt(room)) {
+            if (map.hasPitAt(room)) {
                 System.out.println("I FEEL A DRAFT");
             }
         }
@@ -293,7 +289,7 @@ public class Wumpus {
                 }
             }
         
-            if (isPitAt(roomToMoveTo)) {
+            if (map.hasPitAt(roomToMoveTo)) {
                 System.out.println("YYYYIIIIEEEE . . . FELL IN PIT");
                 winLoseState = WinLoseState.LOST;
                 return;
