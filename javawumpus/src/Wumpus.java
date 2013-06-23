@@ -43,6 +43,14 @@ public class Wumpus {
         return objectPositions[1];
     }
 
+    public static void setWumpusPosition(int n) {
+        objectPositions[2] = n;
+    }   
+
+    public static int wumpusPosition() {
+        return objectPositions[2];
+    }
+
 	/**
 	 * @param args
 	 */
@@ -196,9 +204,9 @@ public class Wumpus {
     public static void moveWumpus() {
         int k = randomWumpusMove();
         if (k != NUMBER_OF_CONNECTIONS_PER_ROOM + 1) {
-            objectPositions[2] = caveStructure[objectPositions[2]][k]; 
+            setWumpusPosition( caveStructure[wumpusPosition()][k] );
         }
-        if (objectPositions[2] == playerPosition()) {
+        if (wumpusPosition() == playerPosition()) {
             System.out.println("TSK TSK TSK - WUMPUS GOT YOU!");
             winLoseState = WinLoseState.LOST;
         }
@@ -242,7 +250,7 @@ public class Wumpus {
                 arrowPosition = caveStructure[arrowPosition][randomConnection()];
             }
              
-            if (arrowPosition == objectPositions[2]) {
+            if (arrowPosition == wumpusPosition()) {
                 System.out.println("AHA! YOU GOT THE WUMPUS!");
                 winLoseState = WinLoseState.WON;
                 return;
@@ -290,7 +298,7 @@ public class Wumpus {
         
         while (true) {
             setPlayerPosition(roomToMoveTo);
-            if (roomToMoveTo == objectPositions[2]) {
+            if (roomToMoveTo == wumpusPosition()) {
                 System.out.println("... OOPS! BUMPED A WUMPUS!");
                 moveWumpus();
                 if (winLoseState != WinLoseState.PLAYING) {
