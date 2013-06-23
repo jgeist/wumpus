@@ -59,6 +59,22 @@ public class Wumpus {
     public static int connectionsFromRoom(int n) {
         return caveStructure[n].length - 1;
     }
+    
+    public static boolean isGameOver() {
+        return player.winLoseState() != Player.WinLoseState.PLAYING;
+    }
+
+    public static boolean didPlayerWin() {
+        return player.winLoseState() == Player.WinLoseState.WON;
+    }
+
+    public static void endGameWithPlayerLosing() {
+        player.setWinLoseState(Player.WinLoseState.LOST);
+    }
+
+    public static void endGameWithPlayerWinning() {
+        player.setWinLoseState(Player.WinLoseState.WON);
+    }
 
 	public static int readInt() throws IOException {
 		String line = "";
@@ -202,7 +218,7 @@ public class Wumpus {
         }
         if (map.wumpusPosition() == map.playerPosition()) {
             System.out.println("TSK TSK TSK - WUMPUS GOT YOU!");
-            player.setWinLoseState(Player.WinLoseState.LOST);
+            endGameWithPlayerLosing();
         }
     }
 
@@ -232,7 +248,7 @@ public class Wumpus {
         }
     }
 
-    public static Player.WinLoseState evaluateArrowShoot(int pathLength, int[] rooms) {
+    public static void evaluateArrowShoot(int pathLength, int[] rooms) {
         int arrowPosition = map.playerPosition();
         for (int k = 1; k <= pathLength; k++) {
             int k1;
@@ -248,15 +264,13 @@ public class Wumpus {
              
             if (arrowPosition == map.wumpusPosition()) {
                 System.out.println("AHA! YOU GOT THE WUMPUS!");
-                return Player.WinLoseState.WON;
+                endGameWithPlayerWinning();
             }   
             if (arrowPosition == map.playerPosition()) {
                 System.out.println("OUCH! ARROW GOT YOU!");
-                return Player.WinLoseState.LOST;
+                endGameWithPlayerLosing();
             }
         }
-        
-        return Player.WinLoseState.PLAYING;
     }
 
     public static boolean consumeArrowAndTestIfOut() {
@@ -268,19 +282,17 @@ public class Wumpus {
         int[] p = new int[MAX_ROOMS_FOR_ARROW_SHOT+1];
         int roomCount;
 
-        player.setWinLoseState(Player.WinLoseState.PLAYING);
-        
         // path of arrow
         roomCount = promptForArrowPathRoomCount(MAX_ROOMS_FOR_ARROW_SHOT);
         promptForArrowPathRooms(roomCount, p);
 
-        player.setWinLoseState(evaluateArrowShoot(roomCount, p));
+        evaluateArrowShoot(roomCount, p);
 
-        if (player.winLoseState() == Player.WinLoseState.PLAYING) {
+        if (!isGameOver()) {
             System.out.println("MISSED");
             moveWumpus();
             if (consumeArrowAndTestIfOut()) {
-                player.setWinLoseState(Player.WinLoseState.LOST);
+                endGameWithPlayerLosing();
             }
         }
     }
@@ -317,14 +329,14 @@ public class Wumpus {
             if (roomToMoveTo == map.wumpusPosition()) {
                 System.out.println("... OOPS! BUMPED A WUMPUS!");
                 moveWumpus();
-                if (player.winLoseState() != Player.WinLoseState.PLAYING) {
+                if (isGameOver()) {
                     return;
                 }
             }
         
             if (map.hasPitAt(roomToMoveTo)) {
                 System.out.println("YYYYIIIIEEEE . . . FELL IN PIT");
-                player.setWinLoseState(Player.WinLoseState.LOST);
+                endGameWithPlayerLosing();
                 return;
             }
         
@@ -339,8 +351,6 @@ public class Wumpus {
     }
 
     public static void promptAndMovePlayer() throws IOException {
-        player.setWinLoseState(Player.WinLoseState.PLAYING);
-
         int roomToMoveTo = promptForRoomToMoveTo();
         movePlayerAndTestHazards(roomToMoveTo);
     }
@@ -374,7 +384,7 @@ public class Wumpus {
     }
     
     public static void printWinLoseState(Player.WinLoseState state) {
-        if (state == Player.WinLoseState.WON) {
+        if (didPlayerWin()) {
             System.out.println("HEE HEE HEE - THE WUMPUS'LL GET YOU NEXT TIME!!");
         } else {
             System.out.println ("HA HA HA - YOU LOSE!");
@@ -412,7 +422,7 @@ public class Wumpus {
             do {
                 printRoomDescription();
                 promptAndExecutePlayerAction();
-            } while (player.winLoseState() == Player.WinLoseState.PLAYING);
+            } while (!isGameOver());
             
             printWinLoseState(player.winLoseState());
             loadGameMapFromStartingMap();
