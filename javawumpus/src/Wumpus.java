@@ -200,13 +200,9 @@ public class Wumpus {
         }
     }
 
-    public static void promptAndShootArrow() throws IOException {
-        int[] p = new int[6];
+    public static int promptForArrowPathRoomCount() throws IOException {
         int roomCount;
 
-        winLoseState = WinLoseState.PLAYING;
-        
-        // path of arrow
         System.out.print("NO. OF ROOMS (1-5) ");
         while (true) {
             roomCount = readInt();
@@ -214,6 +210,18 @@ public class Wumpus {
                 break;
             }
         }
+
+        return roomCount;
+    }
+
+    public static void promptAndShootArrow() throws IOException {
+        int[] p = new int[6];
+        int roomCount;
+
+        winLoseState = WinLoseState.PLAYING;
+        
+        // path of arrow
+        roomCount = promptForArrowPathRoomCount();
         
         for (int k = 1; k <= roomCount; k++) {
             System.out.print("ROOM # ");    
