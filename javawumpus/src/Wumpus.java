@@ -20,8 +20,8 @@ public class Wumpus {
                         {0,10,12,19},	{0,3,11,13},	{0,12,14,20},	{0,4,13,15},	{0,6,14,16},
                         {0,15,17,20},	{0,7,16,18},	{0,9,17,19},	{0,11,18,20},	{0,13,16,19}};
 
-    public static int[] objectPositions = new int[MAP_OBJECT_COUNT + 1];
-    public static int[] originalObjectPositions = new int[MAP_OBJECT_COUNT + 1];
+    public static WumpusMap map = new WumpusMap();
+    public static WumpusMap startingMap = new WumpusMap();
     public static int arrowInventory = INITIAL_ARROWS;
 
     public enum WinLoseState {
@@ -36,27 +36,27 @@ public class Wumpus {
     public static boolean throwOnIOErrorForTests = false;
 
     public static void setPlayerPosition(int n) {
-        objectPositions[1] = n;
+        map.setPlayerPosition(n);
     }
     
     public static int playerPosition() {
-        return objectPositions[1];
+        return map.playerPosition();
     }
 
     public static void setWumpusPosition(int n) {
-        objectPositions[2] = n;
+        map.setWumpusPosition(n);
     }   
 
     public static int wumpusPosition() {
-        return objectPositions[2];
+        return map.wumpusPosition();
     }
 
     public static boolean isPitAt(int n) {
-        return objectPositions[3] == n || objectPositions[4] == n;
+        return map.hasPitAt(n);
     }
 
     public static boolean isBatAt(int n) {
-        return objectPositions[5] == n || objectPositions[6] == n;
+        return map.hasBatAt(n);
     }
 
 	/**
@@ -168,7 +168,8 @@ public class Wumpus {
             }
         }
         for (int k = 1; k <= NUMBER_OF_CONNECTIONS_PER_ROOM; k++) {
-            if (isPitAt(caveStructure[playerPosition()][k])) {
+            int room = caveStructure[playerPosition()][k];
+            if (isPitAt(room)) {
                 System.out.println("I FEEL A DRAFT");
             }
         }
@@ -333,27 +334,17 @@ public class Wumpus {
         while (true) {
             if (randomize) {
                 while (true) {
-                    for (int j = 1; j <= MAP_OBJECT_COUNT; j++) {
-                        objectPositions[j] = randomRoom();
-                        originalObjectPositions[j] = objectPositions[j];
-                    }
-
-                    int k = 0;
-                    for (int j = 1; j <= MAP_OBJECT_COUNT; j++) {
-                        for (k = 1; k <= MAP_OBJECT_COUNT; k++) {
-                            if (j == k) {
-                                continue;
-                            }   
-                            if (objectPositions[j] == objectPositions[k]) {
-                                break;
-                            }
-                        }
-                        if (k <= MAP_OBJECT_COUNT) {
-                            break;
-                        }
-                    }
-            
-                    if (k > MAP_OBJECT_COUNT) {
+                    map = new WumpusMap();
+                    map.setPlayerPosition(randomRoom());
+                    map.setWumpusPosition(randomRoom());
+                    map.addPit(randomRoom());
+                    map.addPit(randomRoom());
+                    map.addBat(randomRoom());
+                    map.addBat(randomRoom());
+                    
+                    startingMap = (WumpusMap)map.clone();
+                    
+                    if (!map.hasOverlap()) {
                         break;
                     }
                 }
@@ -387,9 +378,7 @@ public class Wumpus {
                 System.out.println ("HA HA HA - YOU LOSE!");
             }
         
-            for (int j = 1; j < MAP_OBJECT_COUNT; j++) {
-                objectPositions[j] = originalObjectPositions[j];
-            }
+            map = (WumpusMap)startingMap.clone();
             
             System.out.print("SAME SETUP (Y-N)"); 
             char i$ = (char) System.in.read(); System.in.read();

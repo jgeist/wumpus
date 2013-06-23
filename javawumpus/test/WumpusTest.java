@@ -20,6 +20,7 @@ public class WumpusTest {
 	public void setUp() {
 		Wumpus.random = new Random(0); //seed random for expected results
         Wumpus.throwOnIOErrorForTests = true;
+        Wumpus.map = new WumpusMap();
         System.setOut(new PrintStream(textOutput));
 	}
 
@@ -75,10 +76,10 @@ public class WumpusTest {
         // player is in room 1, everything else is off the map
         Wumpus.setPlayerPosition(1);
         Wumpus.setWumpusPosition(999);
-        Wumpus.objectPositions[3] = 999;
-        Wumpus.objectPositions[4] = 999; 
-        Wumpus.objectPositions[5] = 999;
-        Wumpus.objectPositions[6] = 999;
+        Wumpus.map.addPit(998);
+        Wumpus.map.addPit(999);
+        Wumpus.map.addBat(998);
+        Wumpus.map.addBat(999);
         
         String expectedOutput =     
             "\n" +
@@ -96,10 +97,10 @@ public class WumpusTest {
     public void testRoomDescriptionWumpus() throws IOException {
         Wumpus.setPlayerPosition(1);
         Wumpus.setWumpusPosition(2);
-        Wumpus.objectPositions[3] = 999;
-        Wumpus.objectPositions[4] = 999; 
-        Wumpus.objectPositions[5] = 999;
-        Wumpus.objectPositions[6] = 999;
+        Wumpus.map.addPit(998);
+        Wumpus.map.addPit(999);
+        Wumpus.map.addBat(998);
+        Wumpus.map.addBat(999);
         
         String expectedOutput =     
             "\n" +
@@ -118,10 +119,10 @@ public class WumpusTest {
     public void testRoomDescriptionPits() throws IOException {
         Wumpus.setPlayerPosition(1);
         Wumpus.setWumpusPosition(999);
-        Wumpus.objectPositions[3] = 2;
-        Wumpus.objectPositions[4] = 999; 
-        Wumpus.objectPositions[5] = 999;
-        Wumpus.objectPositions[6] = 999;
+        Wumpus.map.addPit(2);
+        Wumpus.map.addPit(999);
+        Wumpus.map.addBat(998);
+        Wumpus.map.addBat(999);
         
         String expectedOutput =     
             "\n" +
@@ -140,10 +141,11 @@ public class WumpusTest {
     public void testRoomDescriptionBats() throws IOException {
         Wumpus.setPlayerPosition(1);
         Wumpus.setWumpusPosition(999);
-        Wumpus.objectPositions[3] = 999;
-        Wumpus.objectPositions[4] = 999; 
-        Wumpus.objectPositions[5] = 2;
-        Wumpus.objectPositions[6] = 999;
+
+        Wumpus.map.addPit(998);
+        Wumpus.map.addPit(999);
+        Wumpus.map.addBat(2);
+        Wumpus.map.addBat(999);
         
         String expectedOutput =     
             "\n" +
@@ -162,10 +164,10 @@ public class WumpusTest {
     public void testRoomDescriptionEverything() throws IOException {
         Wumpus.setPlayerPosition(1);
         Wumpus.setWumpusPosition(2);
-        Wumpus.objectPositions[3] = 5;
-        Wumpus.objectPositions[4] = 999; 
-        Wumpus.objectPositions[5] = 8;
-        Wumpus.objectPositions[6] = 999;
+        Wumpus.map.addPit(5);
+        Wumpus.map.addPit(999);
+        Wumpus.map.addBat(8);
+        Wumpus.map.addBat(999);
 
         String expectedOutput =     
             "\n" +
@@ -212,10 +214,10 @@ public class WumpusTest {
     public void testShootArrowMissing() throws IOException {   
         Wumpus.setPlayerPosition(1);
         Wumpus.setWumpusPosition(19);
-        Wumpus.objectPositions[3] = 19;
-        Wumpus.objectPositions[4] = 19; 
-        Wumpus.objectPositions[5] = 19;
-        Wumpus.objectPositions[6] = 19;
+        Wumpus.map.addPit(18);
+        Wumpus.map.addPit(19);
+        Wumpus.map.addBat(18);
+        Wumpus.map.addBat(19);
         Wumpus.arrowInventory = 5;
 
         String input = "1" + CR + "2" + CR;     // shoot arrow into room 2
@@ -241,10 +243,10 @@ public class WumpusTest {
     public void testShootArrowHitting() throws IOException {   
         Wumpus.setPlayerPosition(1);
         Wumpus.setWumpusPosition(2);
-        Wumpus.objectPositions[3] = 19;
-        Wumpus.objectPositions[4] = 19; 
-        Wumpus.objectPositions[5] = 19;
-        Wumpus.objectPositions[6] = 19;
+        Wumpus.map.addPit(18);
+        Wumpus.map.addPit(19);
+        Wumpus.map.addBat(18);
+        Wumpus.map.addBat(19);
         Wumpus.arrowInventory = 5;
 
         String input = "1" + CR + "2" + CR;     // shoot arrow into room 2
@@ -269,10 +271,10 @@ public class WumpusTest {
     public void testShootArrowAtSelf() throws IOException {   
         Wumpus.setPlayerPosition(1);
         Wumpus.setWumpusPosition(19);
-        Wumpus.objectPositions[3] = 19;
-        Wumpus.objectPositions[4] = 19; 
-        Wumpus.objectPositions[5] = 19;
-        Wumpus.objectPositions[6] = 19;
+        Wumpus.map.addPit(18);
+        Wumpus.map.addPit(19);
+        Wumpus.map.addBat(18);
+        Wumpus.map.addBat(19);
         Wumpus.arrowInventory = 5;
 
         String input = "2" + CR + "2" + CR + "1" + CR;     // shoot arrow into next room and back
@@ -299,10 +301,10 @@ public class WumpusTest {
     public void testShootArrowBackwards() throws IOException  {   
         Wumpus.setPlayerPosition(1);
         Wumpus.setWumpusPosition(19);
-        Wumpus.objectPositions[3] = 19;
-        Wumpus.objectPositions[4] = 19; 
-        Wumpus.objectPositions[5] = 19;
-        Wumpus.objectPositions[6] = 19;
+        Wumpus.map.addPit(18);
+        Wumpus.map.addPit(19);
+        Wumpus.map.addBat(18);
+        Wumpus.map.addBat(19);
         Wumpus.arrowInventory = 5;
 
         String input = "3" + CR + "2" + CR + "3" + CR + "2" + CR;     // shoot arrow into next room and back
@@ -334,10 +336,10 @@ public class WumpusTest {
     public void testShootArrowWall() throws IOException {   
         Wumpus.setPlayerPosition(1);
         Wumpus.setWumpusPosition(19);
-        Wumpus.objectPositions[3] = 19;
-        Wumpus.objectPositions[4] = 19; 
-        Wumpus.objectPositions[5] = 19;
-        Wumpus.objectPositions[6] = 19;
+        Wumpus.map.addPit(18);
+        Wumpus.map.addPit(19);
+        Wumpus.map.addBat(18);
+        Wumpus.map.addBat(19);
         Wumpus.arrowInventory = 5;
 
         String input = "1" + CR + "12" + CR;
@@ -362,6 +364,7 @@ public class WumpusTest {
     @Test
     public void testMoveWumpus() {
         Wumpus.setWumpusPosition(1);
+        Wumpus.setPlayerPosition(1);
         Wumpus.moveWumpus();
         assertEquals(8, Wumpus.wumpusPosition());
 
@@ -382,10 +385,10 @@ public class WumpusTest {
     public void testMovePlayerNotPossible() throws IOException {
         Wumpus.setPlayerPosition(1);
         Wumpus.setWumpusPosition(19);
-        Wumpus.objectPositions[3] = 19;
-        Wumpus.objectPositions[4] = 19; 
-        Wumpus.objectPositions[5] = 19;
-        Wumpus.objectPositions[6] = 19;
+        Wumpus.map.addPit(18);
+        Wumpus.map.addPit(19);
+        Wumpus.map.addBat(18);
+        Wumpus.map.addBat(19);
         Wumpus.arrowInventory = 5;  
         Wumpus.winLoseState = Wumpus.WinLoseState.PLAYING;
         
@@ -412,10 +415,10 @@ public class WumpusTest {
     public void testMovePlayerNothingHappens() throws IOException{
         Wumpus.setPlayerPosition(1);
         Wumpus.setWumpusPosition(19);
-        Wumpus.objectPositions[3] = 19;
-        Wumpus.objectPositions[4] = 19; 
-        Wumpus.objectPositions[5] = 19;
-        Wumpus.objectPositions[6] = 19;
+        Wumpus.map.addPit(18);
+        Wumpus.map.addPit(19);
+        Wumpus.map.addBat(18);
+        Wumpus.map.addBat(19);
         Wumpus.arrowInventory = 5;  
         Wumpus.winLoseState = Wumpus.WinLoseState.PLAYING;
         
@@ -438,10 +441,10 @@ public class WumpusTest {
     public void testMovePlayerRunIntoWumpus() throws IOException {
         Wumpus.setPlayerPosition(1);
         Wumpus.setWumpusPosition(2);
-        Wumpus.objectPositions[3] = 19;
-        Wumpus.objectPositions[4] = 19; 
-        Wumpus.objectPositions[5] = 19;
-        Wumpus.objectPositions[6] = 19;
+        Wumpus.map.addPit(18);
+        Wumpus.map.addPit(19);
+        Wumpus.map.addBat(18);
+        Wumpus.map.addBat(19);
         Wumpus.arrowInventory = 5;  
         Wumpus.winLoseState = Wumpus.WinLoseState.PLAYING;
         
@@ -465,10 +468,10 @@ public class WumpusTest {
     public void testMovePlayerRunIntoPit() throws IOException {
         Wumpus.setPlayerPosition(1);
         Wumpus.setWumpusPosition(19);
-        Wumpus.objectPositions[3] = 2;
-        Wumpus.objectPositions[4] = 19; 
-        Wumpus.objectPositions[5] = 19;
-        Wumpus.objectPositions[6] = 19;
+        Wumpus.map.addPit(2);
+        Wumpus.map.addPit(19);
+        Wumpus.map.addBat(18);
+        Wumpus.map.addBat(19);
         Wumpus.arrowInventory = 5;  
         Wumpus.winLoseState = Wumpus.WinLoseState.PLAYING;
         
@@ -492,10 +495,10 @@ public class WumpusTest {
     public void testMovePlayerRunIntoBat() throws IOException {
         Wumpus.setPlayerPosition(1);
         Wumpus.setWumpusPosition(19);
-        Wumpus.objectPositions[3] = 19;
-        Wumpus.objectPositions[4] = 19; 
-        Wumpus.objectPositions[5] = 2;
-        Wumpus.objectPositions[6] = 19;
+        Wumpus.map.addPit(18);
+        Wumpus.map.addPit(19);
+        Wumpus.map.addBat(2);
+        Wumpus.map.addBat(19);
         Wumpus.arrowInventory = 5;  
         Wumpus.winLoseState = Wumpus.WinLoseState.PLAYING;;
         
