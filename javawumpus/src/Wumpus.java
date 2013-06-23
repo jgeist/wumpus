@@ -339,6 +339,22 @@ public class Wumpus {
         movePlayerAndTestHazards(roomToMoveTo);
     }
 
+    public static void placeObjectsRandomlyOnMap() {
+        while (true) {
+            map = new WumpusMap();
+            map.setPlayerPosition(randomRoom());
+            map.setWumpusPosition(randomRoom());
+            map.addPit(randomRoom());
+            map.addPit(randomRoom());
+            map.addBat(randomRoom());
+            map.addBat(randomRoom());                    
+            
+            if (!map.hasOverlap()) {
+                break;
+            }
+        }
+    }
+
     public static void runMainLoop() throws IOException {
         boolean randomize = true;
 
@@ -347,21 +363,8 @@ public class Wumpus {
 
         while (true) {
             if (randomize) {
-                while (true) {
-                    map = new WumpusMap();
-                    map.setPlayerPosition(randomRoom());
-                    map.setWumpusPosition(randomRoom());
-                    map.addPit(randomRoom());
-                    map.addPit(randomRoom());
-                    map.addBat(randomRoom());
-                    map.addBat(randomRoom());
-                    
-                    startingMap = (WumpusMap)map.clone();
-                    
-                    if (!map.hasOverlap()) {
-                        break;
-                    }
-                }
+                placeObjectsRandomlyOnMap();
+                startingMap = (WumpusMap)map.clone();
             }
 
             arrowInventory = INITIAL_ARROWS; 
