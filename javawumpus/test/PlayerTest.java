@@ -28,5 +28,14 @@ public class PlayerTest {
         player.setLost();
         assertEquals(5, player.arrowInventory());
         assertEquals(false, player.won());
+        
+        player.setArrowInventory(2);
+        player.setWon();
+        
+        assertEquals(false, player.consumeArrowAndTestIfOut());
+        assertEquals(true, player.won());
+
+        assertEquals(true, player.consumeArrowAndTestIfOut());
+        assertEquals(false, player.won());
     }
 }

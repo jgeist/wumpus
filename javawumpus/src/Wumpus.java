@@ -276,11 +276,6 @@ public class Wumpus {
         }
     }
 
-    public static boolean consumeArrowAndTestIfOut() {
-        player.setArrowInventory(player.arrowInventory() - 1);
-        return player.arrowInventory() <= 0;
-    }
-
     public static void promptAndShootArrow() throws IOException {
         int[] p = new int[MAX_ROOMS_FOR_ARROW_SHOT+1];
         int roomCount;
@@ -294,7 +289,7 @@ public class Wumpus {
         if (!isGameOver()) {
             System.out.println("MISSED");
             moveWumpus();
-            if (consumeArrowAndTestIfOut()) {
+            if (player.consumeArrowAndTestIfOut()) {
                 endGameWithPlayerLosing();
             }
         }

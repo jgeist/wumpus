@@ -32,4 +32,14 @@ public class Player {
     public boolean won() {
         return won;
     }
+
+    public boolean consumeArrowAndTestIfOut() {
+        --arrowInventory;
+        if (arrowInventory <= 0) {
+            setLost();
+            return true;
+        }
+
+        return false;
+    }
 }
