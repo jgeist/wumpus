@@ -79,6 +79,13 @@ public class Wumpus {
         System.in.read();
     }
 
+    private static char promptAndReadSingleCharacterOption(String prompt) throws IOException {
+        System.out.print(prompt);
+        char option = (char)System.in.read();
+        System.in.read();
+        return option;
+    }
+
     private static void printInstructions() throws IOException {
         System.out.println("WELCOME TO 'HUNT THE WUMPUS'");
         System.out.println(String.format("  THE WUMPUS LIVES IN A CAVE OF %d ROOMS. EACH ROOM", NUMBER_OF_ROOMS));	
@@ -129,11 +136,8 @@ public class Wumpus {
     }
 
     private static void promptAndShowInstructions() throws IOException {
-        char i$ = '\0';
+        char i$ = promptAndReadSingleCharacterOption("INSTRUCTIONS (Y-N) ");
 
-        System.out.print("INSTRUCTIONS (Y-N) ");
-        i$ = (char) System.in.read(); 
-        System.in.read(); 
         if (i$ == 'N' || i$ =='n') {    
             return;
         }
@@ -183,9 +187,7 @@ public class Wumpus {
 
     public static PlayerAction promptForShootOrMove() throws IOException {
         while (true) {
-            System.out.print("SHOOT OR MOVE (S-M) ");
-            char i$ = (char) System.in.read();
-            System.in.read();
+            char i$ = promptAndReadSingleCharacterOption("SHOOT OR MOVE (S-M) ");
             if (i$ == 'S' || i$ == 's') {
                 return PlayerAction.SHOOT;
             } else if (i$ == 'M' || i$ == 'm') {
@@ -381,8 +383,7 @@ public class Wumpus {
     }
 
     public static boolean promptToReplaySameMap() throws IOException {
-        System.out.print("SAME SETUP (Y-N)"); 
-        char i$ = (char) System.in.read(); System.in.read();
+        char i$ = promptAndReadSingleCharacterOption("SAME SETUP (Y-N)");
         
         if (i$ == 'y' || i$ == 'Y') {
             return true;
