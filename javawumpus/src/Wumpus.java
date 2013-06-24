@@ -6,7 +6,6 @@ import java.util.Deque;
 import java.util.Random;
 
 public class Wumpus {
-    private static final int NUMBER_OF_ROOMS = 20;
     private static final int MAX_ROOMS_FOR_ARROW_SHOT = 5;
 
 	public static Random random = new Random();
@@ -37,7 +36,7 @@ public class Wumpus {
 	}
 
 	public static int randomRoom() {
-		return random.nextInt(NUMBER_OF_ROOMS) + 1;
+		return random.nextInt(cave.numberOfRooms()) + 1;
 	}
 
 	public static int randomConnection(int room) {
@@ -99,7 +98,7 @@ public class Wumpus {
 
     private static void printInstructions() throws IOException {
         System.out.println("WELCOME TO 'HUNT THE WUMPUS'");
-        System.out.println(String.format("  THE WUMPUS LIVES IN A CAVE OF %d ROOMS. EACH ROOM", NUMBER_OF_ROOMS));	
+        System.out.println(String.format("  THE WUMPUS LIVES IN A CAVE OF %d ROOMS. EACH ROOM", cave.numberOfRooms()));	
         System.out.println("HAS 3 TUNNELS LEADING TO OTHER ROOMS. (LOOK AT A");
         System.out.println("DODECAHEDRON TO SEE HOW THIS WORKS-IF YOU DON'T KNOW");
         System.out.println("WHAT A DODECAHEDRON IS, ASK SOMEONE)");
@@ -294,7 +293,7 @@ public class Wumpus {
         while (true) {
             System.out.print("WHERE TO "); 
             roomToMoveTo = readInt(); 
-            if (roomToMoveTo < 1 || roomToMoveTo > NUMBER_OF_ROOMS) {
+            if (roomToMoveTo < 1 || roomToMoveTo > cave.numberOfRooms()) {
                 continue;
             }
 
