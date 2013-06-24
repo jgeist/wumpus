@@ -32,4 +32,12 @@ public class UserInterface {
     public void println(String line) {
         System.out.println(line);
     }
+
+    public void print(int i) {
+        print(String.format("%d", i));
+    }
+
+    public void println(int i) {
+        println(String.format("%d", i));
+    }
 }

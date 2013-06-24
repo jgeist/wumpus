@@ -20,7 +20,7 @@ public class WumpusTest {
 	public void setUp() {
 		Wumpus.random = new Random(0); //seed random for expected results
         Wumpus.cave = new Cave(Wumpus.random);
-        Wumpus.throwOnIOErrorForTests = true;
+        Wumpus.ui = new UserInterfaceWithThrow();
         Wumpus.map = new WumpusMap();
         System.setOut(new PrintStream(textOutput));
 	}

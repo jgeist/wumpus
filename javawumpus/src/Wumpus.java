@@ -11,15 +11,13 @@ public class Wumpus {
     public static WumpusMap map = new WumpusMap();
     public static WumpusMap startingMap = new WumpusMap();
     public static Player player = new Player();
+    public static UserInterface ui = new UserInterface();
     public static boolean gameOver = false;
 
     public enum PlayerAction {
         SHOOT,
         MOVE
     };
-
-
-    public static boolean throwOnIOErrorForTests = false;
 
 	/**
 	 * @param args
@@ -57,82 +55,57 @@ public class Wumpus {
         player.setWon();
     }
 
-	public static int readInt() throws IOException {
-		String line = "";
-		BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
-		try {
-			line = is.readLine();
-		} catch (IOException e) {
-            if (throwOnIOErrorForTests) {
-                throw e;
-            }
-			return 0;
-		}
-		return Integer.parseInt(line);
-	}
-
-    private static void waitForUserToHitReturn() throws IOException {
-        System.in.read();
-    }
-
-    private static char promptAndReadSingleCharacterOption(String prompt) throws IOException {
-        System.out.print(prompt);
-        char option = (char)System.in.read();
-        System.in.read();
-        return option;
-    }
-
     private static void printInstructions() throws IOException {
-        System.out.println("WELCOME TO 'HUNT THE WUMPUS'");
-        System.out.println(String.format("  THE WUMPUS LIVES IN A CAVE OF %d ROOMS. EACH ROOM", cave.numberOfRooms()));	
-        System.out.println("HAS 3 TUNNELS LEADING TO OTHER ROOMS. (LOOK AT A");
-        System.out.println("DODECAHEDRON TO SEE HOW THIS WORKS-IF YOU DON'T KNOW");
-        System.out.println("WHAT A DODECAHEDRON IS, ASK SOMEONE)");
-        System.out.println("");
-        System.out.println("     HAZARDS:");
-        System.out.println(" BOTTOMLESS PITS - TWO ROOMS HAVE BOTTOMLESS PITS IN THEM");
-        System.out.println("     IF YOU GO THERE, YOU FALL INTO THE PIT (& LOSE!)");
-        System.out.println(" SUPER BATS - TWO OTHER ROOMS HAVE SUPER BATS. IF YOU");
-        System.out.println("     GO THERE, A BAT GRABS YOU AND TAKES YOU TO SOME OTHER");
-        System.out.println("     ROOM AT RANDOM. (WHICH MAY BE TROUBLESOME)");
-        System.out.println("HIT RETURN TO CONTINUE"); 
+        ui.println("WELCOME TO 'HUNT THE WUMPUS'");
+        ui.println(String.format("  THE WUMPUS LIVES IN A CAVE OF %d ROOMS. EACH ROOM", cave.numberOfRooms()));	
+        ui.println("HAS 3 TUNNELS LEADING TO OTHER ROOMS. (LOOK AT A");
+        ui.println("DODECAHEDRON TO SEE HOW THIS WORKS-IF YOU DON'T KNOW");
+        ui.println("WHAT A DODECAHEDRON IS, ASK SOMEONE)");
+        ui.println("");
+        ui.println("     HAZARDS:");
+        ui.println(" BOTTOMLESS PITS - TWO ROOMS HAVE BOTTOMLESS PITS IN THEM");
+        ui.println("     IF YOU GO THERE, YOU FALL INTO THE PIT (& LOSE!)");
+        ui.println(" SUPER BATS - TWO OTHER ROOMS HAVE SUPER BATS. IF YOU");
+        ui.println("     GO THERE, A BAT GRABS YOU AND TAKES YOU TO SOME OTHER");
+        ui.println("     ROOM AT RANDOM. (WHICH MAY BE TROUBLESOME)");
+        ui.println("HIT RETURN TO CONTINUE"); 
         
-        waitForUserToHitReturn();
+        ui.waitForUserToHitReturn();
 
-        System.out.println("     WUMPUS:");
-        System.out.println(" THE WUMPUS IS NOT BOTHERED BY HAZARDS (HE HAS SUCKER");
-        System.out.println(" FEET AND IS TOO BIG FOR A BAT TO LIFT).  USUALLY");
-        System.out.println(" HE IS ASLEEP.  TWO THINGS WAKE HIM UP: YOU SHOOTING AN");
-        System.out.println("ARROW OR YOU ENTERING HIS ROOM.");
-        System.out.println("     IF THE WUMPUS WAKES HE MOVES (P=.75) ONE ROOM");
-        System.out.println(" OR STAYS STILL (P=.25).  AFTER THAT, IF HE IS WHERE YOU");
-        System.out.println(" ARE, HE EATS YOU UP AND YOU LOSE!");
-        System.out.println("");
-        System.out.println("     YOU:");
-        System.out.println(" EACH TURN YOU MAY MOVE OR SHOOT A CROOKED ARROW");
-        System.out.println("   MOVING:  YOU CAN MOVE ONE ROOM (THRU ONE TUNNEL)");
-        System.out.println("   ARROWS:  YOU HAVE 5 ARROWS.  YOU LOSE WHEN YOU RUN OUT");
-        System.out.println("   EACH ARROW CAN GO FROM 1 TO 5 ROOMS. YOU AIM BY TELLING");
-        System.out.println("   THE COMPUTER THE ROOM#S YOU WANT THE ARROW TO GO TO.");
-        System.out.println("   IF THE ARROW CAN'T GO THAT WAY (IF NO TUNNEL) IT MOVES");
-        System.out.println("   AT RANDOM TO THE NEXT ROOM.");
-        System.out.println("     IF THE ARROW HITS THE WUMPUS, YOU WIN.");
-        System.out.println("     IF THE ARROW HITS YOU, YOU LOSE.");
-        System.out.println("HIT RETURN TO CONTINUE"); 
+        ui.println("     WUMPUS:");
+        ui.println(" THE WUMPUS IS NOT BOTHERED BY HAZARDS (HE HAS SUCKER");
+        ui.println(" FEET AND IS TOO BIG FOR A BAT TO LIFT).  USUALLY");
+        ui.println(" HE IS ASLEEP.  TWO THINGS WAKE HIM UP: YOU SHOOTING AN");
+        ui.println("ARROW OR YOU ENTERING HIS ROOM.");
+        ui.println("     IF THE WUMPUS WAKES HE MOVES (P=.75) ONE ROOM");
+        ui.println(" OR STAYS STILL (P=.25).  AFTER THAT, IF HE IS WHERE YOU");
+        ui.println(" ARE, HE EATS YOU UP AND YOU LOSE!");
+        ui.println("");
+        ui.println("     YOU:");
+        ui.println(" EACH TURN YOU MAY MOVE OR SHOOT A CROOKED ARROW");
+        ui.println("   MOVING:  YOU CAN MOVE ONE ROOM (THRU ONE TUNNEL)");
+        ui.println("   ARROWS:  YOU HAVE 5 ARROWS.  YOU LOSE WHEN YOU RUN OUT");
+        ui.println("   EACH ARROW CAN GO FROM 1 TO 5 ROOMS. YOU AIM BY TELLING");
+        ui.println("   THE COMPUTER THE ROOM#S YOU WANT THE ARROW TO GO TO.");
+        ui.println("   IF THE ARROW CAN'T GO THAT WAY (IF NO TUNNEL) IT MOVES");
+        ui.println("   AT RANDOM TO THE NEXT ROOM.");
+        ui.println("     IF THE ARROW HITS THE WUMPUS, YOU WIN.");
+        ui.println("     IF THE ARROW HITS YOU, YOU LOSE.");
+        ui.println("HIT RETURN TO CONTINUE"); 
 
-        waitForUserToHitReturn();
+        ui.waitForUserToHitReturn();
 
-        System.out.println("    WARNINGS:");
-        System.out.println("     WHEN YOU ARE ONE ROOM AWAY FROM A WUMPUS OR HAZARD,");
-        System.out.println("     THE COMPUTER SAYS:");
-        System.out.println(" WUMPUS:  'I SMELL A WUMPUS'");
-        System.out.println(" BAT   :  'BATS NEARBY'");
-        System.out.println(" PIT   :  'I FEEL A DRAFT'");
-        System.out.println("");
+        ui.println("    WARNINGS:");
+        ui.println("     WHEN YOU ARE ONE ROOM AWAY FROM A WUMPUS OR HAZARD,");
+        ui.println("     THE COMPUTER SAYS:");
+        ui.println(" WUMPUS:  'I SMELL A WUMPUS'");
+        ui.println(" BAT   :  'BATS NEARBY'");
+        ui.println(" PIT   :  'I FEEL A DRAFT'");
+        ui.println("");
     }
 
     private static void promptAndShowInstructions() throws IOException {
-        char i$ = promptAndReadSingleCharacterOption("INSTRUCTIONS (Y-N) ");
+        char i$ = ui.promptAndReadSingleCharacterOption("INSTRUCTIONS (Y-N) ");
 
         if (i$ != 'N' && i$ != 'n') {    
             printInstructions();
@@ -143,47 +116,47 @@ public class Wumpus {
         int connections = cave.connectionsFromRoom(map.playerPosition());
         for (int k = 1; k <= connections; k++) {
             if (cave.connection(map.playerPosition(), k) == map.wumpusPosition()) {
-                System.out.println("I SMELL A WUMPUS!");
+                ui.println("I SMELL A WUMPUS!");
             }
         }
         for (int k = 1; k <= connections; k++) {
             int room = cave.connection(map.playerPosition(), k);
             if (map.hasPitAt(room)) {
-                System.out.println("I FEEL A DRAFT");
+                ui.println("I FEEL A DRAFT");
             }
         }
         for (int k = 1; k <= connections; k++) {
             if (map.hasBatAt(cave.connection(map.playerPosition(),k))) {
-                System.out.println("BATS NEARBY!");
+                ui.println("BATS NEARBY!");
             }
         }
     }
 
     public static void printRoomGeometry() {
-        System.out.print("YOUR ARE IN ROOM ");
-        System.out.println(map.playerPosition());
-        System.out.print("TUNNELS LEAD TO");
+        ui.print("YOUR ARE IN ROOM ");
+        ui.println(map.playerPosition());
+        ui.print("TUNNELS LEAD TO");
         
         int connections = cave.connectionsFromRoom(map.playerPosition());
         for (int k = 1; k <= connections; k++) {
-            System.out.print(" ");
-            System.out.print(cave.connection(map.playerPosition(),k));
+            ui.print(" ");
+            ui.print(cave.connection(map.playerPosition(),k));
         }
     }
 
     public static void printRoomDescription() throws IOException {
-        System.out.println("");
+        ui.println("");
 
         printHazardDescriptions(); 
         printRoomGeometry();
         
-        System.out.println("");
-        System.out.println("");
+        ui.println("");
+        ui.println("");
     } 
 
     public static PlayerAction promptForShootOrMove() throws IOException {
         while (true) {
-            char i$ = promptAndReadSingleCharacterOption("SHOOT OR MOVE (S-M) ");
+            char i$ = ui.promptAndReadSingleCharacterOption("SHOOT OR MOVE (S-M) ");
             if (i$ == 'S' || i$ == 's') {
                 return PlayerAction.SHOOT;
             } else if (i$ == 'M' || i$ == 'm') {
@@ -198,7 +171,7 @@ public class Wumpus {
             map.setWumpusPosition(cave.connection(map.wumpusPosition(),k));
         }
         if (map.wumpusPosition() == map.playerPosition()) {
-            System.out.println("TSK TSK TSK - WUMPUS GOT YOU!");
+            ui.println("TSK TSK TSK - WUMPUS GOT YOU!");
             endGameWithPlayerLosing();
         }
     }
@@ -206,9 +179,9 @@ public class Wumpus {
     public static int promptForArrowPathRoomCount(int maxPathLength) throws IOException {
         int roomCount;
 
-        System.out.print(String.format("NO. OF ROOMS (1-%d) ", maxPathLength));
+        ui.print(String.format("NO. OF ROOMS (1-%d) ", maxPathLength));
         while (true) {
-            roomCount = readInt();
+            roomCount = ui.readInt();
             if (roomCount >= 1 && roomCount <= maxPathLength) {
                 break;
             }
@@ -219,10 +192,10 @@ public class Wumpus {
     
     public static void promptForArrowPathRooms(int pathLength, int[] roomsOut) throws IOException {
         for (int k = 1; k <= pathLength; k++) {
-            System.out.print("ROOM # ");    
-            roomsOut[k] = readInt();
+            ui.print("ROOM # ");    
+            roomsOut[k] = ui.readInt();
             if (k > 2 && roomsOut[k] == roomsOut[k-2]) {
-                System.out.println("ARROWS AREN'T THAT CROOKED - TRY ANOTHER ROOM");
+                ui.println("ARROWS AREN'T THAT CROOKED - TRY ANOTHER ROOM");
                 k--;
                 continue;
             }
@@ -244,11 +217,11 @@ public class Wumpus {
             }
              
             if (arrowPosition == map.wumpusPosition()) {
-                System.out.println("AHA! YOU GOT THE WUMPUS!");
+                ui.println("AHA! YOU GOT THE WUMPUS!");
                 endGameWithPlayerWinning();
             }   
             if (arrowPosition == map.playerPosition()) {
-                System.out.println("OUCH! ARROW GOT YOU!");
+                ui.println("OUCH! ARROW GOT YOU!");
                 endGameWithPlayerLosing();
             }
         }
@@ -265,7 +238,7 @@ public class Wumpus {
         evaluateArrowShoot(roomCount, p);
 
         if (!isGameOver()) {
-            System.out.println("MISSED");
+            ui.println("MISSED");
             moveWumpus();
             if (player.consumeArrowAndTestIfOut()) {
                 endGameWithPlayerLosing();
@@ -277,8 +250,8 @@ public class Wumpus {
         int roomToMoveTo = 0;
 
         while (true) {
-            System.out.print("WHERE TO "); 
-            roomToMoveTo = readInt(); 
+            ui.print("WHERE TO "); 
+            roomToMoveTo = ui.readInt(); 
             if (roomToMoveTo < 1 || roomToMoveTo > cave.numberOfRooms()) {
                 continue;
             }
@@ -290,7 +263,7 @@ public class Wumpus {
                 }
             }
             if (k > cave.connectionsFromRoom(map.playerPosition()) && roomToMoveTo != map.playerPosition()) {
-                System.out.print("NOT POSSIBLE - ");
+                ui.print("NOT POSSIBLE - ");
                 continue;
             }
             break;
@@ -303,7 +276,7 @@ public class Wumpus {
         while (true) {
             map.setPlayerPosition(roomToMoveTo);
             if (roomToMoveTo == map.wumpusPosition()) {
-                System.out.println("... OOPS! BUMPED A WUMPUS!");
+                ui.println("... OOPS! BUMPED A WUMPUS!");
                 moveWumpus();
                 if (isGameOver()) {
                     return;
@@ -311,13 +284,13 @@ public class Wumpus {
             }
         
             if (map.hasPitAt(roomToMoveTo)) {
-                System.out.println("YYYYIIIIEEEE . . . FELL IN PIT");
+                ui.println("YYYYIIIIEEEE . . . FELL IN PIT");
                 endGameWithPlayerLosing();
                 return;
             }
         
             if (map.hasBatAt(roomToMoveTo)) {
-                System.out.println("ZAP--SUPER BAT SNATCH! ELSEWHEREVILLE FOR YOU!");
+                ui.println("ZAP--SUPER BAT SNATCH! ELSEWHEREVILLE FOR YOU!");
                 roomToMoveTo = cave.randomRoom();
                 continue;
             }
@@ -361,14 +334,14 @@ public class Wumpus {
     
     public static void printWinLoseState() {
         if (didPlayerWin()) {
-            System.out.println("HEE HEE HEE - THE WUMPUS'LL GET YOU NEXT TIME!!");
+            ui.println("HEE HEE HEE - THE WUMPUS'LL GET YOU NEXT TIME!!");
         } else {
-            System.out.println ("HA HA HA - YOU LOSE!");
+            ui.println ("HA HA HA - YOU LOSE!");
         }
     }
 
     public static boolean promptToReplaySameMap() throws IOException {
-        char i$ = promptAndReadSingleCharacterOption("SAME SETUP (Y-N)");        
+        char i$ = ui.promptAndReadSingleCharacterOption("SAME SETUP (Y-N)");        
         return i$ == 'y' || i$ == 'Y';
     }
     
@@ -398,7 +371,7 @@ public class Wumpus {
         while (true) {
             setUpGame(randomize);
 
-            System.out.println("HUNT THE WUMPUS");
+            ui.println("HUNT THE WUMPUS");
 
             do {
                 printRoomDescription();
