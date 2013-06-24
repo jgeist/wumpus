@@ -69,10 +69,6 @@ public class Wumpus {
         return desc;
     }
 
-    public static void printRoomDescription() throws IOException {
-        ui.printRoomDescription(buildRoomDescription());
-    } 
-
     public static void moveWumpus() {
         int k = randomWumpusMove();
         if (k != 0) {
@@ -282,7 +278,7 @@ public class Wumpus {
             ui.println("HUNT THE WUMPUS");
 
             do {
-                printRoomDescription();
+                ui.printRoomDescription(buildRoomDescription());
                 promptAndExecutePlayerAction();
             } while (!isGameOver());
             

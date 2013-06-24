@@ -128,4 +128,114 @@ public class UserInterfaceTest {
         assertEquals(expectedOutput, textOutput.toString());    
         assertEquals(UserInterface.PlayerAction.MOVE, o);
     }
+
+    @Test
+    public void testRoomDescriptionNormal() throws IOException {
+        // player is in room 1, everything else is off the map
+        Wumpus.map.setPlayerPosition(1);
+        Wumpus.map.setWumpusPosition(999);
+        Wumpus.map.addPit(998);
+        Wumpus.map.addPit(999);
+        Wumpus.map.addBat(998);
+        Wumpus.map.addBat(999);
+        
+        String expectedOutput =     
+            "\n" +
+            "YOUR ARE IN ROOM 1\n" +
+            "TUNNELS LEAD TO 2 5 8\n" +
+            "\n";
+        
+        ui.printRoomDescription(Wumpus.buildRoomDescription());
+        
+        System.out.flush();        
+        assertEquals(expectedOutput, textOutput.toString());
+    }
+
+    @Test
+    public void testRoomDescriptionWumpus() throws IOException {
+        RoomDescription desc = new RoomDescription(1);
+        desc.addConnectedRoom(2);
+        desc.addConnectedRoom(5);
+        desc.addConnectedRoom(8);
+        desc.addNearbyWumpus();
+        
+        String expectedOutput =     
+            "\n" +
+            "I SMELL A WUMPUS!\n" + 
+            "YOUR ARE IN ROOM 1\n" +
+            "TUNNELS LEAD TO 2 5 8\n" +
+            "\n";
+        
+        ui.printRoomDescription(desc);
+        
+        System.out.flush();        
+        assertEquals(expectedOutput, textOutput.toString());
+    }
+
+    @Test
+    public void testRoomDescriptionPits() throws IOException {
+        RoomDescription desc = new RoomDescription(1);
+        desc.addConnectedRoom(2);
+        desc.addConnectedRoom(5);
+        desc.addConnectedRoom(8);
+        desc.addNearbyPit();
+        
+        String expectedOutput =     
+            "\n" +
+            "I FEEL A DRAFT\n" + 
+            "YOUR ARE IN ROOM 1\n" +
+            "TUNNELS LEAD TO 2 5 8\n" +
+            "\n";
+        
+        ui.printRoomDescription(desc);
+        
+        System.out.flush();        
+        assertEquals(expectedOutput, textOutput.toString());
+    }
+
+    @Test
+    public void testRoomDescriptionBats() throws IOException {
+        RoomDescription desc = new RoomDescription(1);
+        desc.addConnectedRoom(2);
+        desc.addConnectedRoom(5);
+        desc.addConnectedRoom(8);
+        desc.addNearbyBat();
+        
+        String expectedOutput =     
+            "\n" +
+            "BATS NEARBY!\n" + 
+            "YOUR ARE IN ROOM 1\n" +
+            "TUNNELS LEAD TO 2 5 8\n" +
+            "\n";
+        
+        ui.printRoomDescription(desc);
+        
+        System.out.flush();        
+        assertEquals(expectedOutput, textOutput.toString());
+    }
+
+    @Test
+    public void testRoomDescriptionEverything() throws IOException {
+        RoomDescription desc = new RoomDescription(1);
+        desc.addConnectedRoom(2);
+        desc.addConnectedRoom(5);
+        desc.addConnectedRoom(8);
+        desc.addNearbyWumpus();
+        desc.addNearbyPit();
+        desc.addNearbyBat();
+
+        String expectedOutput =     
+            "\n" +
+            "I SMELL A WUMPUS!\n" + 
+            "I FEEL A DRAFT\n" +
+            "BATS NEARBY!\n" + 
+            "YOUR ARE IN ROOM 1\n" +
+            "TUNNELS LEAD TO 2 5 8\n" +
+            "\n";
+
+        ui.printRoomDescription(desc);
+        
+        System.out.flush();        
+        assertEquals(expectedOutput, textOutput.toString());
+    }
 }
