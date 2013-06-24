@@ -36,14 +36,10 @@ public class Wumpus {
 	}
 
 	public static int randomWumpusMove() {
-        int connections = connectionsFromRoom(map.wumpusPosition());
+        int connections = cave.connectionsFromRoom(map.wumpusPosition());
         int move = random.nextInt(connections + 1) + 1;
         return (move <= connections) ? move : 0;
 	}
-    
-    public static int connectionsFromRoom(int n) {
-        return cave.connectionsFromRoom(n);
-    }
     
     public static boolean isGameOver() {
         return gameOver;
@@ -146,7 +142,7 @@ public class Wumpus {
     }
     
     public static void printHazardDescriptions() {
-        int connections = connectionsFromRoom(map.playerPosition());
+        int connections = cave.connectionsFromRoom(map.playerPosition());
         for (int k = 1; k <= connections; k++) {
             if (cave.connection(map.playerPosition(), k) == map.wumpusPosition()) {
                 System.out.println("I SMELL A WUMPUS!");
@@ -170,7 +166,7 @@ public class Wumpus {
         System.out.println(map.playerPosition());
         System.out.print("TUNNELS LEAD TO");
         
-        int connections = connectionsFromRoom(map.playerPosition());
+        int connections = cave.connectionsFromRoom(map.playerPosition());
         for (int k = 1; k <= connections; k++) {
             System.out.print(" ");
             System.out.print(cave.connection(map.playerPosition(),k));
@@ -239,13 +235,13 @@ public class Wumpus {
         int arrowPosition = map.playerPosition();
         for (int k = 1; k <= pathLength; k++) {
             int k1;
-            for (k1 = 1; k1 <= connectionsFromRoom(arrowPosition); k1++) {
+            for (k1 = 1; k1 <= cave.connectionsFromRoom(arrowPosition); k1++) {
                 if (cave.connection(arrowPosition,k1) == rooms[k]) {
                     arrowPosition = rooms[k];  
                     break;
                 }
             }
-            if (k1 > connectionsFromRoom(arrowPosition)) {
+            if (k1 > cave.connectionsFromRoom(arrowPosition)) {
                 arrowPosition = cave.connection(arrowPosition, cave.randomTunnel(arrowPosition));
             }
              
@@ -290,12 +286,12 @@ public class Wumpus {
             }
 
             int k;
-            for (k = 1; k <= connectionsFromRoom(map.playerPosition()); k++) {
+            for (k = 1; k <= cave.connectionsFromRoom(map.playerPosition()); k++) {
                 if (cave.connection(map.playerPosition(),k) == roomToMoveTo) {
                     break;
                 }
             }
-            if (k > connectionsFromRoom(map.playerPosition()) && roomToMoveTo != map.playerPosition()) {
+            if (k > cave.connectionsFromRoom(map.playerPosition()) && roomToMoveTo != map.playerPosition()) {
                 System.out.print("NOT POSSIBLE - ");
                 continue;
             }
