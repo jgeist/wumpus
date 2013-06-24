@@ -59,34 +59,6 @@ public class UserInterfaceTest {
     }
 
     @Test
-    public void testPrint() {
-        ui.print("HELLO WORLD");
-        System.out.flush();
-        assertEquals("HELLO WORLD", textOutput.toString());    
-    }
-
-    @Test
-    public void testPrintLine() {
-        ui.println("HELLO WORLD");
-        System.out.flush();
-        assertEquals("HELLO WORLD\n", textOutput.toString());    
-    }
-
-    @Test 
-    public void testPrintLineInteger() {
-        ui.println(42);
-        System.out.flush();
-        assertEquals("42\n", textOutput.toString());    
-    }
-
-    @Test 
-    public void testPrintInteger() {
-        ui.print(42);
-        System.out.flush();
-        assertEquals("42", textOutput.toString());    
-    }
-
-    @Test
     public void testThrowingReadInt() {
         String input = "";
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));

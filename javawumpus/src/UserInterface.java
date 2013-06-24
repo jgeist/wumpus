@@ -32,19 +32,19 @@ public class UserInterface {
         return option;
     }
 
-    public void print(String line) {
+    private void print(String line) {
         System.out.print(line);
     }
 
-    public void println(String line) {
+    private void println(String line) {
         System.out.println(line);
     }
 
-    public void print(int i) {
+    private void print(int i) {
         print(String.format("%d", i));
     }
 
-    public void println(int i) {
+    private void println(int i) {
         println(String.format("%d", i));
     }
 
