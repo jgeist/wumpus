@@ -89,4 +89,8 @@ public class UserInterface {
         println(" PIT   :  'I FEEL A DRAFT'");
         println("");
     }
+    
+    public void printHazardWarning(String line) {
+        println(line);
+    }
 }

@@ -67,18 +67,18 @@ public class Wumpus {
         int connections = cave.connectionsFromRoom(map.playerPosition());
         for (int k = 1; k <= connections; k++) {
             if (cave.connection(map.playerPosition(), k) == map.wumpusPosition()) {
-                ui.println("I SMELL A WUMPUS!");
+                ui.printHazardWarning("I SMELL A WUMPUS!");
             }
         }
         for (int k = 1; k <= connections; k++) {
             int room = cave.connection(map.playerPosition(), k);
             if (map.hasPitAt(room)) {
-                ui.println("I FEEL A DRAFT");
+                ui.printHazardWarning("I FEEL A DRAFT");
             }
         }
         for (int k = 1; k <= connections; k++) {
             if (map.hasBatAt(cave.connection(map.playerPosition(),k))) {
-                ui.println("BATS NEARBY!");
+                ui.printHazardWarning("BATS NEARBY!");
             }
         }
     }
