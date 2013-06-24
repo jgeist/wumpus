@@ -124,7 +124,7 @@ public class Wumpus {
         }
     }
 
-    public static int promptForRoomToMoveTo() throws IOException {
+    public static int promptForRoomToMoveTo(RoomDescription currentRoom) throws IOException {
         int roomToMoveTo = 0;
 
         while (true) {
@@ -178,7 +178,7 @@ public class Wumpus {
     }
 
     public static void promptAndMovePlayer(RoomDescription currentRoom) throws IOException {
-        int roomToMoveTo = promptForRoomToMoveTo();
+        int roomToMoveTo = promptForRoomToMoveTo(currentRoom);
         movePlayerAndTestHazards(roomToMoveTo);
     }
 
