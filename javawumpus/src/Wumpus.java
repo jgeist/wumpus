@@ -187,11 +187,6 @@ public class Wumpus {
         }            
     }
     
-    public static boolean promptToReplaySameMap() throws IOException {
-        char i$ = ui.promptAndReadSingleCharacterOption("SAME SETUP (Y-N)");        
-        return i$ == 'y' || i$ == 'Y';
-    }
-    
     public static void saveStartingMapFromGameMap() {
         startingMap = (WumpusMap)map.clone();
     }
@@ -229,7 +224,7 @@ public class Wumpus {
             ui.printWinLoseState(didPlayerWin());
             loadGameMapFromStartingMap();
 
-            randomize = !promptToReplaySameMap();            
+            randomize = !ui.promptToReplaySameMap();            
         }
     }
 }

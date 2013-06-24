@@ -156,6 +156,11 @@ public class UserInterface {
         }
     }
 
+    public boolean promptToReplaySameMap() throws IOException {
+        char i$ = promptAndReadSingleCharacterOption("SAME SETUP (Y-N)");        
+        return i$ == 'y' || i$ == 'Y';
+    }
+    
     public int promptForArrowPathRoomCount(int maxPathLength) throws IOException {
         int roomCount;
 
