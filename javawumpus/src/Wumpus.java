@@ -80,23 +80,11 @@ public class Wumpus {
         ui.printHazards(nearbyWumpii, nearbyPits, nearbyBats);
     }
 
-    public static void printRoomGeometry() {
-        ui.print("YOUR ARE IN ROOM ");
-        ui.println(map.playerPosition());
-        ui.print("TUNNELS LEAD TO");
-        
-        int connections = cave.connectionsFromRoom(map.playerPosition());
-        for (int k = 1; k <= connections; k++) {
-            ui.print(" ");
-            ui.print(cave.connection(map.playerPosition(),k));
-        }
-    }
-
     public static void printRoomDescription() throws IOException {
         ui.println("");
 
         printHazardDescriptions(); 
-        printRoomGeometry();
+        ui.printRoomGeometry(map.playerPosition(), cave);
         
         ui.println("");
         ui.println("");

@@ -115,4 +115,17 @@ public class UserInterface {
             printHazardWarning("BATS NEARBY!");
         }
     }
+
+    public void printRoomGeometry(int room, Cave cave) {
+        print("YOUR ARE IN ROOM ");
+        println(room);
+        print("TUNNELS LEAD TO");
+        
+        int connections = cave.connectionsFromRoom(room);
+        for (int k = 1; k <= connections; k++) {
+            print(" ");
+            print(cave.connection(room, k));
+        }
+    }
+
 }
