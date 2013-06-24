@@ -169,4 +169,16 @@ public class UserInterface {
 
         return roomCount;
     }    
+
+    public void promptForArrowPathRooms(int pathLength, int[] roomsOut) throws IOException {
+        for (int k = 1; k <= pathLength; k++) {
+            print("ROOM # ");    
+            roomsOut[k] = readInt();
+            if (k > 2 && roomsOut[k] == roomsOut[k-2]) {
+                println("ARROWS AREN'T THAT CROOKED - TRY ANOTHER ROOM");
+                k--;
+                continue;
+            }
+        }
+    }
 }
