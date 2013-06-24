@@ -185,14 +185,6 @@ public class Wumpus {
         }            
     }
     
-    public static void printWinLoseState() {
-        if (didPlayerWin()) {
-            ui.println("HEE HEE HEE - THE WUMPUS'LL GET YOU NEXT TIME!!");
-        } else {
-            ui.println ("HA HA HA - YOU LOSE!");
-        }
-    }
-
     public static boolean promptToReplaySameMap() throws IOException {
         char i$ = ui.promptAndReadSingleCharacterOption("SAME SETUP (Y-N)");        
         return i$ == 'y' || i$ == 'Y';
@@ -232,7 +224,7 @@ public class Wumpus {
                 promptAndExecutePlayerAction(currentRoom);
             } while (!isGameOver());
             
-            printWinLoseState();
+            ui.printWinLoseState(didPlayerWin());
             loadGameMapFromStartingMap();
 
             randomize = !promptToReplaySameMap();            

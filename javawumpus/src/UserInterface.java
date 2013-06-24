@@ -211,4 +211,12 @@ public class UserInterface {
         
         return roomToMoveTo;
     }    
+
+    public void printWinLoseState(boolean won) {
+        if (won) {
+            println("HEE HEE HEE - THE WUMPUS'LL GET YOU NEXT TIME!!");
+        } else {
+            println ("HA HA HA - YOU LOSE!");
+        }
+    }
 }
