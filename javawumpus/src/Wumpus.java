@@ -56,23 +56,28 @@ public class Wumpus {
     }
 
     public static void printHazardDescriptions() {
+        int nearbyWumpii = 0;
+        int nearbyPits = 0;
+        int nearbyBats = 0;
+
         int connections = cave.connectionsFromRoom(map.playerPosition());
         for (int k = 1; k <= connections; k++) {
-            if (cave.connection(map.playerPosition(), k) == map.wumpusPosition()) {
-                ui.printHazardWarning("I SMELL A WUMPUS!");
-            }
-        }
-        for (int k = 1; k <= connections; k++) {
             int room = cave.connection(map.playerPosition(), k);
+
+            if (room == map.wumpusPosition()) {
+                ++nearbyWumpii;
+            }
+            
             if (map.hasPitAt(room)) {
-                ui.printHazardWarning("I FEEL A DRAFT");
+                ++nearbyPits;
+            }
+
+            if (map.hasBatAt(room)) {
+                ++nearbyBats;
             }
         }
-        for (int k = 1; k <= connections; k++) {
-            if (map.hasBatAt(cave.connection(map.playerPosition(),k))) {
-                ui.printHazardWarning("BATS NEARBY!");
-            }
-        }
+
+        ui.printHazards(nearbyWumpii, nearbyPits, nearbyBats);
     }
 
     public static void printRoomGeometry() {

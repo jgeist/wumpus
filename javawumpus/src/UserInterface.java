@@ -101,4 +101,18 @@ public class UserInterface {
     public void printHazardWarning(String line) {
         println(line);
     }
+    
+    public void printHazards(int nearbyWumpii, int nearbyPits, int nearbyBats) {
+        while (nearbyWumpii-- > 0) {
+            printHazardWarning("I SMELL A WUMPUS!");
+        }
+
+        while (nearbyPits-- > 0) {
+            printHazardWarning("I FEEL A DRAFT");
+        }
+
+        while (nearbyBats-- > 0) {
+            printHazardWarning("BATS NEARBY!");
+        }
+    }
 }
