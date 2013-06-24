@@ -4,7 +4,7 @@ BASEDIR=$(dirname $0)/..
 # compile
 #
 pushd $BASEDIR/src > /dev/null
-javac Wumpus.java WumpusMap.java Player.java Cave.java UserInterface.java
+javac Wumpus.java WumpusMap.java Player.java Cave.java UserInterface.java RoomDescription.java
 if [ $? -ne 0 ] ; then 
   echo "Compile of game failed"
   popd > /dev/null
@@ -16,7 +16,7 @@ popd > /dev/null
 # compile tests
 #
 pushd $BASEDIR/test > /dev/null
-javac -cp ../src:../external/hamcrest-core-1.3.jar:../external/junit-4.11.jar WumpusTestSuite.java WumpusMapTest.java PlayerTest.java CaveTest.java WumpusTest.java ThrowingByteArrayInputStream.java UserInterfaceTest.java UserInterfaceWithThrow.java
+javac -cp ../src:../external/hamcrest-core-1.3.jar:../external/junit-4.11.jar WumpusTestSuite.java WumpusMapTest.java PlayerTest.java CaveTest.java WumpusTest.java ThrowingByteArrayInputStream.java UserInterfaceTest.java UserInterfaceWithThrow.java RoomDescriptionTest.java
 if [ $? -ne 0 ] ; then 
   echo "Compile of tests failed"
   popd > /dev/null
