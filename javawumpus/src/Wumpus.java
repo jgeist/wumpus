@@ -177,7 +177,7 @@ public class Wumpus {
         }
     }
 
-    public static void promptAndMovePlayer() throws IOException {
+    public static void promptAndMovePlayer(RoomDescription currentRoom) throws IOException {
         int roomToMoveTo = promptForRoomToMoveTo();
         movePlayerAndTestHazards(roomToMoveTo);
     }
@@ -205,7 +205,7 @@ public class Wumpus {
             break;
             
         case MOVE:
-            promptAndMovePlayer();
+            promptAndMovePlayer(currentRoom);
             break;
         }            
     }
