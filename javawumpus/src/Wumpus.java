@@ -55,39 +55,27 @@ public class Wumpus {
         player.setWon();
     }
 
-    public static void printHazardDescriptions() {
-        int nearbyWumpii = 0;
-        int nearbyPits = 0;
-        int nearbyBats = 0;
+    public static RoomDescription buildRoomDescription() {
+        int room = map.playerPosition();
+        RoomDescription desc = new RoomDescription(room);
+        
+        int connections = cave.connectionsFromRoom(room);
 
-        int connections = cave.connectionsFromRoom(map.playerPosition());
-        for (int k = 1; k <= connections; k++) {
-            int room = cave.connection(map.playerPosition(), k);
+        for (int i = 1; i <= connections; i++) {
+            int nearbyRoom = cave.connection(room, i);
 
-            if (room == map.wumpusPosition()) {
-                ++nearbyWumpii;
-            }
-            
-            if (map.hasPitAt(room)) {
-                ++nearbyPits;
-            }
+            desc.addConnectedRoom(nearbyRoom);
 
-            if (map.hasBatAt(room)) {
-                ++nearbyBats;
-            }
+            if (nearbyRoom == map.wumpusPosition()) desc.addNearbyWumpus();
+            if (map.hasPitAt(nearbyRoom)) desc.addNearbyPit();
+            if (map.hasBatAt(nearbyRoom)) desc.addNearbyBat();
         }
 
-        ui.printHazards(nearbyWumpii, nearbyPits, nearbyBats);
+        return desc;
     }
 
     public static void printRoomDescription() throws IOException {
-        ui.println("");
-
-        printHazardDescriptions(); 
-        ui.printRoomGeometry(map.playerPosition(), cave);
-        
-        ui.println("");
-        ui.println("");
+        ui.printRoomDescription(buildRoomDescription());
     } 
 
     public static PlayerAction promptForShootOrMove() throws IOException {

@@ -2,6 +2,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import java.util.Iterator;
+
 public class UserInterface {
 	public int readInt() throws IOException {
 		String line = "";
@@ -116,16 +118,25 @@ public class UserInterface {
         }
     }
 
-    public void printRoomGeometry(int room, Cave cave) {
+    public void printRoomGeometry(RoomDescription desc) {
         print("YOUR ARE IN ROOM ");
-        println(room);
+        println(desc.roomNumber());
         print("TUNNELS LEAD TO");
         
-        int connections = cave.connectionsFromRoom(room);
-        for (int k = 1; k <= connections; k++) {
+        Iterator<Integer> connections = desc.connectedRooms();
+        while (connections.hasNext()) {
             print(" ");
-            print(cave.connection(room, k));
+            print((int)connections.next());
         }
     }
 
+    public void printRoomDescription(RoomDescription desc) {
+        println("");
+
+        printHazards(desc.nearbyWumpii(), desc.nearbyPits(), desc.nearbyBats());
+        printRoomGeometry(desc);
+
+        println("");
+        println("");
+    }
 }
