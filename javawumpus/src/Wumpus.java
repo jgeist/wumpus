@@ -10,12 +10,7 @@ public class Wumpus {
     private static final int MAX_ROOMS_FOR_ARROW_SHOT = 5;
 
 	public static Random random = new Random();
-	public static int[][] caveStructure = {{0,0,0,0},
-                        {0,2,5,8},		{0,1,3,10},		{0,2,4,12},		{0,3,5,14},		{0,1,4,6},
-                        {0,5,7,15},		{0,6,8,17},		{0,1,7,9},		{0,8,10,18},	{0,2,9,11},
-                        {0,10,12,19},	{0,3,11,13},	{0,12,14,20},	{0,4,13,15},	{0,6,14,16},
-                        {0,15,17,20},	{0,7,16,18},	{0,9,17,19},	{0,11,18,20},	{0,13,16,19}};
-
+    public static Cave cave = new Cave();
     public static WumpusMap map = new WumpusMap();
     public static WumpusMap startingMap = new WumpusMap();
     public static Player player = new Player();
@@ -56,7 +51,7 @@ public class Wumpus {
 	}
     
     public static int connectionsFromRoom(int n) {
-        return caveStructure[n].length - 1;
+        return cave.connectionsFromRoom(n);
     }
     
     public static boolean isGameOver() {
@@ -162,18 +157,18 @@ public class Wumpus {
     public static void printHazardDescriptions() {
         int connections = connectionsFromRoom(map.playerPosition());
         for (int k = 1; k <= connections; k++) {
-            if (caveStructure[map.playerPosition()][k] == map.wumpusPosition()) {
+            if (cave.connection(map.playerPosition(), k) == map.wumpusPosition()) {
                 System.out.println("I SMELL A WUMPUS!");
             }
         }
         for (int k = 1; k <= connections; k++) {
-            int room = caveStructure[map.playerPosition()][k];
+            int room = cave.connection(map.playerPosition(), k);
             if (map.hasPitAt(room)) {
                 System.out.println("I FEEL A DRAFT");
             }
         }
         for (int k = 1; k <= connections; k++) {
-            if (map.hasBatAt(caveStructure[map.playerPosition()][k])) {
+            if (map.hasBatAt(cave.connection(map.playerPosition(),k))) {
                 System.out.println("BATS NEARBY!");
             }
         }
@@ -187,7 +182,7 @@ public class Wumpus {
         int connections = connectionsFromRoom(map.playerPosition());
         for (int k = 1; k <= connections; k++) {
             System.out.print(" ");
-            System.out.print(caveStructure[map.playerPosition()][k]);
+            System.out.print(cave.connection(map.playerPosition(),k));
         }
     }
 
@@ -215,7 +210,7 @@ public class Wumpus {
     public static void moveWumpus() {
         int k = randomWumpusMove();
         if (k != 0) {
-            map.setWumpusPosition( caveStructure[map.wumpusPosition()][k] );
+            map.setWumpusPosition(cave.connection(map.wumpusPosition(),k));
         }
         if (map.wumpusPosition() == map.playerPosition()) {
             System.out.println("TSK TSK TSK - WUMPUS GOT YOU!");
@@ -254,13 +249,13 @@ public class Wumpus {
         for (int k = 1; k <= pathLength; k++) {
             int k1;
             for (k1 = 1; k1 <= connectionsFromRoom(arrowPosition); k1++) {
-                if (caveStructure[arrowPosition][k1] == rooms[k]) {
+                if (cave.connection(arrowPosition,k1) == rooms[k]) {
                     arrowPosition = rooms[k];  
                     break;
                 }
             }
             if (k1 > connectionsFromRoom(arrowPosition)) {
-                arrowPosition = caveStructure[arrowPosition][randomConnection(arrowPosition)];
+                arrowPosition = cave.connection(arrowPosition,randomConnection(arrowPosition));
             }
              
             if (arrowPosition == map.wumpusPosition()) {
@@ -305,7 +300,7 @@ public class Wumpus {
 
             int k;
             for (k = 1; k <= connectionsFromRoom(map.playerPosition()); k++) {
-                if (caveStructure[map.playerPosition()][k] == roomToMoveTo) {
+                if (cave.connection(map.playerPosition(),k) == roomToMoveTo) {
                     break;
                 }
             }
