@@ -19,6 +19,7 @@ public class WumpusTest {
 	@Before
 	public void setUp() {
 		Wumpus.random = new Random(0); //seed random for expected results
+        Wumpus.cave = new Cave(Wumpus.random);
         Wumpus.throwOnIOErrorForTests = true;
         Wumpus.map = new WumpusMap();
         System.setOut(new PrintStream(textOutput));
@@ -31,16 +32,16 @@ public class WumpusTest {
 	
 	@Test
 	public void randomRoom() throws Exception {
-		assertEquals(1, Wumpus.randomRoom());
-		assertEquals(9, Wumpus.randomRoom());
-		assertEquals(10, Wumpus.randomRoom());
-		assertEquals(8, Wumpus.randomRoom());
-		assertEquals(16, Wumpus.randomRoom());
-		assertEquals(14, Wumpus.randomRoom());
-		assertEquals(12, Wumpus.randomRoom());
-		assertEquals(2, Wumpus.randomRoom());
-		assertEquals(20, Wumpus.randomRoom());
-		assertEquals(15, Wumpus.randomRoom());
+		assertEquals(1, Wumpus.cave.randomRoom());
+		assertEquals(9, Wumpus.cave.randomRoom());
+		assertEquals(10, Wumpus.cave.randomRoom());
+		assertEquals(8, Wumpus.cave.randomRoom());
+		assertEquals(16, Wumpus.cave.randomRoom());
+		assertEquals(14, Wumpus.cave.randomRoom());
+		assertEquals(12, Wumpus.cave.randomRoom());
+		assertEquals(2, Wumpus.cave.randomRoom());
+		assertEquals(20, Wumpus.cave.randomRoom());
+		assertEquals(15, Wumpus.cave.randomRoom());
 	}
 
 	@Test

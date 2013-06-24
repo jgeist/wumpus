@@ -9,7 +9,7 @@ public class Wumpus {
     private static final int MAX_ROOMS_FOR_ARROW_SHOT = 5;
 
 	public static Random random = new Random();
-    public static Cave cave = new Cave();
+    public static Cave cave = new Cave(random);
     public static WumpusMap map = new WumpusMap();
     public static WumpusMap startingMap = new WumpusMap();
     public static Player player = new Player();
@@ -33,10 +33,6 @@ public class Wumpus {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	public static int randomRoom() {
-		return random.nextInt(cave.numberOfRooms()) + 1;
 	}
 
 	public static int randomConnection(int room) {
@@ -332,7 +328,7 @@ public class Wumpus {
         
             if (map.hasBatAt(roomToMoveTo)) {
                 System.out.println("ZAP--SUPER BAT SNATCH! ELSEWHEREVILLE FOR YOU!");
-                roomToMoveTo = randomRoom();
+                roomToMoveTo = cave.randomRoom();
                 continue;
             }
             
@@ -348,12 +344,12 @@ public class Wumpus {
     public static void placeObjectsRandomlyOnMap() {
         while (true) {
             map = new WumpusMap();
-            map.setPlayerPosition(randomRoom());
-            map.setWumpusPosition(randomRoom());
-            map.addPit(randomRoom());
-            map.addPit(randomRoom());
-            map.addBat(randomRoom());
-            map.addBat(randomRoom());                    
+            map.setPlayerPosition(cave.randomRoom());
+            map.setWumpusPosition(cave.randomRoom());
+            map.addPit(cave.randomRoom());
+            map.addPit(cave.randomRoom());
+            map.addBat(cave.randomRoom());
+            map.addBat(cave.randomRoom());                    
             
             if (!map.hasOverlap()) {
                 break;
