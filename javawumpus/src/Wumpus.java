@@ -124,13 +124,13 @@ public class Wumpus {
         }
     }
 
-    public static int promptForRoomToMoveTo(RoomDescription currentRoom) throws IOException {
+    public static int promptForRoomToMoveTo(RoomDescription currentRoom, int numberOfRooms) throws IOException {
         int roomToMoveTo = 0;
 
         while (true) {
             ui.print("WHERE TO "); 
             roomToMoveTo = ui.readInt(); 
-            if (roomToMoveTo < 1 || roomToMoveTo > cave.numberOfRooms()) {
+            if (roomToMoveTo < 1 || roomToMoveTo > numberOfRooms) {
                 continue;
             }
 
@@ -178,7 +178,7 @@ public class Wumpus {
     }
 
     public static void promptAndMovePlayer(RoomDescription currentRoom) throws IOException {
-        int roomToMoveTo = promptForRoomToMoveTo(currentRoom);
+        int roomToMoveTo = promptForRoomToMoveTo(currentRoom, cave.numberOfRooms());
         movePlayerAndTestHazards(roomToMoveTo);
     }
 
