@@ -14,11 +14,6 @@ public class Wumpus {
     public static UserInterface ui = new UserInterface();
     public static boolean gameOver = false;
 
-    public enum PlayerAction {
-        SHOOT,
-        MOVE
-    };
-
 	/**
 	 * @param args
 	 */
@@ -77,17 +72,6 @@ public class Wumpus {
     public static void printRoomDescription() throws IOException {
         ui.printRoomDescription(buildRoomDescription());
     } 
-
-    public static PlayerAction promptForShootOrMove() throws IOException {
-        while (true) {
-            char i$ = ui.promptAndReadSingleCharacterOption("SHOOT OR MOVE (S-M) ");
-            if (i$ == 'S' || i$ == 's') {
-                return PlayerAction.SHOOT;
-            } else if (i$ == 'M' || i$ == 'm') {
-                return PlayerAction.MOVE;
-            }
-        }
-    }
 
     public static void moveWumpus() {
         int k = randomWumpusMove();
@@ -245,7 +229,7 @@ public class Wumpus {
     }
 
     public static void promptAndExecutePlayerAction() throws IOException{
-        switch (promptForShootOrMove()) {
+        switch (ui.promptForShootOrMove()) {
         case SHOOT:
             promptAndShootArrow();
             break;

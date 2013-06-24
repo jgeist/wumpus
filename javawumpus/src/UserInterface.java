@@ -5,6 +5,11 @@ import java.io.InputStreamReader;
 import java.util.Iterator;
 
 public class UserInterface {
+    public enum PlayerAction {
+        SHOOT,
+        MOVE
+    };
+
 	public int readInt() throws IOException {
 		String line = "";
 		BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
@@ -138,5 +143,16 @@ public class UserInterface {
 
         println("");
         println("");
+    }
+
+    public PlayerAction promptForShootOrMove() throws IOException {
+        while (true) {
+            char i$ = promptAndReadSingleCharacterOption("SHOOT OR MOVE (S-M) ");
+            if (i$ == 'S' || i$ == 's') {
+                return PlayerAction.SHOOT;
+            } else if (i$ == 'M' || i$ == 'm') {
+                return PlayerAction.MOVE;
+            }
+        }
     }
 }

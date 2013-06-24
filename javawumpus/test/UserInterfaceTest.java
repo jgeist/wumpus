@@ -102,4 +102,30 @@ public class UserInterfaceTest {
 
         fail("Test did not throw expected exception");
     }
+
+    @Test
+    public void testShootOrMovePromptShoot() throws IOException {   
+        String input = "S\r";
+        String expectedOutput = "SHOOT OR MOVE (S-M) ";
+        System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
+        
+        UserInterface.PlayerAction o = ui.promptForShootOrMove();
+
+        System.out.flush();
+        assertEquals(expectedOutput, textOutput.toString());    
+        assertEquals(UserInterface.PlayerAction.SHOOT, o);
+    }
+
+    @Test
+    public void testShootOrMovePromptMove() throws IOException {   
+        String input = "M\r";
+        String expectedOutput = "SHOOT OR MOVE (S-M) ";
+        System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
+        
+        UserInterface.PlayerAction o = ui.promptForShootOrMove();
+
+        System.out.flush();
+        assertEquals(expectedOutput, textOutput.toString());    
+        assertEquals(UserInterface.PlayerAction.MOVE, o);
+    }
 }

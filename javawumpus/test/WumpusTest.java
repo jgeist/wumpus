@@ -186,32 +186,6 @@ public class WumpusTest {
     }
 
     @Test
-    public void testShootOrMovePromptShoot() throws IOException {   
-        String input = "S\r";
-        String expectedOutput = "SHOOT OR MOVE (S-M) ";
-        System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
-        
-        Wumpus.PlayerAction o = Wumpus.promptForShootOrMove();
-
-        System.out.flush();
-        assertEquals(expectedOutput, textOutput.toString());    
-        assertEquals(Wumpus.PlayerAction.SHOOT, o);
-    }
-
-    @Test
-    public void testShootOrMovePromptMove() throws IOException {   
-        String input = "M\r";
-        String expectedOutput = "SHOOT OR MOVE (S-M) ";
-        System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
-        
-        Wumpus.PlayerAction o = Wumpus.promptForShootOrMove();
-
-        System.out.flush();
-        assertEquals(expectedOutput, textOutput.toString());    
-        assertEquals(Wumpus.PlayerAction.MOVE, o);
-    }
-
-    @Test
     public void testShootArrowMissing() throws IOException {   
         Wumpus.setUpGame(false);
         Wumpus.map.setPlayerPosition(1);
