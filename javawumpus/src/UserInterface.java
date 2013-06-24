@@ -155,4 +155,18 @@ public class UserInterface {
             }
         }
     }
+
+    public int promptForArrowPathRoomCount(int maxPathLength) throws IOException {
+        int roomCount;
+
+        print(String.format("NO. OF ROOMS (1-%d) ", maxPathLength));
+        while (true) {
+            roomCount = readInt();
+            if (roomCount >= 1 && roomCount <= maxPathLength) {
+                break;
+            }
+        }
+
+        return roomCount;
+    }    
 }

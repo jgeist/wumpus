@@ -80,20 +80,6 @@ public class Wumpus {
         }
     }
 
-    public static int promptForArrowPathRoomCount(int maxPathLength) throws IOException {
-        int roomCount;
-
-        ui.print(String.format("NO. OF ROOMS (1-%d) ", maxPathLength));
-        while (true) {
-            roomCount = ui.readInt();
-            if (roomCount >= 1 && roomCount <= maxPathLength) {
-                break;
-            }
-        }
-
-        return roomCount;
-    }
-    
     public static void promptForArrowPathRooms(int pathLength, int[] roomsOut) throws IOException {
         for (int k = 1; k <= pathLength; k++) {
             ui.print("ROOM # ");    
@@ -136,7 +122,7 @@ public class Wumpus {
         int roomCount;
 
         // path of arrow
-        roomCount = promptForArrowPathRoomCount(MAX_ROOMS_FOR_ARROW_SHOT);
+        roomCount = ui.promptForArrowPathRoomCount(MAX_ROOMS_FOR_ARROW_SHOT);
         promptForArrowPathRooms(roomCount, p);
 
         evaluateArrowShoot(roomCount, p);
