@@ -198,7 +198,7 @@ public class Wumpus {
         }
     }
 
-    public static void promptAndExecutePlayerAction() throws IOException{
+    public static void promptAndExecutePlayerAction(RoomDescription currentRoom) throws IOException{
         switch (ui.promptForShootOrMove()) {
         case SHOOT:
             promptAndShootArrow();
@@ -252,8 +252,9 @@ public class Wumpus {
             ui.println("HUNT THE WUMPUS");
 
             do {
-                ui.printRoomDescription(buildRoomDescription());
-                promptAndExecutePlayerAction();
+                RoomDescription currentRoom = buildRoomDescription();
+                ui.printRoomDescription(currentRoom);
+                promptAndExecutePlayerAction(currentRoom);
             } while (!isGameOver());
             
             printWinLoseState();
