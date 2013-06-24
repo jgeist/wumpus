@@ -1,20 +1,7 @@
 #!/bin/sh
 BASEDIR=$(dirname $0)/..
-#
-# compile
-#
-pushd $BASEDIR/src > /dev/null
-javac Wumpus.java WumpusMap.java Player.java Cave.java UserInterface.java RoomDescription.java
-if [ $? -ne 0 ] ; then 
-  echo "Compile of game failed"
-  popd > /dev/null
+(cd $BASEDIR ; ant jargame)
+if [ $? -ne 0 ] ; then
   exit 1
 fi
-popd > /dev/null
-
-#
-# run
-#
-pushd $BASEDIR
-java -cp src Wumpus
-popd
+java -cp $BASEDIR/bin/wumpus.jar Wumpus

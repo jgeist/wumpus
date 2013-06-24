@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="wumpus" default="compilegame">
+ <property name="testcp" value="src:external/hamcrest-core-1.3.jar:external/junit-4.11.jar"/>
+ <target name="compilegame">
+  <javac srcdir="src" includeantruntime="false"/> 
+ </target>
+ <target name="jargame">
+  <jar destfile="bin/wumpus.jar" basedir="src"/>
+ </target>
+ <target name="compiletests" depends="compilegame">
+  <javac srcdir="test" includeantruntime="false">
+   <classpath path="${testcp}"/>
+  </javac>
+ </target>
+ <target name="test" depends="compiletests">
+  <java classpath="test:${testcp}" classname="org.junit.runner.JUnitCore" fork="yes">
+   <arg line="WumpusTestSuite"/>
+  </java>
+ </target>
+</project>

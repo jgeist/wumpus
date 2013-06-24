@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.EOFException;
 import java.io.InputStreamReader;
 import java.util.Random;
 import java.util.Iterator;
@@ -21,8 +22,9 @@ public class Wumpus {
 	public static void main(String[] args) {
 		try {
             runMainLoop();
+        } catch (EOFException e) {
+            
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
