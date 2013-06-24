@@ -7,6 +7,8 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.PrintStream;
+import java.io.FileOutputStream;
+import java.io.FileDescriptor;
 import java.io.IOException;
 
 public class UserInterfaceTest {
@@ -22,7 +24,7 @@ public class UserInterfaceTest {
 
     @After
     public void tearDown() {
-        System.setOut(null);
+        System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
     }
     
     @Test
