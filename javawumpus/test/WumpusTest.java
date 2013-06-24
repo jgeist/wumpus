@@ -46,16 +46,16 @@ public class WumpusTest {
 
 	@Test
 	public void randomConnection() throws Exception {
-		assertEquals(1, Wumpus.randomConnection(3));
-		assertEquals(2, Wumpus.randomConnection(3));
-		assertEquals(2, Wumpus.randomConnection(3));
-		assertEquals(3, Wumpus.randomConnection(3));
-		assertEquals(3, Wumpus.randomConnection(3));
-		assertEquals(3, Wumpus.randomConnection(3));
-		assertEquals(3, Wumpus.randomConnection(3));
-		assertEquals(1, Wumpus.randomConnection(3));
-		assertEquals(1, Wumpus.randomConnection(3));
-		assertEquals(3, Wumpus.randomConnection(3));
+		assertEquals(1, Wumpus.cave.randomTunnel(3));
+		assertEquals(2, Wumpus.cave.randomTunnel(3));
+		assertEquals(2, Wumpus.cave.randomTunnel(3));
+		assertEquals(3, Wumpus.cave.randomTunnel(3));
+		assertEquals(3, Wumpus.cave.randomTunnel(3));
+		assertEquals(3, Wumpus.cave.randomTunnel(3));
+		assertEquals(3, Wumpus.cave.randomTunnel(3));
+		assertEquals(1, Wumpus.cave.randomTunnel(3));
+		assertEquals(1, Wumpus.cave.randomTunnel(3));
+		assertEquals(3, Wumpus.cave.randomTunnel(3));
 	}
 	
 	@Test

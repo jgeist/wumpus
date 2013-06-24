@@ -35,10 +35,6 @@ public class Wumpus {
 		}
 	}
 
-	public static int randomConnection(int room) {
-		return random.nextInt(connectionsFromRoom(room)) + 1;
-	}
-
 	public static int randomWumpusMove() {
         int connections = connectionsFromRoom(map.wumpusPosition());
         int move = random.nextInt(connections + 1) + 1;
@@ -250,7 +246,7 @@ public class Wumpus {
                 }
             }
             if (k1 > connectionsFromRoom(arrowPosition)) {
-                arrowPosition = cave.connection(arrowPosition,randomConnection(arrowPosition));
+                arrowPosition = cave.connection(arrowPosition, cave.randomTunnel(arrowPosition));
             }
              
             if (arrowPosition == map.wumpusPosition()) {
