@@ -219,4 +219,8 @@ public class UserInterface {
             println ("HA HA HA - YOU LOSE!");
         }
     }
+
+    public void printWinLoseMessage(String message) {
+        println(message);
+    }
 }

@@ -41,14 +41,20 @@ public class Wumpus {
         return player.won();
     }
 
-    public static void endGameWithPlayerLosing() {
+    public static void endGameWithPlayerLosing(String description) {
         gameOver = true;
         player.setLost();
+        if (description != null) {
+            ui.printWinLoseMessage(description);
+        }
     }
 
-    public static void endGameWithPlayerWinning() {
+    public static void endGameWithPlayerWinning(String description) {
         gameOver = true;
         player.setWon();
+        if (description != null) {
+            ui.printWinLoseMessage(description);
+        }
     }
 
     public static RoomDescription buildRoomDescription() {
@@ -76,8 +82,7 @@ public class Wumpus {
             map.setWumpusPosition(cave.connection(map.wumpusPosition(),k));
         }
         if (map.wumpusPosition() == map.playerPosition()) {
-            ui.println("TSK TSK TSK - WUMPUS GOT YOU!");
-            endGameWithPlayerLosing();
+            endGameWithPlayerLosing("TSK TSK TSK - WUMPUS GOT YOU!");
         }
     }
 
@@ -96,12 +101,10 @@ public class Wumpus {
             }
              
             if (arrowPosition == map.wumpusPosition()) {
-                ui.println("AHA! YOU GOT THE WUMPUS!");
-                endGameWithPlayerWinning();
+                endGameWithPlayerWinning("AHA! YOU GOT THE WUMPUS!");
             }   
             if (arrowPosition == map.playerPosition()) {
-                ui.println("OUCH! ARROW GOT YOU!");
-                endGameWithPlayerLosing();
+                endGameWithPlayerLosing("OUCH! ARROW GOT YOU!");
             }
         }
     }
@@ -120,7 +123,7 @@ public class Wumpus {
             ui.println("MISSED");
             moveWumpus();
             if (player.consumeArrowAndTestIfOut()) {
-                endGameWithPlayerLosing();
+                endGameWithPlayerLosing(null);
             }
         }
     }
@@ -137,8 +140,7 @@ public class Wumpus {
             }
         
             if (map.hasPitAt(roomToMoveTo)) {
-                ui.println("YYYYIIIIEEEE . . . FELL IN PIT");
-                endGameWithPlayerLosing();
+                endGameWithPlayerLosing("YYYYIIIIEEEE . . . FELL IN PIT");
                 return;
             }
         
