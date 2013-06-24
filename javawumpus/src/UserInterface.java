@@ -40,4 +40,53 @@ public class UserInterface {
     public void println(int i) {
         println(String.format("%d", i));
     }
+
+    public void printInstructions(Cave cave) throws IOException {
+        println("WELCOME TO 'HUNT THE WUMPUS'");
+        println(String.format("  THE WUMPUS LIVES IN A CAVE OF %d ROOMS. EACH ROOM", cave.numberOfRooms()));	
+        println("HAS 3 TUNNELS LEADING TO OTHER ROOMS. (LOOK AT A");
+        println("DODECAHEDRON TO SEE HOW THIS WORKS-IF YOU DON'T KNOW");
+        println("WHAT A DODECAHEDRON IS, ASK SOMEONE)");
+        println("");
+        println("     HAZARDS:");
+        println(" BOTTOMLESS PITS - TWO ROOMS HAVE BOTTOMLESS PITS IN THEM");
+        println("     IF YOU GO THERE, YOU FALL INTO THE PIT (& LOSE!)");
+        println(" SUPER BATS - TWO OTHER ROOMS HAVE SUPER BATS. IF YOU");
+        println("     GO THERE, A BAT GRABS YOU AND TAKES YOU TO SOME OTHER");
+        println("     ROOM AT RANDOM. (WHICH MAY BE TROUBLESOME)");
+        println("HIT RETURN TO CONTINUE"); 
+        
+        waitForUserToHitReturn();
+
+        println("     WUMPUS:");
+        println(" THE WUMPUS IS NOT BOTHERED BY HAZARDS (HE HAS SUCKER");
+        println(" FEET AND IS TOO BIG FOR A BAT TO LIFT).  USUALLY");
+        println(" HE IS ASLEEP.  TWO THINGS WAKE HIM UP: YOU SHOOTING AN");
+        println("ARROW OR YOU ENTERING HIS ROOM.");
+        println("     IF THE WUMPUS WAKES HE MOVES (P=.75) ONE ROOM");
+        println(" OR STAYS STILL (P=.25).  AFTER THAT, IF HE IS WHERE YOU");
+        println(" ARE, HE EATS YOU UP AND YOU LOSE!");
+        println("");
+        println("     YOU:");
+        println(" EACH TURN YOU MAY MOVE OR SHOOT A CROOKED ARROW");
+        println("   MOVING:  YOU CAN MOVE ONE ROOM (THRU ONE TUNNEL)");
+        println("   ARROWS:  YOU HAVE 5 ARROWS.  YOU LOSE WHEN YOU RUN OUT");
+        println("   EACH ARROW CAN GO FROM 1 TO 5 ROOMS. YOU AIM BY TELLING");
+        println("   THE COMPUTER THE ROOM#S YOU WANT THE ARROW TO GO TO.");
+        println("   IF THE ARROW CAN'T GO THAT WAY (IF NO TUNNEL) IT MOVES");
+        println("   AT RANDOM TO THE NEXT ROOM.");
+        println("     IF THE ARROW HITS THE WUMPUS, YOU WIN.");
+        println("     IF THE ARROW HITS YOU, YOU LOSE.");
+        println("HIT RETURN TO CONTINUE"); 
+
+        waitForUserToHitReturn();
+
+        println("    WARNINGS:");
+        println("     WHEN YOU ARE ONE ROOM AWAY FROM A WUMPUS OR HAZARD,");
+        println("     THE COMPUTER SAYS:");
+        println(" WUMPUS:  'I SMELL A WUMPUS'");
+        println(" BAT   :  'BATS NEARBY'");
+        println(" PIT   :  'I FEEL A DRAFT'");
+        println("");
+    }
 }

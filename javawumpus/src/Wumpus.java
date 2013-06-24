@@ -55,60 +55,11 @@ public class Wumpus {
         player.setWon();
     }
 
-    private static void printInstructions() throws IOException {
-        ui.println("WELCOME TO 'HUNT THE WUMPUS'");
-        ui.println(String.format("  THE WUMPUS LIVES IN A CAVE OF %d ROOMS. EACH ROOM", cave.numberOfRooms()));	
-        ui.println("HAS 3 TUNNELS LEADING TO OTHER ROOMS. (LOOK AT A");
-        ui.println("DODECAHEDRON TO SEE HOW THIS WORKS-IF YOU DON'T KNOW");
-        ui.println("WHAT A DODECAHEDRON IS, ASK SOMEONE)");
-        ui.println("");
-        ui.println("     HAZARDS:");
-        ui.println(" BOTTOMLESS PITS - TWO ROOMS HAVE BOTTOMLESS PITS IN THEM");
-        ui.println("     IF YOU GO THERE, YOU FALL INTO THE PIT (& LOSE!)");
-        ui.println(" SUPER BATS - TWO OTHER ROOMS HAVE SUPER BATS. IF YOU");
-        ui.println("     GO THERE, A BAT GRABS YOU AND TAKES YOU TO SOME OTHER");
-        ui.println("     ROOM AT RANDOM. (WHICH MAY BE TROUBLESOME)");
-        ui.println("HIT RETURN TO CONTINUE"); 
-        
-        ui.waitForUserToHitReturn();
-
-        ui.println("     WUMPUS:");
-        ui.println(" THE WUMPUS IS NOT BOTHERED BY HAZARDS (HE HAS SUCKER");
-        ui.println(" FEET AND IS TOO BIG FOR A BAT TO LIFT).  USUALLY");
-        ui.println(" HE IS ASLEEP.  TWO THINGS WAKE HIM UP: YOU SHOOTING AN");
-        ui.println("ARROW OR YOU ENTERING HIS ROOM.");
-        ui.println("     IF THE WUMPUS WAKES HE MOVES (P=.75) ONE ROOM");
-        ui.println(" OR STAYS STILL (P=.25).  AFTER THAT, IF HE IS WHERE YOU");
-        ui.println(" ARE, HE EATS YOU UP AND YOU LOSE!");
-        ui.println("");
-        ui.println("     YOU:");
-        ui.println(" EACH TURN YOU MAY MOVE OR SHOOT A CROOKED ARROW");
-        ui.println("   MOVING:  YOU CAN MOVE ONE ROOM (THRU ONE TUNNEL)");
-        ui.println("   ARROWS:  YOU HAVE 5 ARROWS.  YOU LOSE WHEN YOU RUN OUT");
-        ui.println("   EACH ARROW CAN GO FROM 1 TO 5 ROOMS. YOU AIM BY TELLING");
-        ui.println("   THE COMPUTER THE ROOM#S YOU WANT THE ARROW TO GO TO.");
-        ui.println("   IF THE ARROW CAN'T GO THAT WAY (IF NO TUNNEL) IT MOVES");
-        ui.println("   AT RANDOM TO THE NEXT ROOM.");
-        ui.println("     IF THE ARROW HITS THE WUMPUS, YOU WIN.");
-        ui.println("     IF THE ARROW HITS YOU, YOU LOSE.");
-        ui.println("HIT RETURN TO CONTINUE"); 
-
-        ui.waitForUserToHitReturn();
-
-        ui.println("    WARNINGS:");
-        ui.println("     WHEN YOU ARE ONE ROOM AWAY FROM A WUMPUS OR HAZARD,");
-        ui.println("     THE COMPUTER SAYS:");
-        ui.println(" WUMPUS:  'I SMELL A WUMPUS'");
-        ui.println(" BAT   :  'BATS NEARBY'");
-        ui.println(" PIT   :  'I FEEL A DRAFT'");
-        ui.println("");
-    }
-
     private static void promptAndShowInstructions() throws IOException {
         char i$ = ui.promptAndReadSingleCharacterOption("INSTRUCTIONS (Y-N) ");
 
         if (i$ != 'N' && i$ != 'n') {    
-            printInstructions();
+            ui.printInstructions(cave);
         }
     }
     
