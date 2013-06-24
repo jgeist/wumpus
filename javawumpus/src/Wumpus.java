@@ -55,14 +55,6 @@ public class Wumpus {
         player.setWon();
     }
 
-    private static void promptAndShowInstructions() throws IOException {
-        char i$ = ui.promptAndReadSingleCharacterOption("INSTRUCTIONS (Y-N) ");
-
-        if (i$ != 'N' && i$ != 'n') {    
-            ui.printInstructions(cave);
-        }
-    }
-    
     public static void printHazardDescriptions() {
         int connections = cave.connectionsFromRoom(map.playerPosition());
         for (int k = 1; k <= connections; k++) {
@@ -317,7 +309,7 @@ public class Wumpus {
     public static void runMainLoop() throws IOException {
         boolean randomize = true;
 
-        promptAndShowInstructions();
+        ui.promptAndShowInstructions(cave.numberOfRooms());
 
         while (true) {
             setUpGame(randomize);

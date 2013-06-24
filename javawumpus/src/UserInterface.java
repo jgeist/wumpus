@@ -41,9 +41,9 @@ public class UserInterface {
         println(String.format("%d", i));
     }
 
-    public void printInstructions(Cave cave) throws IOException {
+    public void printInstructions(int numberOfRooms) throws IOException {
         println("WELCOME TO 'HUNT THE WUMPUS'");
-        println(String.format("  THE WUMPUS LIVES IN A CAVE OF %d ROOMS. EACH ROOM", cave.numberOfRooms()));	
+        println(String.format("  THE WUMPUS LIVES IN A CAVE OF %d ROOMS. EACH ROOM", numberOfRooms));
         println("HAS 3 TUNNELS LEADING TO OTHER ROOMS. (LOOK AT A");
         println("DODECAHEDRON TO SEE HOW THIS WORKS-IF YOU DON'T KNOW");
         println("WHAT A DODECAHEDRON IS, ASK SOMEONE)");
@@ -88,6 +88,14 @@ public class UserInterface {
         println(" BAT   :  'BATS NEARBY'");
         println(" PIT   :  'I FEEL A DRAFT'");
         println("");
+    }
+
+    public void promptAndShowInstructions(int numberOfRooms) throws IOException {
+        char i$ = promptAndReadSingleCharacterOption("INSTRUCTIONS (Y-N) ");
+
+        if (i$ != 'N' && i$ != 'n') {    
+            printInstructions(numberOfRooms);
+        }
     }
     
     public void printHazardWarning(String line) {
