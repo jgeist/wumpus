@@ -223,4 +223,8 @@ public class UserInterface {
     public void printWinLoseMessage(String message) {
         println(message);
     }
+    
+    public void printStatusMessage(String message) {
+        println(message);
+    }
 }

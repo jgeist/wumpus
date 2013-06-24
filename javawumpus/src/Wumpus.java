@@ -120,7 +120,7 @@ public class Wumpus {
         evaluateArrowShoot(roomCount, p);
 
         if (!isGameOver()) {
-            ui.println("MISSED");
+            ui.printStatusMessage("MISSED");
             moveWumpus();
             if (player.consumeArrowAndTestIfOut()) {
                 endGameWithPlayerLosing(null);
@@ -132,7 +132,7 @@ public class Wumpus {
         while (true) {
             map.setPlayerPosition(roomToMoveTo);
             if (roomToMoveTo == map.wumpusPosition()) {
-                ui.println("... OOPS! BUMPED A WUMPUS!");
+                ui.printStatusMessage("... OOPS! BUMPED A WUMPUS!");
                 moveWumpus();
                 if (isGameOver()) {
                     return;
@@ -145,7 +145,7 @@ public class Wumpus {
             }
         
             if (map.hasBatAt(roomToMoveTo)) {
-                ui.println("ZAP--SUPER BAT SNATCH! ELSEWHEREVILLE FOR YOU!");
+                ui.printStatusMessage("ZAP--SUPER BAT SNATCH! ELSEWHEREVILLE FOR YOU!");
                 roomToMoveTo = cave.randomRoom();
                 continue;
             }
@@ -218,7 +218,7 @@ public class Wumpus {
         while (true) {
             setUpGame(randomize);
 
-            ui.println("HUNT THE WUMPUS");
+            ui.printStatusMessage("HUNT THE WUMPUS");
 
             do {
                 RoomDescription currentRoom = buildRoomDescription();
