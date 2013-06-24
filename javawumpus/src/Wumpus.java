@@ -125,36 +125,6 @@ public class Wumpus {
         }
     }
 
-    public static int promptForRoomToMoveTo(RoomDescription currentRoom, int numberOfRooms) throws IOException {
-        int roomToMoveTo = 0;
-
-        while (true) {
-            ui.print("WHERE TO "); 
-            roomToMoveTo = ui.readInt(); 
-            if (roomToMoveTo < 1 || roomToMoveTo > numberOfRooms) {
-                continue;
-            }
-            
-            boolean validRoom = false;
-            Iterator<Integer> rooms = currentRoom.connectedRooms();
-            while (rooms.hasNext()) {
-                if (roomToMoveTo == rooms.next()) {
-                    validRoom = true;
-                    break;
-                }
-            }
-
-            if (!validRoom && roomToMoveTo != currentRoom.roomNumber()) {
-                ui.print("NOT POSSIBLE - ");
-                continue;
-            }
-
-            break;
-        }
-        
-        return roomToMoveTo;
-    }
-    
     public static void movePlayerAndTestHazards(int roomToMoveTo) {
         while (true) {
             map.setPlayerPosition(roomToMoveTo);
@@ -183,7 +153,7 @@ public class Wumpus {
     }
 
     public static void promptAndMovePlayer(RoomDescription currentRoom) throws IOException {
-        int roomToMoveTo = promptForRoomToMoveTo(currentRoom, cave.numberOfRooms());
+        int roomToMoveTo = ui.promptForRoomToMoveTo(currentRoom, cave.numberOfRooms());
         movePlayerAndTestHazards(roomToMoveTo);
     }
 

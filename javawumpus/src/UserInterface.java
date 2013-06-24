@@ -181,4 +181,34 @@ public class UserInterface {
             }
         }
     }
+
+    public int promptForRoomToMoveTo(RoomDescription currentRoom, int numberOfRooms) throws IOException {
+        int roomToMoveTo = 0;
+
+        while (true) {
+            print("WHERE TO "); 
+            roomToMoveTo = readInt(); 
+            if (roomToMoveTo < 1 || roomToMoveTo > numberOfRooms) {
+                continue;
+            }
+            
+            boolean validRoom = false;
+            Iterator<Integer> rooms = currentRoom.connectedRooms();
+            while (rooms.hasNext()) {
+                if (roomToMoveTo == rooms.next()) {
+                    validRoom = true;
+                    break;
+                }
+            }
+
+            if (!validRoom && roomToMoveTo != currentRoom.roomNumber()) {
+                print("NOT POSSIBLE - ");
+                continue;
+            }
+
+            break;
+        }
+        
+        return roomToMoveTo;
+    }    
 }
