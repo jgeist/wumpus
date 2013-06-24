@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Random;
+import java.util.Iterator;
 
 public class Wumpus {
     private static final int MAX_ROOMS_FOR_ARROW_SHOT = 5;
@@ -133,17 +134,21 @@ public class Wumpus {
             if (roomToMoveTo < 1 || roomToMoveTo > numberOfRooms) {
                 continue;
             }
-
-            int k;
-            for (k = 1; k <= cave.connectionsFromRoom(map.playerPosition()); k++) {
-                if (cave.connection(map.playerPosition(),k) == roomToMoveTo) {
+            
+            boolean validRoom = false;
+            Iterator<Integer> rooms = currentRoom.connectedRooms();
+            while (rooms.hasNext()) {
+                if (roomToMoveTo == rooms.next()) {
+                    validRoom = true;
                     break;
                 }
             }
-            if (k > cave.connectionsFromRoom(map.playerPosition()) && roomToMoveTo != map.playerPosition()) {
+
+            if (!validRoom && roomToMoveTo != currentRoom.roomNumber()) {
                 ui.print("NOT POSSIBLE - ");
                 continue;
             }
+
             break;
         }
         

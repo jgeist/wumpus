@@ -251,7 +251,7 @@ public class WumpusTest {
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
         try {
-            Wumpus.promptAndMovePlayer(null);
+            Wumpus.promptAndMovePlayer(Wumpus.buildRoomDescription());
         } catch (IOException e) {
         }
 
@@ -279,7 +279,7 @@ public class WumpusTest {
         String input = "2" + CR;
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
-        Wumpus.promptAndMovePlayer(null);
+        Wumpus.promptAndMovePlayer(Wumpus.buildRoomDescription());
 
         System.out.flush();
         
@@ -304,7 +304,7 @@ public class WumpusTest {
         String input = "2" + CR;
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
-        Wumpus.promptAndMovePlayer(null);
+        Wumpus.promptAndMovePlayer(Wumpus.buildRoomDescription());
 
         System.out.flush();
         
@@ -330,7 +330,7 @@ public class WumpusTest {
         String input = "2" + CR;
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
-        Wumpus.promptAndMovePlayer(null);
+        Wumpus.promptAndMovePlayer(Wumpus.buildRoomDescription());
 
         System.out.flush();
         
@@ -357,7 +357,7 @@ public class WumpusTest {
         String input = "2" + CR;
         System.setIn(new ThrowingByteArrayInputStream(input.getBytes()));
         
-        Wumpus.promptAndMovePlayer(null);
+        Wumpus.promptAndMovePlayer(Wumpus.buildRoomDescription());
 
         System.out.flush();
         
